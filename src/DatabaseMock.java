@@ -39,4 +39,12 @@ public class DatabaseMock {
   public List<Item> getPlayerOwnedItems(String username) {
     return ownedItems;
   }
+  
+  public boolean updatePlayerBalance(String username) {
+	  
+  }
+  
+  public int getPlayerBalance(String username) {
+	  
+  }
 }
