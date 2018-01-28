@@ -8,6 +8,9 @@ public class DatabaseMock {
   private HashMap<Integer, Item> allItems = new HashMap();
   private HashMap<Integer, Player> allPlayers = new HashMap();
   
+  //placeholder for tracking items just on local player until database is setup
+  private List<Item> ownedItems = new List<Item>();
+  
   //returns the id of the newly registered players, or -1 if there was an error
   public int registerNewPlayer(String username) {
     //TODO:: Construct a real player
@@ -17,7 +20,7 @@ public class DatabaseMock {
     return userHash;
   }
   
-  public ArrayList<Item> getAllItems() {
+  public List<Item> getAllItems() {
     return new ArrayList<Item>(allItems.values());
   }
   
@@ -25,7 +28,15 @@ public class DatabaseMock {
     return allItems.get(id);
   }
   
-  public ArrayList<Item> getPlayerOwnedItems(int playerID) {
-    
+  public boolean insertOwnedItem(String username, Item i) {
+    if (ownedItems.contains(i)) {
+      return false;
+    }
+    ownedItems.add(i);
+    return true;
+  }
+  
+  public List<Item> getPlayerOwnedItems(String username) {
+    return ownedItems;
   }
 }
