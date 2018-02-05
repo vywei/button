@@ -2,7 +2,6 @@ import java.util.*;
 
 //TODO replace these with real classes
 class Player {}
-class Item {}
 
 public class DatabaseMock {
   private HashMap<Integer, Item> allItems = new HashMap();
