@@ -5,6 +5,6 @@ jdk:
 
 addons:
   sonarcloud:
-    organization: "cbaxes-github" # the key of the org you chose at step #3
+    organization: "button-github" # the key of the org you chose at step #3
 script:
   - sonar-scanner
