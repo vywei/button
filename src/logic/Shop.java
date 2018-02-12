@@ -1,4 +1,5 @@
 package logic;
+
 import java.util.*;
 import armdb.QueryResult;
 import armdb.SQLQueryException;
