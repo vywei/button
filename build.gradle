@@ -11,3 +11,9 @@ dependencies {
     testCompile 'junit:junit:4.11'
     testCompile 'org.mockito:mockito-core:1.9.+'
 }
+ sonarqube {
+    properties {
+        property "sonar.projectName", "Button thingy"
+        property "sonar.projectKey", "button-github"
+    }
+}
