@@ -1,3 +1,5 @@
+package logic;
+
 import java.util.*;
 
 //TODO replace these with real classes

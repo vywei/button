@@ -1,3 +1,5 @@
+package logic;
+
 import armdb.ConnectHost;             //import to make connection
 
 public class Database {
