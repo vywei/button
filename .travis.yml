@@ -7,4 +7,4 @@ addons:
   sonarcloud:
     organization: "button-github" # the key of the org you chose at step #3
 script:
-  - sonar-scanner
+  - sonar-scanner -Dsonar.java.binaries=.
