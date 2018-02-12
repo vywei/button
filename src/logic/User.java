@@ -1,4 +1,4 @@
-package button;
+package logic;
 
 import java.util.ArrayList;
 

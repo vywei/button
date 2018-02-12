@@ -1,4 +1,4 @@
-package button;
+package logic;
 
 public interface Subject {
     void register(Observer observ);
