@@ -5,9 +5,7 @@ import armdb.QueryResult;
 import armdb.SQLQueryException;
 
 public class Shop {
-  DatabaseMock dbm = new DatabaseMock();
   Database db = new Database();
-  
   public List<Item> getAllItems() {
     // Create result list
     List<Item> allItems = new ArrayList<Item>();
@@ -30,7 +28,7 @@ public class Shop {
     return allItems;
   }
   
-  public List<Item> getOwnedItems(Player p) {
+  public List<Item> getOwnedItems(User u) {
     // Create result list
     List<Item> playerItems = new ArrayList<Item>();
     
@@ -41,7 +39,7 @@ public class Shop {
     // Execute the query
     try {
       qr = query.result("items_owned JOIN item ON (items_owned.item_id = item.id)", 
-          new ArrayList<String>(), "WHERE player_id = '" + p.getId() +"'"); 
+          new ArrayList<String>(), "WHERE player_id = '" + u.getID() +"'"); 
 
       // Convert each row into an item
       parseItems(qr, playerItems);
@@ -69,16 +67,16 @@ public class Shop {
     }
   }
   
-  public List<Item> getShopItems(Player p) {
+  public List<Item> getShopItems(User u) {
     List<Item> allItems = getAllItems();
-    List<Item> ownedItems = getOwnedItems(p);
+    List<Item> ownedItems = getOwnedItems(u);
     allItems.removeAll(ownedItems);
     return allItems;
   }
   
-  public boolean purchaseItem(Item i, Player p) {
-    if(p.getBalance() >= i.getPrice()) {
-        p.subtractFromBalance(i.getPrice());
+  public boolean purchaseItem(Item i, User u) {
+    if(u.getBalance() >= i.getPrice()) {
+        u.subtractFromBalance(i.getPrice());
         
         SQLInsert query = new SQLInsert(db.getCH());
         
@@ -87,46 +85,16 @@ public class Shop {
         cols.add("item_id");
         
         ArrayList<String> vals = new ArrayList<String>();
-        cols.add(p.getId().toString());
-        cols.add(i.getId().toString());
+        cols.add(Integer.toString(u.getID()));
+        cols.add(Integer.toString(i.getID()));
         
         query.result("items_owned", cols, vals);
+        return true;
     } 
     else {
         return false;
     }
   
-  }
-  
-  public List<Item> getShopItemsMock(Player p) {
-	  List<Item> allItems = dbm.getAllItems();
-	  List<Item> ownedItems = dbm.getPlayerOwnedItems(p.getUsername());
-	  allItems.removeAll(ownedItems);
-	  return allItems;
-  }
-  
-  public List<Item> getOwnedItemsMock(Player p) {
-	  return dbm.getPlayerOwnedItems(p.getUsername());
-  }
-  
-  public List<Item> getAllItemsMock() {
-	  return dbm.getAllItems();
-  }
-  
-  
-  public boolean purchaseItemMock(Item i, Player p) {
-	  if(p.getBalance() >= i.getPrice()) {
-		  p.subtractFromBalance(i.getPrice());
-		  return dbm.insertOwnedItem(p.getUsername(), i);
-	  } else {
-		  return false;
-	  }
-    
-  }
-  
-  //might not be part of the shop? Idk
-  public boolean equipItemMock(Item i, Player p) {
-	  return p.setActiveItme(i);
   }
   
 }
