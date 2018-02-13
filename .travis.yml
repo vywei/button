@@ -8,7 +8,7 @@ addons:
   sonarcloud:
     organization: "button-github" # the key of the org you chose at step #3
 script:
-  - ./gradlew sonarqube
+  - gradle sonarqube
 cache:
   directories:
     - '$HOME/.m2/repository'

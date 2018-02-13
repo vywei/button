@@ -4,7 +4,7 @@ plugins {
 
 apply plugin: 'java'
 apply plugin: 'eclipse'
-apply plugin: "jacoco"
+apply plugin: 'jacoco'
 
 sourceCompatibility = 1.8
 
@@ -15,7 +15,7 @@ dependencies {
     testCompile 'junit:junit:4.11'
     testCompile 'org.mockito:mockito-core:1.9.+'
 }
- sonarqube {
+sonarqube {
     properties {
         property "sonar.projectName", "Button 309 Project"
         property "sonar.projectKey", "button-github"
