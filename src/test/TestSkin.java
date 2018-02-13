@@ -2,13 +2,13 @@ package test;
 
 import static org.junit.Assert.*;
 import org.junit.Test;
-import logic.Item;
+import logic.*;
 
-public class TestItem {
+public class TestSkin {
 
   @Test
   public void TestGetPrice() {
-    Item item = new Item(0, "testItem", 42);
+    Skin item = new Skin(0, "testSkin", 42);
     assertEquals(42, item.getPrice());
   }
 
