@@ -1,10 +1,22 @@
 package logic;
 
-public interface Item {
+public abstract class Item {
+  public int id;
+  public String name;
+  public int price;
   
-  public int getID();
+  //constructors are specific to Skin, SoundEffect, and VisualEffect
+  //so future changes to specific constructors can be made
   
-  public String getName();
+  public int getID() {
+    return id;
+  };
   
-  public int getPrice();
+  public String getName() {
+    return name;
+  };
+  
+  public int getPrice() {
+    return price;
+  };
 }
