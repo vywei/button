@@ -8,6 +8,7 @@ public class User implements Subject, Observer {
     private ArrayList<Observer> observers;
     private String password;
     private String username;
+    private int ID;
     private int score;
     private ArrayList<String> skins;
     private String currentSkin;
@@ -47,6 +48,18 @@ public class User implements Subject, Observer {
   @Override
   public void register(Observer observ) {
       observers.add(observ);
+  }
+  
+  public String getUsername() {
+    return this.username;
+  }
+  
+  public void setID(int ID) {
+    this.ID = ID;
+  }
+  
+  public int getID() {
+    return this.ID;
   }
 
   @Override
@@ -106,6 +119,14 @@ public class User implements Subject, Observer {
      */
     private void addNewSkin(String newSkin) {
 	skins.add(newSkin);
+    }
+    
+    public int getBalance() {
+      return this.score;
+    }
+    
+    public void subtractFromBalance(int amt) {
+      this.score -= amt;
     }
 
   @Override
