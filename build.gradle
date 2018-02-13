@@ -18,7 +18,7 @@ dependencies {
 }
  sonarqube {
     properties {
-        property "sonar.projectName", "Button thingy"
+        property "sonar.projectName", "Button 309 Project"
         property "sonar.projectKey", "button-github"
     }
 }
