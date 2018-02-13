@@ -62,7 +62,7 @@ public class Shop {
       int price = Integer.parseInt(qr.getValue("price"));
       
       //Instantiate new item and insert into result list
-      Item newItem = new Item(id, name, price);
+      Item newItem = new Skin(id, name, price);
       list.add(newItem);
     }
   }
@@ -74,7 +74,7 @@ public class Shop {
     return allItems;
   }
   
-  public boolean purchaseItem(Item i, User u) {
+  public boolean purchaseItem(Item i, User u) throws SQLQueryException {
     if(u.getBalance() >= i.getPrice()) {
         u.subtractFromBalance(i.getPrice());
         
