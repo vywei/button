@@ -1,10 +1,13 @@
 package logic;
 
 public class BugReport{
-	private String report_message;
+	private String reportMessage;
+	
 	public BugReport(String message){
-		report_message = message;
+		reportMessage = message;
 	}
 	
-	
+	public String getReportMessage() {
+		return reportMessage;
+	}
 }

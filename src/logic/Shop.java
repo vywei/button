@@ -52,7 +52,6 @@ public class Shop {
   }
   
   private void parseItems(QueryResult qr, List<Item> list) {
-    
     // Loop through all rows in the result
     while(qr.nextFlag()) {
       
@@ -89,6 +88,7 @@ public class Shop {
         cols.add(Integer.toString(i.getID()));
         
         query.result("items_owned", cols, vals);
+        
         return true;
     } 
     else {

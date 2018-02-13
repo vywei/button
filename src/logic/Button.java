@@ -1,23 +1,20 @@
 package logic;
 
 public class Button{
-	private class Skin{
-		private Skin(){
-			
-		}
-	}
-	public Button() {
-		
+	Skin currentSkin;
+	Boolean isPressed;
+	
+	public Button(Skin currentSkin) {
+		this.currentSkin = currentSkin;
+		this.isPressed = false;
 	}
 	public boolean isPressed(){
-		//dummy return
-		return true;
+		return isPressed();
 	}
 	public Skin currentSkin(){
-		//dummy return
-		return new Skin();
+		return currentSkin;
 	}
-	public void setSkin(){
-		//not sure
+	public void setSkin(Skin currentSkin){
+		this.currentSkin = currentSkin;
 	}
 }
