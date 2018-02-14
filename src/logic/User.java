@@ -105,7 +105,7 @@ public class User implements Subject, Observer {
      * @param newSkin
      * @return newSkin if valid, null if invalid
      */
-    public String validateSkin(String newSkin) {
+    private String validateSkin(String newSkin) {
 	for (int i = 0; i < skins.size(); i++) {
 	    if (skins.get(i).equals(newSkin)) {
 		return newSkin;
@@ -118,7 +118,7 @@ public class User implements Subject, Observer {
      * Only allows score to be increased by positive values.
      * @param x
      */
-    public void increaseScore(int x) {
+    private void increaseScore(int x) {
 	if (x > 0) {
 	    score += x;
 	}
