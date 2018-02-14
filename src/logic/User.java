@@ -30,7 +30,18 @@ public class User implements Subject, Observer {
 	//if newUsername isn't in database, return null
 	return null;
     }
-  
+    /**
+     * public getter for current skin
+     */
+    public String getCurrentSkin(){
+    	return currentSkin;
+    }
+    /**
+     * public getter for current score
+     */
+    public int getCurrentScore(){
+    	return score;
+    }
     /**
      * Validates that the given password fits parameters
      * @param newPassword
@@ -94,7 +105,7 @@ public class User implements Subject, Observer {
      * @param newSkin
      * @return newSkin if valid, null if invalid
      */
-    private String validateSkin(String newSkin) {
+    public String validateSkin(String newSkin) {
 	for (int i = 0; i < skins.size(); i++) {
 	    if (skins.get(i).equals(newSkin)) {
 		return newSkin;
@@ -107,7 +118,7 @@ public class User implements Subject, Observer {
      * Only allows score to be increased by positive values.
      * @param x
      */
-    private void increaseScore(int x) {
+    public void increaseScore(int x) {
 	if (x > 0) {
 	    score += x;
 	}
@@ -117,7 +128,7 @@ public class User implements Subject, Observer {
      * For adding a new skin. Maybe unnecessary. Probably needs error checking
      * @param newSkin
      */
-    private void addNewSkin(String newSkin) {
+    public void addNewSkin(String newSkin) {
 	skins.add(newSkin);
     }
     
