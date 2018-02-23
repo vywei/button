@@ -13,9 +13,16 @@ public class User implements Subject, Observer {
     private ArrayList<String> skins;
     private String currentSkin;
 
+    public User() {
+	observers = new ArrayList<Observer>();
+	skins = new ArrayList<String>();
+    }
+  
     public User(String newUsername, String newPassword) {
 	username = validateUsername(newUsername);
 	password = validatePassword(newPassword);
+	observers = new ArrayList<Observer>();
+	skins = new ArrayList<String>();
     }
 
     /**
@@ -113,7 +120,7 @@ public class User implements Subject, Observer {
      * @return username
      */
     public String getUsername() {
-	return this.username;
+	return username;
     }
 
     /**
@@ -130,7 +137,7 @@ public class User implements Subject, Observer {
      * Notifies all observing object (Button and User Roster)
      * that User class has changed and that they should update
      * themselves with the changes.
-   */
+     */
   @Override
   public void notifyObservers() {
       for (int i = 0; i < observers.size(); i++) {
@@ -236,12 +243,11 @@ public class User implements Subject, Observer {
 
     /**
      * User will be updated if Button or Store is updated
-     * @param user this user
      * @param type the type of update. Maybe "B204" to be update score by 
      * 204 and "S2304" to add skin 2304?
      */
   @Override
-  public void update(User user, String type) {
+  public void update(String type) {
       // TODO Auto-generated method stub
 
   }
@@ -264,7 +270,7 @@ public class User implements Subject, Observer {
      * Making sure that a skin that hasn't been purchased can't be equipped
      * @param newSkin
      * @return newSkin if valid, null if invalid
-   */
+     */
     private String validateSkin(String newSkin) {
 	for (int i = 0; i < skins.size(); i++) {
 	    if (skins.get(i).equals(newSkin)) {
@@ -286,5 +292,10 @@ public class User implements Subject, Observer {
 	//if newUsername isn't in database, return null
 	return null;
     }
+
+  @Override
+  public void update(int amount) {
+      increaseScore(amount);
+  }
 
 }

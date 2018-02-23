@@ -34,7 +34,13 @@ public class UserRoster implements Subject, Observer {
   }
 
   @Override
-  public void update(User user, String type) {
+  public void update(String type) {
+      // TODO Auto-generated method stub
+    
+  }
+
+  @Override
+  public void update(int amount) {
       // TODO Auto-generated method stub
     
   }
