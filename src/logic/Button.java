@@ -53,14 +53,21 @@ public class Button implements Subject, Observer {
     public void setSkin(Skin newSkin){
       this.currentSkin = newSkin;
     }
+    
     @Override
     public void update() {
-	// TODO Auto-generated method stub 
+
+    	for (int i = 0; i < observers.size(); i++) {
+    	    User temp = (User)observers.get(i);
+    	    if (temp.getCurrentSkin().equals(this.currentSkin)) {
+    	    		this.currentSkin = temp.getCurrentSkin();
+    	    }
+    	}
     }
     
     @Override
     public void update(String type) {
-	// TODO Auto-generated method stub
+    	//No-Op
     }
     
     @Override
@@ -86,7 +93,7 @@ public class Button implements Subject, Observer {
     
     @Override
     public void update(int amount) {
-	// TODO Auto-generated method stub
+	//No-Op
       
     }
     
