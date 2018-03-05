@@ -26,6 +26,18 @@ public class LoginView
         double height = Main.screenSize.getHeight();
         double width = Main.screenSize.getWidth();
 
+        Image image = new Image(Main.class.getResourceAsStream("images/login.png"));
+        ImageView iv1 = new ImageView();
+        iv1.setImage(image);
+        iv1.setFitWidth(450);
+        iv1.setPreserveRatio(true);
+        iv1.setSmooth(true);
+        iv1.setCache(true);
+
+        HBox imageBox = new HBox();
+        imageBox.getChildren().add(iv1);
+        imageBox.setPadding(new Insets(-300,0,0,-130));
+        
         // User name Input
         TextField userInput = new TextField("");
         userInput.setPromptText("Username");
@@ -44,7 +56,7 @@ public class LoginView
         // Sign Up Action
         Button signUpButton = new Button("Sign Up");
         signUpButton.setMaxWidth(Double.MAX_VALUE);
-        //signUpButton.setOnAction(e -> Main.window.setScene(Main.createUser));
+        signUpButton.setOnAction(e -> Main.window.setScene(Main.signUp));
         
         // Exit Button
         Button exitButton = new Button("Exit Button");
@@ -52,6 +64,7 @@ public class LoginView
         exitButton.setOnAction(e ->  System.exit(0));
         
         loginBox.setSpacing(10);
+        loginBox.setMaxWidth(loginWidth);
         loginBox.getChildren().addAll(userInput, passInput, loginButton, signUpButton, exitButton);
         final BooleanProperty firstTime = new SimpleBooleanProperty(true); 
         userInput.focusedProperty().addListener((observable,  oldValue,  newValue) -> {
@@ -66,7 +79,7 @@ public class LoginView
         loginGrid.setPadding(new Insets(height/2-100, width/2-100, height/2, width/2-75));
         loginGrid.setVgap(8);
         loginGrid.setHgap(10);
-        loginGrid.getChildren().addAll(loginBox);
+        loginGrid.getChildren().addAll(imageBox, loginBox);
         view.setCenter(loginGrid);
     }
     public Node getView()

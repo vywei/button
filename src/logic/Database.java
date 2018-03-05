@@ -11,11 +11,18 @@ import armdb.QueryResult;
 import armdb.SQLQueryException;
 
 public class Database {
-  ConnectHost ch;
+    ConnectHost ch;
+    private static Database db;
   
-  public Database() {
-  
+  private Database() {
     ch = loadDatabaseCredentials();
+  }
+  
+  public Database getDatabase() {
+  if (db == null) {
+      db = new Database();
+  }
+  return db;
   }
   
   private ConnectHost loadDatabaseCredentials() {
@@ -85,28 +92,29 @@ public class Database {
     }
   }
     
-  public List<User> getLeaderboard() {
-    // Create result list
-    List<User> players = new ArrayList<>();
     
-    // Create query and result
-    SQLSelect query = new SQLSelect(ch);
-    QueryResult qr;  
-    
-    // Execute the query
-    try {
-      qr = query.result("player", new ArrayList<String>(), "ORDER BY score DESC LIMIT 10"); 
+    public List<User> getLeaderboard() {
+	// Create result list
+	List<User> players = new ArrayList<>();
 
-      // Convert each row into an item
-      parsePlayers(qr, players);
+	// Create query and result
+	SQLSelect query = new SQLSelect(ch);
+	QueryResult qr;
+
+	// Execute the query
+	try {
+	    qr = query.result("player", new ArrayList<String>(), "ORDER BY score DESC LIMIT 10");
+
+	    // Convert each row into an item
+	    parsePlayers(qr, players);
+	}
+	catch(SQLQueryException e){
+	    System.out.println(e.getMessage());
+	}
+
+	return players;
     }
-    catch(SQLQueryException e){                   
-        System.out.println(e.getMessage());           
-    }
-    
-    return players;
-  }
 
 
-  
+
 }
