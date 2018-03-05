@@ -1,5 +1,6 @@
 package logic;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import javafx.application.Application;
@@ -92,7 +93,7 @@ public class StoreView extends Application {
   }
   
   private HBox getPurchase() {
-    List<Item> items = Main.theShop.getAllItems();
+    List<Item> items = dummyList(); //Main.theShop.getAllItems();
     HBox purchaseView = new HBox();
     
     for (Iterator<Item> i = items.iterator(); i.hasNext();) {
@@ -103,7 +104,7 @@ public class StoreView extends Application {
   }
   
   private HBox getCustomize() {
-    List<Item> items = Main.theShop.getOwnedItems(Main.user);
+    List<Item> items = dummyList(); //Main.theShop.getOwnedItems(Main.user);
     HBox customizedView = new HBox();
     
     for (Iterator<Item> i = items.iterator(); i.hasNext();) {
@@ -168,10 +169,13 @@ public class StoreView extends Application {
     
   }
   
-  /* private List<Item> dummyList() {
+    private List<Item> dummyList() {
     Skin item1 = new Skin(123, "Cool Skin", 999);
     Skin item2 = new Skin(456, "Cool Skin 2", 123);
-    
-  } */
+    ArrayList<Item> temp = new ArrayList<Item>();
+    temp.add(item1);
+    temp.add(item2);
+    return temp;
+  }
 
 }
