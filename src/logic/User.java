@@ -145,7 +145,7 @@ public class User implements Subject, Observer {
      * Only allows score to be increased by positive values.
      * @param x
      */
-    private void increaseScore(int x) {
+    public void increaseScore(int x) {
 	if (x > 0) {
 	    score += x;
 	}
