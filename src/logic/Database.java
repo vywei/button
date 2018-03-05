@@ -2,6 +2,10 @@ package logic;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import armdb.ConnectHost;             //import to make connection
 import armdb.QueryResult;
 import armdb.SQLQueryException;
@@ -10,14 +14,33 @@ public class Database {
   ConnectHost ch;
   
   public Database() {
-    // Omitted for push to git
-    String fileURL = "";  
-    String host = "";                             
-    String user = "";                                          
-    String pass = "";                                     
-    String dbName = ""; 
+  
+    ch = loadDatabaseCredentials();
+  }
+  
+  private ConnectHost loadDatabaseCredentials() {
+    String fileURL = "";
+    String host = "";
+    String user = "";
+    String pass = "";
+    String dbName = "";
+    String filename = "dontPushThis.txt";
     
-    ch = new ConnectHost(fileURL, host, user, pass, dbName);
+    try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
+      fileURL = br.readLine();
+      host = br.readLine();
+      user = br.readLine();
+      pass = br.readLine();
+      dbName = br.readLine();
+    }
+    catch (FileNotFoundException fnfe) {
+      System.out.println("Unable to connect to database.");
+    }
+    catch (IOException ioe) {
+      System.out.println("Unable to connect to database.");
+    }
+    
+    return new ConnectHost(fileURL, host, user, pass, dbName);
   }
   
   public ConnectHost getCH() {
