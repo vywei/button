@@ -16,7 +16,7 @@ public class Leaderboard implements Subject, Observer {
 	db = db.getDatabase();
     }
   
-    public static Leaderboard getMaster() {
+    public static Leaderboard getLeaderboard() {
 	if (leaderboard == null) {
 	    leaderboard = new Leaderboard();
 	}
