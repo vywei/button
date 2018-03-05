@@ -20,13 +20,13 @@ public class Main extends Application{
       
   protected static Scene login;
   protected static Scene home;
+  protected static Scene store;
   protected static Scene createUser;
- 
   protected static Scene settings;
   protected static Scene account;
-  protected static Scene email;
-  protected static Scene password;
-  
+  protected static Scene share;
+  protected static Scene leaderboard;
+
   protected static String pString = "Password";
   protected static String uString = "Username";
   protected static String cancelString = "Cancel";

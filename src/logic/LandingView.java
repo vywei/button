@@ -35,7 +35,7 @@ public class LandingView
 
        
        BorderPane root = new BorderPane();
-       root.setLeft(sidebar);
+       root.setRight(sidebar);
        root.getStylesheets().add(getClass().getResource(t).toExternalForm());
        root.getStyleClass().add("root");
 
