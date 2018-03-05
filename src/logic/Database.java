@@ -57,20 +57,26 @@ public class Database {
     return ch;
   }
   
-  public User loginUser(String username, String password) {
-    User resultUser = null;
-    
+  public String encryptPassword(String password) {
+    String passHash = "";
     MessageDigest md = null;
     try {
       md = MessageDigest.getInstance("MD5");
+      md.update(password.getBytes());
+      byte[] digest = md.digest();
+      passHash = DatatypeConverter.printHexBinary(digest).toUpperCase();
     } catch (NoSuchAlgorithmException e) {
-      // TODO Auto-generated catch block
       e.printStackTrace();
     }
-    md.update(password.getBytes());
-    byte[] digest = md.digest();
-    String passHash = DatatypeConverter.printHexBinary(digest).toUpperCase();
-
+    
+    return passHash;
+  }
+  
+  public User loginUser(String username, String password) {
+    User resultUser = null;
+    
+    String passHash = encryptPassword(password);
+    
     // Create query and result
     SQLSelect query = new SQLSelect(ch);
     QueryResult qr;
