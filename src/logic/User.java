@@ -13,8 +13,8 @@ public class User implements Subject, Observer {
     private String username;
     private int ID;
     private int score;
-    private ArrayList<String> skins;
-    private String currentSkin;
+    private ArrayList<Skin> skins;
+    private Skin currentSkin;
 
     public User() {
 	observers = new ArrayList<Observer>();
@@ -47,8 +47,8 @@ public class User implements Subject, Observer {
      * For adding a new skin. Maybe unnecessary. Probably needs error checking
      * @param newSkin
      */
-    public void addNewSkin(String newSkin) {
-	String tempSkin = validateSkin(newSkin);
+    public void addNewSkin(Skin newSkin) {
+	Skin tempSkin = validateSkin(newSkin);
 	if (tempSkin != null) {
 	    skins.add(newSkin);
 	}
@@ -61,8 +61,8 @@ public class User implements Subject, Observer {
      * unaltered.
      * @param newSkin
      */
-    public void changeSkin(String newSkin) {
-	String tempSkin = validateSkin(newSkin);
+    public void changeSkin(Skin newSkin) {
+	Skin tempSkin = validateSkin(newSkin);
 	if (tempSkin != null) {
 	    currentSkin = tempSkin;
 	    notifyObservers();
@@ -88,7 +88,7 @@ public class User implements Subject, Observer {
      * public getter for current skin
      * @return name of currently equipped skins
      */
-    public String getCurrentSkin(){
+    public Skin getCurrentSkin(){
 	return currentSkin;
     }
 
@@ -129,7 +129,7 @@ public class User implements Subject, Observer {
      * Public getter for ArrayList of skin names
      * @return list of all purchased skins for this user
      */
-    public ArrayList<String> getSkins() {
+    public ArrayList<Skin> getSkins() {
 	return skins;
     }
 
@@ -175,7 +175,7 @@ public class User implements Subject, Observer {
      * public setter for the current skin
      * @param currentSkin
      */
-    public void setCurrentSkin(String newSkin) {
+    public void setCurrentSkin(Skin newSkin) {
 	currentSkin = validateSkin(newSkin);
     }
 
@@ -212,8 +212,8 @@ public class User implements Subject, Observer {
      * public setter for skins
      * @param newSkins
      */
-    public void setSkins(ArrayList<String> newSkins) {
-	String tempSkin;
+    public void setSkins(ArrayList<Skin> newSkins) {
+	Skin tempSkin;
 	for (int i = 0; i < newSkins.size(); i++) {
 	    tempSkin = newSkins.get(i);
 	    if (validateSkin(tempSkin) == null) {
@@ -287,7 +287,7 @@ public class User implements Subject, Observer {
      * @param newSkin
      * @return newSkin if valid, null if invalid
      */
-    private String validateSkin(String newSkin) {
+    private Skin validateSkin(Skin newSkin) {
 	for (int i = 0; i < skins.size(); i++) {
 	    if (skins.get(i).equals(newSkin)) {
 		return newSkin;
