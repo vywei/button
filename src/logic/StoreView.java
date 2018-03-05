@@ -10,7 +10,6 @@ import javafx.stage.Stage;
 import javafx.scene.*;
 import javafx.scene.control.Label;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderStroke;
 import javafx.scene.layout.BorderStrokeStyle;
@@ -110,17 +109,25 @@ public class StoreView extends Application {
     HBox purchaseView = new HBox();
     
     for (Iterator<Item> i = items.iterator(); i.hasNext();) {
-      Item item = i.next();
-  }
+      purchaseView.getChildren().add(genPurchaseFrame(i.next()));
+    }
+    return purchaseView;
     
   }
   
   private HBox getCustomize() {
+    List<Item> items = Main.theShop.getOwnedItems(Main.user);
+    HBox customizedView = new HBox();
+    
+    for (Iterator<Item> i = items.iterator(); i.hasNext();) {
+      customizedView.getChildren().add(genCustomizeFrame(i.next()));
+    }
+    return customizedView;
     
   }
   
-  private HBox genItemFrame(Item item) {
-    HBox frame = new HBox();
+  private VBox genPurchaseFrame(Item item) {
+    VBox frame = new VBox();
     frame.setMaxWidth(250);
     frame.setMinWidth(250);
     frame.setMaxHeight(250);
@@ -131,7 +138,47 @@ public class StoreView extends Application {
     
     Label name = new Label(item.getName());
     HBox title = new HBox();
+    title.getChildren().add(name);
     title.setAlignment(Pos.CENTER);
+    
+    frame.getChildren().add(title);
+    
+    HBox priceNBuy = new HBox();
+    
+    Label price = new Label(Integer.toString(item.getPrice()));
+    Button buy = new Button("Buy");
+    
+    priceNBuy.getChildren().addAll(price, buy);
+    frame.getChildren().add(priceNBuy);
+    return frame;
+    
+  }
+  
+  private VBox genCustomizeFrame(Item item) {
+    VBox frame = new VBox();
+    frame.setMaxWidth(250);
+    frame.setMinWidth(250);
+    frame.setMaxHeight(250);
+    frame.setMinHeight(250);
+    
+    frame.setBorder(new Border(new BorderStroke(Color.BLACK, 
+        BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+    
+    Label name = new Label(item.getName());
+    HBox title = new HBox();
+    title.getChildren().add(name);
+    title.setAlignment(Pos.CENTER);
+    
+    frame.getChildren().add(title);
+    
+    HBox equipBox = new HBox();
+    
+    Button equip = new Button("Use");
+    
+    equipBox.getChildren().add(equip);
+    frame.getChildren().add(equipBox);
+    return frame;
+    
   }
 
 }
