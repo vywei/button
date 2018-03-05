@@ -13,8 +13,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-
-
 public class LoginView 
 {
     private final BorderPane view;
@@ -41,7 +39,7 @@ public class LoginView
         // Login Action
         Button loginButton = new Button("Log In");
         loginButton.setMaxWidth(Double.MAX_VALUE);
-        //loginButton.setOnAction(e -> Main.authenticate(userInput.getText(), passInput.getText()));
+        loginButton.setOnAction(e -> Main.window.setScene(Main.home));
         
         // Sign Up Action
         Button signUpButton = new Button("Sign Up");
