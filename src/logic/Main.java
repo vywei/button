@@ -35,6 +35,7 @@ public class Main extends Application{
   protected static ArrayList<User> users;
   static String s; 
   
+  public static Shop theShop = new Shop();
   
   private static void setup(Stage prim, String sheet){
     s = sheet;
