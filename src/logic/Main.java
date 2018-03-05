@@ -93,7 +93,7 @@ public class Main extends Application{
 
       GridPane homeGrid = gridSetup(landingView.getView());
       
-      home = new Scene(homeGrid, screenSize.getWidth(), screenSize.getHeight());
+      home = new Scene(homeGrid, 575, 440);
   }
   
   private static void signUpScreen()
