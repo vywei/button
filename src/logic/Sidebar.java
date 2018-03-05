@@ -25,8 +25,8 @@ public class Sidebar extends VBox
         Text text = new Text (Integer.toString(score));
         HBox scoreBox = new HBox();
         scoreBox.getChildren().addAll(scoreLabel, text);
-        scoreBox.setSpacing(10);
-        
+        scoreBox.setSpacing(20); 
+        scoreBox.setPadding(new Insets(0,0,70,0));
         
         // Home Back Button
         Button homeButton = new Button("Home");
@@ -66,10 +66,11 @@ public class Sidebar extends VBox
         {
           Main.window.setScene(Main.leaderboard);
         });
-        settingsButton.setMaxWidth(Double.MAX_VALUE);
+        leaderboardButton.setMaxWidth(Double.MAX_VALUE);
         
         // Populating the nav bar
-        this.setSpacing(20);
+        this.setSpacing(30);
+        
         this.setMaxWidth(buttonWidth);
         this.setPadding(new Insets(20,20,10,10));
         this.getChildren().addAll(scoreBox, homeButton, storeButton, settingsButton, shareButton, leaderboardButton);   
