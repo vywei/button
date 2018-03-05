@@ -2,22 +2,52 @@ package logic;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import armdb.ConnectHost;             //import to make connection
 import armdb.QueryResult;
 import armdb.SQLQueryException;
 
 public class Database {
-  ConnectHost ch;
+    ConnectHost ch;
+    private static Database db;
   
-  public Database() {
-    // Omitted for push to git
-    String fileURL = "";  
-    String host = "";                             
-    String user = "";                                          
-    String pass = "";                                     
-    String dbName = ""; 
+  private Database() {
+    ch = loadDatabaseCredentials();
+  }
+  
+  public Database getDatabase() {
+  if (db == null) {
+      db = new Database();
+  }
+  return db;
+  }
+  
+  private ConnectHost loadDatabaseCredentials() {
+    String fileURL = "";
+    String host = "";
+    String user = "";
+    String pass = "";
+    String dbName = "";
+    String filename = "dontPushThis.txt";
     
-    ch = new ConnectHost(fileURL, host, user, pass, dbName);
+    try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
+      fileURL = br.readLine();
+      host = br.readLine();
+      user = br.readLine();
+      pass = br.readLine();
+      dbName = br.readLine();
+    }
+    catch (FileNotFoundException fnfe) {
+      System.out.println("Unable to connect to database.");
+    }
+    catch (IOException ioe) {
+      System.out.println("Unable to connect to database.");
+    }
+    
+    return new ConnectHost(fileURL, host, user, pass, dbName);
   }
   
   public ConnectHost getCH() {
@@ -62,28 +92,29 @@ public class Database {
     }
   }
     
-  public List<User> getLeaderboard() {
-    // Create result list
-    List<User> players = new ArrayList<>();
     
-    // Create query and result
-    SQLSelect query = new SQLSelect(ch);
-    QueryResult qr;  
-    
-    // Execute the query
-    try {
-      qr = query.result("player", new ArrayList<String>(), "ORDER BY score DESC LIMIT 10"); 
+    public List<User> getLeaderboard() {
+	// Create result list
+	List<User> players = new ArrayList<>();
 
-      // Convert each row into an item
-      parsePlayers(qr, players);
+	// Create query and result
+	SQLSelect query = new SQLSelect(ch);
+	QueryResult qr;
+
+	// Execute the query
+	try {
+	    qr = query.result("player", new ArrayList<String>(), "ORDER BY score DESC LIMIT 10");
+
+	    // Convert each row into an item
+	    parsePlayers(qr, players);
+	}
+	catch(SQLQueryException e){
+	    System.out.println(e.getMessage());
+	}
+
+	return players;
     }
-    catch(SQLQueryException e){                   
-        System.out.println(e.getMessage());           
-    }
-    
-    return players;
-  }
 
 
-  
+
 }

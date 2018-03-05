@@ -20,13 +20,13 @@ public class Main extends Application{
       
   protected static Scene login;
   protected static Scene home;
-  protected static Scene createUser;
- 
+  protected static Scene store;
+  protected static Scene signUp;
   protected static Scene settings;
   protected static Scene account;
-  protected static Scene email;
-  protected static Scene password;
-  
+  protected static Scene share;
+  protected static Scene leaderboard;
+
   protected static String pString = "Password";
   protected static String uString = "Username";
   protected static String cancelString = "Cancel";
@@ -45,6 +45,11 @@ public class Main extends Application{
     loginScreen();
     user = new User(uString,pString);
     homeScreen();
+    signUpScreen();
+    
+    login.getStylesheets().add(sheet);
+    //home.getStylesheets().add(sheet);
+    signUp.getStylesheets().add(sheet);
     
     window.setScene(login);
     window.show();
@@ -82,9 +87,18 @@ public class Main extends Application{
   {
       LandingView landingView = new LandingView();
 
-      GridPane loginGrid = gridSetup(landingView.getView());
+      GridPane homeGrid = gridSetup(landingView.getView());
       
-      home = new Scene(loginGrid, screenSize.getWidth(), screenSize.getHeight());
+      home = new Scene(homeGrid, screenSize.getWidth(), screenSize.getHeight());
+  }
+  
+  private static void signUpScreen()
+  {
+      SignUpView signUpView = new SignUpView();
+
+      GridPane signUpGrid = gridSetup(signUpView.getView());
+      
+      signUp = new Scene(signUpGrid, screenSize.getWidth(), screenSize.getHeight());
   }
 
 }

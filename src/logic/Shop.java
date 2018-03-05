@@ -6,7 +6,11 @@ import armdb.SQLQuery;
 import armdb.SQLQueryException;
 
 public class Shop {
-  Database db = new Database();
+  private Database db;
+  
+  public Shop() {
+    db.getDatabase();
+  }
   
   public List<Item> getAllItems() {
     // Create result list

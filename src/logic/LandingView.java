@@ -5,8 +5,13 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+
+
 
 public class LandingView 
 {
@@ -15,34 +20,44 @@ public class LandingView
     
     public LandingView()
     {
+        Sidebar sidebar = new Sidebar();
+        double buttonWidth = 150;
+        Button add = new Button("Button");
+        add.setMinWidth(buttonWidth);
 
-       Sidebar sidebar = new Sidebar();
-       double buttonWidth = 150;
-       Button add = new Button("Button");
-       add.setMinWidth(buttonWidth);
+        // The title text on top and its alignment
+        Label header = new Label("Welcome to Home, " + Main.user.getUsername());
+        header.setMaxWidth(Double.MAX_VALUE);
+        header.setAlignment(Pos.CENTER);
 
-      // The title text on top and its alignment
-       Label header = new Label("Welcome to Home, " + Main.user.getUsername());
-       header.setMaxWidth(Double.MAX_VALUE);
-       header.setAlignment(Pos.CENTER);
-
-       GridPane homeGrid = new GridPane();
-       homeGrid.setPadding(new Insets(0, 0, 0, 0));
-       homeGrid.setVgap(8);
-       homeGrid.setHgap(10);
-       homeGrid.getStylesheets().add(getClass().getResource(t).toExternalForm());
-       homeGrid.getStyleClass().add("root");
+        GridPane homeGrid = new GridPane();
+        homeGrid.setPadding(new Insets(0, 0, 0, 0));
+        homeGrid.setVgap(8);
+        homeGrid.setHgap(10);
+        homeGrid.getStylesheets().add(getClass().getResource(t).toExternalForm());
+        homeGrid.getStyleClass().add("root");
        
-       
-       BorderPane root = new BorderPane();
-       root.setLeft(sidebar);
-       root.getStylesheets().add(getClass().getResource(t).toExternalForm());
-       root.getStyleClass().add("root");
+        Image image = new Image(Main.class.getResourceAsStream("red_button_unpressed.png"));
+        ImageView iv1 = new ImageView();
+        iv1.setImage(image);
+        iv1.setFitWidth(450);
+        iv1.setPreserveRatio(true);
+        iv1.setSmooth(true);
+        iv1.setCache(true);
+        HBox imageBox = new HBox();
+        imageBox.getChildren().add(iv1);
+        imageBox.setPadding(new Insets(0,0,0,0));
+        
+        BorderPane root = new BorderPane();
+        root.setRight(sidebar);
+        root.setLeft(imageBox);
+        root.getStylesheets().add(getClass().getResource(t).toExternalForm());
+        root.getStyleClass().add("root");
 
-       homeGrid.getChildren().addAll(root);
+        homeGrid.getChildren().addAll(root);
        
-       view = root;
-   }
+        view = root;
+    }
     
    public Node getView()
    {
