@@ -32,7 +32,7 @@ public class LandingView
        homeGrid.setHgap(10);
        homeGrid.getStylesheets().add(getClass().getResource(t).toExternalForm());
        homeGrid.getStyleClass().add("root");
-
+       
        
        BorderPane root = new BorderPane();
        root.setRight(sidebar);
@@ -40,6 +40,7 @@ public class LandingView
        root.getStyleClass().add("root");
 
        homeGrid.getChildren().addAll(root);
+       
        view = root;
    }
     
