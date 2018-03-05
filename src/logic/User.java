@@ -17,15 +17,15 @@ public class User implements Subject, Observer {
     private Skin currentSkin;
 
     public User() {
-	    	observers = new ArrayList<Observer>();
-	    	skins = new ArrayList<Skin>();
+	    	observers = new ArrayList<>();
+	    	skins = new ArrayList<>();
     }
   
     public User(String newUsername, String newPassword) {
 	    	username = validateUsername(newUsername);
 	    	password = validatePassword(newPassword);
-	    	observers = new ArrayList<Observer>();
-	    	skins = new ArrayList<Skin>();
+	    	observers = new ArrayList<>();
+	    	skins = new ArrayList<>();
     }
     
     // Constructor for leaderboard users
