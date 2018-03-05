@@ -15,7 +15,11 @@ sourceSets {
     main {
         java {
             srcDirs = ['src/logic']
-		 srcDirs = ['src/test']
+        }
+    }
+    test {
+        java {
+            srcDirs = ['src/test']
         }
     }
 }
