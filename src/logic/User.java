@@ -1,6 +1,8 @@
 package logic;
 
 import java.util.ArrayList;
+import armdb.QueryResult;
+import armdb.SQLQueryException;
 
 //User observes: Button, Store
 //User is subject of: Button, UserRoster, Database(?)
@@ -132,7 +134,7 @@ public class User implements Subject, Observer {
         score += x;
       }
     }
-
+    
     /**
      * Notifies all observing object (Button and User Roster)
      * that User class has changed and that they should update
