@@ -9,6 +9,6 @@ public class TestUser_skin {
 		User u = new User("username0","password0");
 		u.increaseScore(5);
 		int score = u.getCurrentScore();
-		assertEquals(score,5);
+		assertEquals(5,score);
 	}
 }

@@ -11,9 +11,9 @@ public class TestButton {
 	@Test
 	public void testButtonSetSkin() {
 		Skin s = new Skin(0, "Test Skin", 500);
-		Button b = new Button(s);
+		Button b = new Button(s, 1);
 		b.setSkin(s);
-		assertEquals(b.currentSkin(), s);
+		assertEquals(b.getCurrentSkin(), s);
 	}
 
 }

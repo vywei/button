@@ -1,8 +1,10 @@
 package test;
 import static org.junit.Assert.*;
 import java.util.ArrayList;
+import java.util.List;
 import org.junit.Test;
 import logic.Observer;
+import logic.Skin;
 import logic.User;
 import logic.Item;
 
@@ -46,16 +48,8 @@ public class TestUser_unit {
       User user = new User("12345678", "1234567890");
       User watch = new User("Stalker", "1234567890");
       user.register(watch);
-      ArrayList<Observer> test = user.getObservers();
+      List<Observer> test = user.getObservers();
       assertEquals(1, test.size(), 0);
-  }
-  
-  @Test
-  public void TestUser(){
-      String skinName = "tannaSkin";
-      User u = new User("username0","password0");
-      u.addNewSkin(skinName);
-      assertEquals(u.getCurrentSkin(),skinName);
   }
   
 }

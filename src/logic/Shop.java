@@ -2,10 +2,12 @@ package logic;
 
 import java.util.*;
 import armdb.QueryResult;
+import armdb.SQLQuery;
 import armdb.SQLQueryException;
 
 public class Shop {
   Database db = new Database();
+  
   public List<Item> getAllItems() {
     // Create result list
     List<Item> allItems = new ArrayList<Item>();
