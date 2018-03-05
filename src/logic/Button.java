@@ -19,6 +19,13 @@ public class Button implements Subject, Observer {
 	this.buttonWeight = weight;
     }
     /**
+     * getter method for whether or not the button is pressed
+     *
+     */
+    public boolean getPressedStatus() {
+    		return isPressed;
+    }
+    /**
      * increases the current user's score by the worth of the button
      *
      */
