@@ -4,17 +4,24 @@ package logic;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.text.Text;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 
-public class Sidebar extends VBox
+
+
+public class Sidebar extends VBox implements Observer
 {
-    public Sidebar()
+    private Text text;
+    private User user;
+    
+    public Sidebar(User user)
     {
-        int score = 0;
+        this.user = user;
+
         int buttonWidth = 500;
         
+
         // Logout Button
         //Button logoutButton = new Button("Log Out");
         //logoutButton.setOnAction(e -> Main.window.setScene(Main.login));
@@ -22,7 +29,8 @@ public class Sidebar extends VBox
         
         //Score Box TextField
         Label scoreLabel = new Label("SCORE:");
-        Text text = new Text (Integer.toString(score));
+        text = new Text (Integer.toString(user.getCurrentScore()));
+        
         HBox scoreBox = new HBox();
         scoreBox.getChildren().addAll(scoreLabel, text);
         scoreBox.setSpacing(20); 
@@ -76,5 +84,21 @@ public class Sidebar extends VBox
         this.getChildren().addAll(scoreBox, homeButton, storeButton, settingsButton, shareButton, leaderboardButton);   
         this.getStylesheets().add(getClass().getResource("theme.css").toExternalForm());
         this.getStyleClass().add("root");
+    }
+
+    @Override
+    public void update() {
+      System.out.println("^");
+      text.setText(Integer.toString(user.getCurrentScore()));
+    }
+
+    @Override
+    public void update(String type) {
+      
+    }
+
+    @Override
+    public void update(int amount) {
+      
     }   
 }

@@ -148,6 +148,8 @@ public class User implements Subject, Observer {
     public void increaseScore(int x) {
 	if (x > 0) {
 	    score += x;
+	    System.out.println("adding " + x + ", score: " + score);
+	    notifyObservers();
 	}
     }
 
@@ -312,6 +314,7 @@ public class User implements Subject, Observer {
   @Override
   public void update(int amount) {
       increaseScore(amount);
+      System.out.println("amount: " + amount);
   }
 
 }

@@ -43,6 +43,7 @@ public class Main extends Application{
 
     loginScreen();
     user = new User(uString,pString);
+
     homeScreen();
     signUpScreen();
     
@@ -61,7 +62,11 @@ public class Main extends Application{
   
   public static void main(String[] args) {
     launch(args);
-}
+  }
+  
+  public static User getUser() {
+    return user;
+  }
   
   private static GridPane gridSetup(Node v){
 

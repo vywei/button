@@ -2,7 +2,7 @@ package logic;
 
 import java.util.ArrayList;
 
-public class Button implements Subject, Observer {
+public class Btn implements Subject, Observer {
     private Skin currentSkin;
     private Boolean isPressed;
     private User currentUser;
@@ -13,10 +13,11 @@ public class Button implements Subject, Observer {
      * Button constructor, set current skin and weight of the button
      * @param currentSkin, weight
      */
-    public Button(Skin currentSkin, int weight) {
-	this.currentSkin = currentSkin;
-	this.isPressed = false;
-	this.buttonWeight = weight;
+    public Btn(Skin currentSkin, int weight) {
+    	this.currentSkin = currentSkin;
+    	this.isPressed = false;
+    	this.buttonWeight = weight;
+    	observers = new ArrayList<>();
     }
     /**
      * getter method for whether or not the button is pressed
@@ -74,6 +75,7 @@ public class Button implements Subject, Observer {
     public void register(Observer observ) {
 	if (observ != null) {
 	    observers.add(observ);
+	    currentUser = (User)observ;
 	}
     }
     
@@ -89,6 +91,7 @@ public class Button implements Subject, Observer {
 	for (int i = 0; i < observers.size(); i++) {
 	    observers.get(i).update(buttonWeight); //need to update with buttonweight
 	}
+	  System.out.println("updating button's observers");
     }
     
     @Override

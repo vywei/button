@@ -2,6 +2,7 @@ package logic;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -10,7 +11,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-
+import javafx.scene.input.MouseEvent;
 
 
 public class LandingView 
@@ -20,10 +21,7 @@ public class LandingView
     
     public LandingView()
     {
-        Sidebar sidebar = new Sidebar();
-        double buttonWidth = 150;
-        Button add = new Button("Button");
-        add.setMinWidth(buttonWidth);
+        
 
         // The title text on top and its alignment
         Label header = new Label("Welcome to Home, " + Main.user.getUsername());
@@ -36,10 +34,28 @@ public class LandingView
         homeGrid.setHgap(10);
         homeGrid.getStylesheets().add(getClass().getResource(t).toExternalForm());
         homeGrid.getStyleClass().add("root");
+      
+        
        
-        Image image = new Image(Main.class.getResourceAsStream("red_button_unpressed.png"));
+        Btn button = new Btn(new Skin(1, "red_button", 10), 1);
+        
+        
+        double buttonWidth = 150;
+        Button add = new Button("Button");
+        add.setMinWidth(buttonWidth);
+        User temp = Main.getUser();
+        
+        Sidebar sidebar = new Sidebar(temp);
+        temp.register((Observer) sidebar);
+        temp.register((Observer) button);
+        
+        System.out.println("*" + temp.getObservers().size());
+       
+        button.register((Observer)temp);
+        Image unpressedImage = new Image(Main.class.getResourceAsStream("red_button_unpressed.png"));
+        Image pressedImage = new Image(Main.class.getResourceAsStream("red_button_pressed.png"));
         ImageView iv1 = new ImageView();
-        iv1.setImage(image);
+        iv1.setImage(unpressedImage);
         iv1.setFitWidth(450);
         iv1.setPreserveRatio(true);
         iv1.setSmooth(true);
@@ -47,6 +63,22 @@ public class LandingView
         HBox imageBox = new HBox();
         imageBox.getChildren().add(iv1);
         imageBox.setPadding(new Insets(0,0,0,0));
+        
+        iv1.setOnMousePressed(new EventHandler<MouseEvent>() {
+          @Override
+          public void handle(MouseEvent event) {
+            iv1.setImage(pressedImage);
+            button.increaseScore();
+          }
+        });
+        iv1.setOnMouseReleased(new EventHandler<MouseEvent>() {
+          @Override
+          public void handle(MouseEvent event) {
+            iv1.setImage(unpressedImage);
+          }
+        });
+        
+        
         
         BorderPane root = new BorderPane();
         root.setRight(sidebar);
