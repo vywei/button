@@ -26,6 +26,13 @@ public class User implements Subject, Observer {
     	observers = new ArrayList<Observer>();
     	skins = new ArrayList<Skin>();
     }
+    
+    // Constructor for leaderboard users
+    public User(String username, int ID, int score) {
+      this.username = username;
+      this.ID = ID;
+      this.score = score;
+    }
 
     /**
      * For adding a new skin. Maybe unnecessary. Probably needs error checking
