@@ -1,5 +1,6 @@
 package logic;
 
+import java.util.List;
 import java.util.ArrayList;
 import armdb.QueryResult;
 import armdb.SQLQueryException;
@@ -16,15 +17,15 @@ public class User implements Subject, Observer {
     private Skin currentSkin;
 
     public User() {
-    	observers = new ArrayList<Observer>();
-    	skins = new ArrayList<Skin>();
+	    	observers = new ArrayList<Observer>();
+	    	skins = new ArrayList<Skin>();
     }
   
     public User(String newUsername, String newPassword) {
-    	username = validateUsername(newUsername);
-    	password = validatePassword(newPassword);
-    	observers = new ArrayList<Observer>();
-    	skins = new ArrayList<Skin>();
+	    	username = validateUsername(newUsername);
+	    	password = validatePassword(newPassword);
+	    	observers = new ArrayList<Observer>();
+	    	skins = new ArrayList<Skin>();
     }
     
     // Constructor for leaderboard users
@@ -96,7 +97,7 @@ public class User implements Subject, Observer {
      * (For User observers should be Button and UserRoster)
      * @return array of Observers
      */
-    public ArrayList<Observer> getObservers() {
+    public List<Observer> getObservers() {
       return observers;
     }
 
@@ -120,7 +121,7 @@ public class User implements Subject, Observer {
      * Public getter for ArrayList of skin names
      * @return list of all purchased skins for this user
      */
-    public ArrayList<Skin> getSkins() {
+    public List<Skin> getSkins() {
       return skins;
     }
 
