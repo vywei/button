@@ -36,19 +36,6 @@ public class StoreView extends Application {
     root.getChildren().addAll(getHeader(), getBody());
     Scene scene = new Scene(root, windowWidth, 500);
     stage.setScene(scene);
-    
-    /*plus = new Button("+");
-    plus.setOnAction(new EventHandler<ActionEvent>() {
-      public void handle(ActionEvent event) {
-        res = getAndCalc('+');
-        System.out.println("plus = " + res);
-        resText.setText("Result = " + res);
-      }
-    });*/
-    
-    //promts.getChildren().addAll(label1, aInput, bInput);
-    //buttons.getChildren().addAll(plus, minus, mult, divide, resText);
-    
     stage.show();
   }
   
@@ -180,5 +167,11 @@ public class StoreView extends Application {
     return frame;
     
   }
+  
+  /* private List<Item> dummyList() {
+    Skin item1 = new Skin(123, "Cool Skin", 999);
+    Skin item2 = new Skin(456, "Cool Skin 2", 123);
+    
+  } */
 
 }
