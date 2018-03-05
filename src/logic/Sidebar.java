@@ -40,7 +40,7 @@ public class Sidebar extends VBox implements Observer
         Button homeButton = new Button("Home");
         homeButton.setOnAction(e -> 
         {
-            Main.window.setScene(Main.home);    
+            Main.window.setScene(Main.landing);    
         });
         homeButton.setMaxWidth(Double.MAX_VALUE);
 

@@ -17,9 +17,10 @@ public class Main extends Application{
   static Stage window;
 
   protected static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-      
+  public static final int SCREEN_WIDTH = 575;
+  public static final int SCREEN_HEIGHT = 440;
   protected static Scene login;
-  protected static Scene home;
+  protected static Scene landing;
   protected static Scene store;
   protected static Scene signUp;
   protected static Scene settings;
@@ -44,12 +45,20 @@ public class Main extends Application{
     loginScreen();
     user = new User(uString,pString);
 
-    homeScreen();
+    landingScreen();
     signUpScreen();
+    /*storeScreen();
+    settingsScreen();
+    leaderboardScreen();
+    shareScreen();*/
     
     login.getStylesheets().add(sheet);
-    //home.getStylesheets().add(sheet);
+    landing.getStylesheets().add(sheet);
     signUp.getStylesheets().add(sheet);
+    /*store.getStylesheets().add(sheet);
+    settings.getStylesheets().add(sheet);
+    leaderboard.getStylesheets().add(sheet);
+    share.getStylesheets().add(sheet);*/
     
     window.setScene(login);
     window.show();
@@ -84,16 +93,7 @@ public class Main extends Application{
 
       GridPane loginGrid = gridSetup(loginView.getView());
       
-      login = new Scene(loginGrid, screenSize.getWidth(), screenSize.getHeight());
-  }
-  
-  private static void homeScreen()
-  {
-      LandingView landingView = new LandingView();
-
-      GridPane homeGrid = gridSetup(landingView.getView());
-      
-      home = new Scene(homeGrid, 575, 440);
+      login = new Scene(loginGrid, SCREEN_WIDTH, SCREEN_HEIGHT);
   }
   
   private static void signUpScreen()
@@ -102,7 +102,52 @@ public class Main extends Application{
 
       GridPane signUpGrid = gridSetup(signUpView.getView());
       
-      signUp = new Scene(signUpGrid, screenSize.getWidth(), screenSize.getHeight());
+      signUp = new Scene(signUpGrid, SCREEN_WIDTH, SCREEN_HEIGHT);
   }
+      
+  private static void landingScreen()
+  {
+      LandingView landingView = new LandingView();
+
+      GridPane landingGrid = gridSetup(landingView.getView());
+      
+      landing = new Scene(landingGrid, SCREEN_WIDTH, SCREEN_HEIGHT);
+  }
+  
+  /*private static void storeScreen()
+  {
+      StoreView storeView = new StoreView();
+
+      GridPane storeGrid = gridSetup(storeView.getView());
+      
+      store new Scene(storeGrid, SCREEN_WIDTH, SCREEN_HEIGHT);
+  }
+  
+  private static void settingsScreen()
+  {
+      SettingsView settingsView = new SettingsView();
+
+      GridPane settingsGrid = gridSetup(settingsView.getView());
+      
+      settings = new Scene(settingsGrid, SCREEN_WIDTH, SCREEN_HEIGHT);
+  }
+  
+  private static void leaderboardScreen()
+  {
+      LeaderboardView leaderboardView = new LeaderboardView();
+
+      GridPane leaderboardGrid = gridSetup(leaderboardView.getView());
+      
+      leaderboard = new Scene(leaderboardGrid, SCREEN_WIDTH, SCREEN_HEIGHT);
+  }
+    private static void shareScreen()
+  {
+      ShareView shareView = new ShareView();
+
+      GridPane shareGrid = gridSetup(shareView.getView());
+      
+      share = new Scene(shareGrid, SCREEN_WIDTH, SCREEN_HEIGHT);
+  }
+  */
 
 }
