@@ -42,6 +42,7 @@ public class Main extends Application{
     window.setTitle("Button");
 
     loginScreen();
+    homeScreen();
 
     window.setScene(login);
     window.show();
@@ -70,11 +71,18 @@ public class Main extends Application{
   {
       LoginView loginView = new LoginView();
 
-      
       GridPane loginGrid = gridSetup(loginView.getView());
       
-      
       login = new Scene(loginGrid, screenSize.getWidth(), screenSize.getHeight());
+  }
+  
+  private static void homeScreen()
+  {
+      LandingView landingView = new LandingView();
+
+      GridPane loginGrid = gridSetup(landingView.getView());
+      
+      home = new Scene(loginGrid, screenSize.getWidth(), screenSize.getHeight());
   }
 
 }
