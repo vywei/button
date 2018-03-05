@@ -79,7 +79,7 @@ public class Database {
     try {
         qr = query.result("player", new ArrayList<String>(), 
             "WHERE username = '" + username + 
-            "' AND MD5(password) = '" + "'");
+            "' AND MD5(password) = '" + passHash + "'");
 
         // Convert each row into an item
         resultUser = parseUser(qr);
