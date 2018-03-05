@@ -3,7 +3,7 @@ package logic;
 import java.util.ArrayList;
 
 public class Button implements Subject, Observer {
-    private String currentSkin;
+    private Skin currentSkin;
     private Boolean isPressed;
     private User currentUser;
     private int buttonWeight;
@@ -13,7 +13,7 @@ public class Button implements Subject, Observer {
      * Button constructor, set current skin and weight of the button
      * @param currentSkin, weight
      */
-    public Button(String currentSkin,int weight) {
+    public Button(Skin currentSkin, int weight) {
 	this.currentSkin = currentSkin;
 	this.isPressed = false;
 	this.buttonWeight = weight;
@@ -36,15 +36,15 @@ public class Button implements Subject, Observer {
      * gets the current buttons skin
      *
      */
-    public String getCurrentSkin(){
-	return currentSkin;
+    public Skin getCurrentSkin(){
+      return currentSkin;
     }
     /**
      * sets the buttons skin
      * @param newSkin
      */
-    public void setSkin(String newSkin){
-	this.currentSkin = newSkin;
+    public void setSkin(Skin newSkin){
+      this.currentSkin = newSkin;
     }
     @Override
     public void update() {

@@ -10,30 +10,30 @@ public class User implements Subject, Observer {
     private String username;
     private int ID;
     private int score;
-    private ArrayList<String> skins;
-    private String currentSkin;
+    private ArrayList<Skin> skins;
+    private Skin currentSkin;
 
     public User() {
-	observers = new ArrayList<Observer>();
-	skins = new ArrayList<String>();
+    	observers = new ArrayList<Observer>();
+    	skins = new ArrayList<Skin>();
     }
   
     public User(String newUsername, String newPassword) {
-	username = validateUsername(newUsername);
-	password = validatePassword(newPassword);
-	observers = new ArrayList<Observer>();
-	skins = new ArrayList<String>();
+    	username = validateUsername(newUsername);
+    	password = validatePassword(newPassword);
+    	observers = new ArrayList<Observer>();
+    	skins = new ArrayList<Skin>();
     }
 
     /**
      * For adding a new skin. Maybe unnecessary. Probably needs error checking
      * @param newSkin
      */
-    public void addNewSkin(String newSkin) {
-	String tempSkin = validateSkin(newSkin);
-	if (tempSkin != null) {
-	    skins.add(newSkin);
-	}
+    public void addNewSkin(Skin newSkin) {
+    	Skin tempSkin = validateSkin(newSkin);
+    	if (tempSkin != null) {
+    	    skins.add(newSkin);
+    	}
     }
 
     /**
@@ -43,12 +43,12 @@ public class User implements Subject, Observer {
      * unaltered.
      * @param newSkin
      */
-    public void changeSkin(String newSkin) {
-	String tempSkin = validateSkin(newSkin);
-	if (tempSkin != null) {
-	    currentSkin = tempSkin;
-	    notifyObservers();
-	}
+    public void changeSkin(Skin newSkin) {
+    	Skin tempSkin = validateSkin(newSkin);
+    	if (tempSkin != null) {
+    	    currentSkin = tempSkin;
+    	    notifyObservers();
+    	}
     }
 
     /**
@@ -56,7 +56,7 @@ public class User implements Subject, Observer {
      * @return current score value
      */
     public int getBalance() {
-	return getScore();
+      return getScore();
     }
 
     /**
@@ -64,14 +64,14 @@ public class User implements Subject, Observer {
      * @return current score value
      */
     public int getCurrentScore(){
-	return getScore();
+      return getScore();
     }
     /**
      * public getter for current skin
      * @return name of currently equipped skins
      */
-    public String getCurrentSkin(){
-	return currentSkin;
+    public Skin getCurrentSkin(){
+      return currentSkin;
     }
 
     /**
@@ -79,7 +79,7 @@ public class User implements Subject, Observer {
      * @return user ID
      */
     public int getID() {
-	return ID;
+      return ID;
     }
 
     /**
@@ -88,7 +88,7 @@ public class User implements Subject, Observer {
      * @return array of Observers
      */
     public ArrayList<Observer> getObservers() {
-	return observers;
+      return observers;
     }
 
     /**
@@ -96,7 +96,7 @@ public class User implements Subject, Observer {
      * @return password
      */
     public String getPassword() {
-	return password;
+      return password;
     }
 
     /**
@@ -104,15 +104,15 @@ public class User implements Subject, Observer {
      * @return current score
      */
     public int getScore() {
-	return score;
+      return score;
     }
 
     /**
      * Public getter for ArrayList of skin names
      * @return list of all purchased skins for this user
      */
-    public ArrayList<String> getSkins() {
-	return skins;
+    public ArrayList<Skin> getSkins() {
+      return skins;
     }
 
     /**
@@ -120,17 +120,17 @@ public class User implements Subject, Observer {
      * @return username
      */
     public String getUsername() {
-	return username;
+      return username;
     }
 
     /**
      * Only allows score to be increased by positive values.
      * @param x
      */
-    private void increaseScore(int x) {
-	if (x > 0) {
-	    score += x;
-	}
+    public void increaseScore(int x) {
+      if (x > 0) {
+        score += x;
+      }
     }
 
     /**
@@ -141,7 +141,7 @@ public class User implements Subject, Observer {
   @Override
   public void notifyObservers() {
       for (int i = 0; i < observers.size(); i++) {
-	  observers.get(i).update();
+        observers.get(i).update();
       }
   }
 
@@ -157,7 +157,7 @@ public class User implements Subject, Observer {
      * public setter for the current skin
      * @param currentSkin
      */
-    public void setCurrentSkin(String newSkin) {
+    public void setCurrentSkin(Skin newSkin) {
 	currentSkin = validateSkin(newSkin);
     }
 
@@ -192,8 +192,8 @@ public class User implements Subject, Observer {
      * public setter for skins
      * @param newSkins
      */
-    public void setSkins(ArrayList<String> newSkins) {
-	String tempSkin;
+    public void setSkins(ArrayList<Skin> newSkins) {
+	Skin tempSkin;
 	for (int i = 0; i < newSkins.size(); i++) {
 	    tempSkin = newSkins.get(i);
 	    if (validateSkin(tempSkin) == null) {
@@ -271,7 +271,7 @@ public class User implements Subject, Observer {
      * @param newSkin
      * @return newSkin if valid, null if invalid
      */
-    private String validateSkin(String newSkin) {
+    private Skin validateSkin(Skin newSkin) {
 	for (int i = 0; i < skins.size(); i++) {
 	    if (skins.get(i).equals(newSkin)) {
 		return newSkin;

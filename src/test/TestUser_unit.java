@@ -3,6 +3,7 @@ import static org.junit.Assert.*;
 import java.util.ArrayList;
 import org.junit.Test;
 import logic.Observer;
+import logic.Skin;
 import logic.User;
 import logic.Item;
 
@@ -48,14 +49,6 @@ public class TestUser_unit {
       user.register(watch);
       ArrayList<Observer> test = user.getObservers();
       assertEquals(1, test.size(), 0);
-  }
-  
-  @Test
-  public void TestUser(){
-      String skinName = "tannaSkin";
-      User u = new User("username0","password0");
-      u.addNewSkin(skinName);
-      assertEquals(u.getCurrentSkin(),skinName);
   }
   
 }
