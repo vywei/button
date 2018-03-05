@@ -42,8 +42,9 @@ public class Main extends Application{
     window.setTitle("Button");
 
     loginScreen();
+    user = new User(uString,pString);
     homeScreen();
-
+    
     window.setScene(login);
     window.show();
 }
