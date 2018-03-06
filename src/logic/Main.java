@@ -47,18 +47,18 @@ public class Main extends Application{
 
     landingScreen();
     signUpScreen();
-    /*storeScreen();
+    //storeScreen();
     settingsScreen();
-    leaderboardScreen();
-    shareScreen();*/
+    //leaderboardScreen();
+    //shareScreen();
     
     login.getStylesheets().add(sheet);
     landing.getStylesheets().add(sheet);
     signUp.getStylesheets().add(sheet);
-    /*store.getStylesheets().add(sheet);
+    //store.getStylesheets().add(sheet);
     settings.getStylesheets().add(sheet);
-    leaderboard.getStylesheets().add(sheet);
-    share.getStylesheets().add(sheet);*/
+    //leaderboard.getStylesheets().add(sheet);
+    //share.getStylesheets().add(sheet);
     
     window.setScene(login);
     window.show();
@@ -121,7 +121,7 @@ public class Main extends Application{
       GridPane storeGrid = gridSetup(storeView.getView());
       
       store new Scene(storeGrid, SCREEN_WIDTH, SCREEN_HEIGHT);
-  }
+  }*/
   
   private static void settingsScreen()
   {
@@ -132,7 +132,7 @@ public class Main extends Application{
       settings = new Scene(settingsGrid, SCREEN_WIDTH, SCREEN_HEIGHT);
   }
   
-  private static void leaderboardScreen()
+  /*private static void leaderboardScreen()
   {
       LeaderboardView leaderboardView = new LeaderboardView();
 

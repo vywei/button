@@ -102,10 +102,6 @@ public class Database {
     }
   }
   
-  /**
-   * Updates user score in the database
-   * @param u
-   */
   public void updateUserScore(User u) {
     // Create query and result
     SQLUpdate query = new SQLUpdate(ch);
@@ -184,6 +180,72 @@ public class Database {
 
 	return players;
     }
+  
+  public void getSettings(User u, Settings s) {
+	
+	SQLSelect query = new SQLSelect(ch);
+	QueryResult qr;
+	
+	try {
+	    qr = query.result("settings", new ArrayList<String>(), "WHERE user_id = " + u.getID());
+	
+	    while (qr.nextFlag()) {
+	    	int temp = Integer.parseInt(qr.getValue("vid_res_width"));
+	        s.setVideoResWidth(temp);
+	        temp = Integer.parseInt(qr.getValue("vid_res_height"));
+	        s.setVideoResHeight(temp);
+	        temp = Integer.parseInt(qr.getValue("vid_textures"));
+	        s.setTextureQual(temp);
+	        temp = Integer.parseInt(qr.getValue("vid_effects"));
+	        s.setEffectsQual(temp);
+	        temp = Integer.parseInt(qr.getValue("audio"));
+	        s.setAudioEnabled(temp);
+	        temp = Integer.parseInt(qr.getValue("music_vol"));
+	        s.setMusicVol(temp);
+	        temp = Integer.parseInt(qr.getValue("effects_vol"));
+	        s.setEffectsVol(temp);
+	        String stemp = qr.getValue("music");
+	        s.setMusicPath(stemp);
+	    }
+	}
+	catch(SQLQueryException e){
+	    System.out.println(e.getMessage());
+	}
+	
+  }
+  
+  public void saveSettings(User u, Settings s) {
+    SQLUpdate query = new SQLUpdate(ch);
+    
+    try {
+      ArrayList<String> cols = new ArrayList<>();
+      cols.add("vid_res_width");
+      cols.add("vid_res_height");
+      cols.add("vid_textures");
+      cols.add("vid_effects");
+      cols.add("audio");
+      cols.add("music_vol");
+      cols.add("effects_vol");
+      cols.add("music");
+      
+      ArrayList<String> vals = new ArrayList<>();
+      vals.add(Integer.toString(s.getVideoResWidth()));
+      vals.add(Integer.toString(s.getVideoResHeight()));
+      vals.add(Integer.toString(s.getTextureQual()));
+      vals.add(Integer.toString(s.getEffectsQual()));
+      vals.add(Integer.toString(s.getAudioEnabled()));
+      vals.add(Integer.toString(s.getMusicVol()));
+      vals.add(Integer.toString(s.getEffectsVol()));
+      vals.add(s.getMusicPath());
+      
+      String constraint = "WHERE id = " + Integer.toString(u.getID());
+      
+      query.result("settings", cols, vals, constraint); 
+    }
+    catch(SQLQueryException e){                   
+        System.out.println(e.getMessage());           
+    }
+  }
 
 
 
