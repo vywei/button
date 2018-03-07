@@ -29,18 +29,14 @@ public class VideoSettingsView
      
     public VideoSettingsView()
     {
+        BorderPane border = new BorderPane();
+        border.setPadding(new Insets(20, 0, 20, 20));
+        
     	Label header = new Label("Video Settings");
         header.setMaxWidth(Double.MAX_VALUE);
         header.setAlignment(Pos.CENTER);
         header.getStylesheets().add(getClass().getResource(t).toExternalForm());
         header.getStyleClass().add("a-header"); 
-    	
-        GridPane homeGrid = new GridPane();
-        homeGrid.setPadding(new Insets(0, 0, 0, 0));
-        homeGrid.setVgap(8);
-        homeGrid.setHgap(10);
-        homeGrid.getStylesheets().add(getClass().getResource(t).toExternalForm());
-        homeGrid.getStyleClass().add("root");
 
         User temp = Main.getUser();
         
@@ -52,8 +48,12 @@ public class VideoSettingsView
         settingsBox.setMinWidth(450);
         settingsBox.setAlignment(Pos.CENTER);
         
-        BorderPane border = new BorderPane();
-        border.setPadding(new Insets(20, 0, 20, 20));
+        GridPane homeGrid = new GridPane();
+        homeGrid.setPadding(new Insets(0, 0, 0, 0));
+        homeGrid.setVgap(8);
+        homeGrid.setHgap(10);
+        homeGrid.getStylesheets().add(getClass().getResource(t).toExternalForm());
+        homeGrid.getStyleClass().add("root");
         
         HBox resolutionBox = new HBox();
         resolutionBox.setPadding(new Insets(0,0,0,0));
