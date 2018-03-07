@@ -27,6 +27,10 @@ public class Main extends Application{
   protected static Scene account;
   protected static Scene share;
   protected static Scene leaderboard;
+  protected static Scene videoSettings;
+  protected static Scene audioSettings;
+  protected static Scene accountSettings;
+  protected static Scene bugReport;
 
   protected static String pString = "Password";
   protected static String uString = "Username";
@@ -51,6 +55,10 @@ public class Main extends Application{
     settingsScreen();
     //leaderboardScreen();
     //shareScreen();
+    videoSettingsScreen();
+    //audioSettingsScreen();
+    //accountSettingsScreen();
+    //bugReportScreen();
     
     login.getStylesheets().add(sheet);
     landing.getStylesheets().add(sheet);
@@ -59,6 +67,10 @@ public class Main extends Application{
     settings.getStylesheets().add(sheet);
     //leaderboard.getStylesheets().add(sheet);
     //share.getStylesheets().add(sheet);
+    videoSettings.getStylesheets().add(sheet);
+    //audioSettings.getStylesheets().add(sheet);
+    //accountSettings.getStylesheets().add(sheet);
+    //bugReport.getStylesheets().add(sheet);
     
     window.setScene(login);
     window.show();
@@ -149,5 +161,40 @@ public class Main extends Application{
       share = new Scene(shareGrid, SCREEN_WIDTH, SCREEN_HEIGHT);
   }
   */
+  private static void videoSettingsScreen()
+  {
+      VideoSettingsView videoSettingsView = new VideoSettingsView();
+
+      GridPane videoSettingsGrid = gridSetup(videoSettingsView.getView());
+      
+      videoSettings = new Scene(videoSettingsGrid, SCREEN_WIDTH, SCREEN_HEIGHT);
+  }
+  
+  /*private static void audioSettingsScreen()
+  {
+      AudioSettingsView audioSettings = new AudioSettingsView();
+
+      GridPane audioSettingsGrid = gridSetup(audioSettingsView.getView());
+      
+      audioSettings = new Scene(audioSettingsGrid, SCREEN_WIDTH, SCREEN_HEIGHT);
+  }
+  
+  private static void accountSettingsScreen()
+  {
+      AccountSettingsView accountSettingsView = new AccountSettingsView();
+
+      GridPane accountSettingsGrid = gridSetup(accountSettingsView.getView());
+      
+      accountSettings = new Scene(accountSettingsGrid, SCREEN_WIDTH, SCREEN_HEIGHT);
+  }
+  
+  private static void bugReportScreen()
+  {
+      BugReportView videoSettingsView = new BugReportView();
+
+      GridPane bugReportGrid = gridSetup(bugReportView.getView());
+      
+      bugReport = new Scene(bugReportGrid, SCREEN_WIDTH, SCREEN_HEIGHT);
+  }*/
 
 }

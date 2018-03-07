@@ -6,6 +6,7 @@ import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -16,13 +17,12 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 
 public class SettingsView 
 {
 	private static String t = "theme.css"; 
     private final BorderPane view;
+    protected static Scene videoSettings;
      
     public SettingsView()
     {
@@ -55,7 +55,7 @@ public class SettingsView
         Button videoButton = new Button("Video");
         videoButton.setMaxWidth(Double.MAX_VALUE);
         videoButton.setPadding(new Insets(10, 0, 10, 0));
-        //videoButton.setOnAction(e -> Main.window.setScene(Main.landing));
+        videoButton.setOnAction(e -> Main.window.setScene(Main.videoSettings));
         
         Button audioButton = new Button("Audio");
         audioButton.setMaxWidth(Double.MAX_VALUE);
