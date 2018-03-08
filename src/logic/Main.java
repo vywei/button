@@ -30,6 +30,7 @@ public class Main extends Application{
   protected static Scene videoSettings;
   protected static Scene audioSettings;
   protected static Scene accountSettings;
+  protected static Scene linkAccounts;
   protected static Scene bugReport;
 
   protected static String pString = "Password";
@@ -57,7 +58,7 @@ public class Main extends Application{
     //shareScreen();
     videoSettingsScreen();
     audioSettingsScreen();
-    //accountSettingsScreen();
+    accountSettingsScreen();
     bugReportScreen();
     
     login.getStylesheets().add(sheet);
@@ -69,8 +70,9 @@ public class Main extends Application{
     //share.getStylesheets().add(sheet);
     videoSettings.getStylesheets().add(sheet);
     audioSettings.getStylesheets().add(sheet);
-    //accountSettings.getStylesheets().add(sheet);
+    accountSettings.getStylesheets().add(sheet);
     bugReport.getStylesheets().add(sheet);
+
     
     window.setScene(login);
     window.show();
@@ -178,7 +180,7 @@ public class Main extends Application{
       
       audioSettings = new Scene(audioSettingsGrid, SCREEN_WIDTH, SCREEN_HEIGHT);
   }
-  /*
+  
   private static void accountSettingsScreen()
   {
       AccountSettingsView accountSettingsView = new AccountSettingsView();
@@ -187,7 +189,7 @@ public class Main extends Application{
       
       accountSettings = new Scene(accountSettingsGrid, SCREEN_WIDTH, SCREEN_HEIGHT);
   }
-  */
+  
   private static void bugReportScreen()
   {
       BugReportView bugReportView = new BugReportView();
@@ -196,5 +198,12 @@ public class Main extends Application{
       
       bugReport = new Scene(bugReportGrid, SCREEN_WIDTH, SCREEN_HEIGHT);
   }
+  /*private static void linkAccountsScreen()
+  {
+      LinkAccountsView linkAccountsView = new LinkAccountsView();
 
+      GridPane linkAccountsGrid = gridSetup(linkAccountsView.getView());
+      
+      bugReport = new Scene(linkAccountsGrid, SCREEN_WIDTH, SCREEN_HEIGHT);
+  }*/
 }

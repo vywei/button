@@ -65,7 +65,7 @@ public class SettingsView
         Button accountsButton = new Button("Link Accounts");
         accountsButton.setMaxWidth(Double.MAX_VALUE); 
         accountsButton.setPadding(new Insets(10, 0, 10, 0));
-        //accountsButton.setOnAction(e -> Main.window.setScene(Main.landing));
+        accountsButton.setOnAction(e -> Main.window.setScene(Main.accountSettings));
         
         Button bugButton = new Button("Report a Bug");
         bugButton.setMaxWidth(Double.MAX_VALUE);  
