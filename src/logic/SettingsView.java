@@ -71,7 +71,11 @@ public class SettingsView
         bugButton.setMaxWidth(Double.MAX_VALUE);  
         bugButton.setPadding(new Insets(10, 0, 10, 0));
         //bugButton.setOnAction(e -> Main.window.setScene(Main.landing));
-        
+        bugButton.setOnAction(e -> 
+        {
+          Main.window.setScene(Main.bugReport);
+        });
+        bugButton.setMaxWidth(Double.MAX_VALUE);
         VBox vbButtons = new VBox();
         vbButtons.setSpacing(40);
         vbButtons.setPadding(new Insets(30, 30, 30, 30));

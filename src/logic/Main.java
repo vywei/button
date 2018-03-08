@@ -58,7 +58,7 @@ public class Main extends Application{
     videoSettingsScreen();
     //audioSettingsScreen();
     //accountSettingsScreen();
-    //bugReportScreen();
+    bugReportScreen();
     
     login.getStylesheets().add(sheet);
     landing.getStylesheets().add(sheet);
@@ -70,7 +70,7 @@ public class Main extends Application{
     videoSettings.getStylesheets().add(sheet);
     //audioSettings.getStylesheets().add(sheet);
     //accountSettings.getStylesheets().add(sheet);
-    //bugReport.getStylesheets().add(sheet);
+    bugReport.getStylesheets().add(sheet);
     
     window.setScene(login);
     window.show();
@@ -187,14 +187,14 @@ public class Main extends Application{
       
       accountSettings = new Scene(accountSettingsGrid, SCREEN_WIDTH, SCREEN_HEIGHT);
   }
-  
+  */
   private static void bugReportScreen()
   {
-      BugReportView videoSettingsView = new BugReportView();
+      BugReportView bugReportView = new BugReportView();
 
       GridPane bugReportGrid = gridSetup(bugReportView.getView());
       
       bugReport = new Scene(bugReportGrid, SCREEN_WIDTH, SCREEN_HEIGHT);
-  }*/
+  }
 
 }
