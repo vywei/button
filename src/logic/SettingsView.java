@@ -60,7 +60,7 @@ public class SettingsView
         Button audioButton = new Button("Audio");
         audioButton.setMaxWidth(Double.MAX_VALUE);
         audioButton.setPadding(new Insets(10, 0, 10, 0));
-        //audioButton.setOnAction(e -> Main.window.setScene(Main.landing));
+        audioButton.setOnAction(e -> Main.window.setScene(Main.audioSettings));
         
         Button accountsButton = new Button("Link Accounts");
         accountsButton.setMaxWidth(Double.MAX_VALUE); 

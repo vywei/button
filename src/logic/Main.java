@@ -56,7 +56,7 @@ public class Main extends Application{
     //leaderboardScreen();
     //shareScreen();
     videoSettingsScreen();
-    //audioSettingsScreen();
+    audioSettingsScreen();
     //accountSettingsScreen();
     bugReportScreen();
     
@@ -68,7 +68,7 @@ public class Main extends Application{
     //leaderboard.getStylesheets().add(sheet);
     //share.getStylesheets().add(sheet);
     videoSettings.getStylesheets().add(sheet);
-    //audioSettings.getStylesheets().add(sheet);
+    audioSettings.getStylesheets().add(sheet);
     //accountSettings.getStylesheets().add(sheet);
     bugReport.getStylesheets().add(sheet);
     
@@ -170,15 +170,15 @@ public class Main extends Application{
       videoSettings = new Scene(videoSettingsGrid, SCREEN_WIDTH, SCREEN_HEIGHT);
   }
   
-  /*private static void audioSettingsScreen()
+  private static void audioSettingsScreen()
   {
-      AudioSettingsView audioSettings = new AudioSettingsView();
+      AudioSettingsView audioSettingsView = new AudioSettingsView();
 
       GridPane audioSettingsGrid = gridSetup(audioSettingsView.getView());
       
       audioSettings = new Scene(audioSettingsGrid, SCREEN_WIDTH, SCREEN_HEIGHT);
   }
-  
+  /*
   private static void accountSettingsScreen()
   {
       AccountSettingsView accountSettingsView = new AccountSettingsView();
