@@ -23,8 +23,8 @@ public class LoginView
         view = new BorderPane();
         VBox loginBox = new VBox();
         double loginWidth = 200;
-        double height = Main.screenSize.getHeight();
-        double width = Main.screenSize.getWidth();
+        double height = Main.SCREEN_HEIGHT;
+        double width = Main.SCREEN_WIDTH;
 
         Image image = new Image(Main.class.getResourceAsStream("images/login.png"));
         ImageView iv1 = new ImageView();
@@ -51,7 +51,7 @@ public class LoginView
         // Login Action
         Button loginButton = new Button("Log In");
         loginButton.setMaxWidth(Double.MAX_VALUE);
-        loginButton.setOnAction(e -> Main.window.setScene(Main.home));
+        loginButton.setOnAction(e -> Main.window.setScene(Main.landing));
         
         // Sign Up Action
         Button signUpButton = new Button("Sign Up");
