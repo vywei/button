@@ -58,14 +58,7 @@ public class AudioSettingsView
         resolutionBox.setAlignment(Pos.CENTER);
         resolutionBox.setSpacing(40);
         Slider volumeSlider = new Slider(0,1,.5);
-      /*  Label resLabel = new Label("Resolution:");
-        ObservableList<String> resOptions = 
-        	    FXCollections.observableArrayList(
-    	    		"1024 x 768",
-    	    		"1920 x 1080"
-        	    );
-        final ComboBox<String> resCB = new ComboBox<>(resOptions);
-        */	
+
         Label volumeLabel = new Label("Volume:");
         resolutionBox.getChildren().addAll(volumeLabel,volumeSlider/*resLabel, resCB*/);
         
