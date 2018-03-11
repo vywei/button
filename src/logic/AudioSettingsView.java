@@ -36,17 +36,18 @@ public class AudioSettingsView
         Sidebar sidebar = new Sidebar(tempU);
         tempU.register((Observer) sidebar);
        
-        HBox settingsB = new HBox();
-        settingsB.setPadding(new Insets(0,0,0,0));
-        settingsB.setMinWidth(450);
-        settingsB.setAlignment(Pos.CENTER);
-        
+
         GridPane homeG = new GridPane();
         homeG.setPadding(new Insets(0, 0, 0, 0));
         homeG.setVgap(8);
         homeG.setHgap(10);
         homeG.getStylesheets().add(getClass().getResource(themecss).toExternalForm());
         homeG.getStyleClass().add("root");
+        
+        HBox settingsB = new HBox();
+        settingsB.setPadding(new Insets(0,0,0,0));
+        settingsB.setMinWidth(450);
+        settingsB.setAlignment(Pos.CENTER);
         
         HBox resBox = new HBox();
         resBox.setPadding(new Insets(0,0,0,0));
