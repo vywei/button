@@ -41,6 +41,7 @@ public class Main extends Application{
   protected static ArrayList<User> users;
   static String s; 
   
+  //public static Shop theShop = new Shop();
   
   private static void setup(Stage prim, String sheet){
     s = sheet;
@@ -52,7 +53,7 @@ public class Main extends Application{
 
     landingScreen();
     signUpScreen();
-    //storeScreen();
+    storeScreen();
     settingsScreen();
     //leaderboardScreen();
     //shareScreen();
@@ -128,14 +129,14 @@ public class Main extends Application{
       landing = new Scene(landingGrid, SCREEN_WIDTH, SCREEN_HEIGHT);
   }
   
-  /*private static void storeScreen()
+  private static void storeScreen()
   {
-      StoreView storeView = new StoreView();
+      ShopView storeView = new ShopView();
 
       GridPane storeGrid = gridSetup(storeView.getView());
       
-      store new Scene(storeGrid, SCREEN_WIDTH, SCREEN_HEIGHT);
-  }*/
+      store = new Scene(storeGrid, SCREEN_WIDTH, SCREEN_HEIGHT);
+  }
   
   private static void settingsScreen()
   {

@@ -94,6 +94,7 @@ public class SettingsView
         homeGrid.getChildren().addAll(root);
        
         view = root;
+        
     }
     
    public Node getView()
