@@ -1,12 +1,10 @@
 package logic;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
+
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
@@ -20,7 +18,12 @@ public class AudioSettingsView
 {
 	private static String t = "theme.css"; 
     private final BorderPane view;
-     
+    public Node getView()
+    {
+        view.getStylesheets().add(getClass().getResource(t).toExternalForm());
+        view.getStyleClass().add("root");
+        return view;
+    }
     public AudioSettingsView()
     {
         BorderPane border = new BorderPane();
@@ -152,10 +155,5 @@ public class AudioSettingsView
         view = root;
     }
     
-   public Node getView()
-   {
-       view.getStylesheets().add(getClass().getResource(t).toExternalForm());
-       view.getStyleClass().add("root");
-       return view;
-   }
+
 }

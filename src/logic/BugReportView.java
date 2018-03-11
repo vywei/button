@@ -10,29 +10,20 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.SimpleBooleanProperty;
-import javafx.event.EventHandler;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.scene.Node;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+
 
 public class BugReportView {
 	private static String t = "theme.css"; 
     private final BorderPane view;
     protected static Scene videoSettings;
-     
+    public Node getView()
+    {
+        view.getStylesheets().add(getClass().getResource(t).toExternalForm());
+        view.getStyleClass().add("root");
+        return view;
+    }
     public BugReportView()
     {
     	Label header = new Label("Report A Bug");
@@ -96,10 +87,5 @@ public class BugReportView {
         view = root;
     }
     
-   public Node getView()
-   {
-       view.getStylesheets().add(getClass().getResource(t).toExternalForm());
-       view.getStyleClass().add("root");
-       return view;
-   }
+
 }
