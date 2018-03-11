@@ -21,35 +21,31 @@ public class AudioSettingsView
 
     public AudioSettingsView()
     {
-
-        
-
-
-        User tempU = Main.getUser();
-    	Label headerLabel = new Label("Audio Settings");
-        headerLabel.setMaxWidth(Double.MAX_VALUE);
-        headerLabel.setAlignment(Pos.CENTER);
-        headerLabel.getStylesheets().add(getClass().getResource(themecss).toExternalForm());
-        headerLabel.getStyleClass().add("a-header");
+        User currentTempUser = Main.getUser();
+    	Label currentHeaderLabel = new Label("Audio Settings");
+        currentHeaderLabel.setMaxWidth(Double.MAX_VALUE);
+        currentHeaderLabel.setAlignment(Pos.CENTER);
+        currentHeaderLabel.getStylesheets().add(getClass().getResource(themecss).toExternalForm());
+        currentHeaderLabel.getStyleClass().add("a-header");
         
         BorderPane border = new BorderPane();
         border.setPadding(new Insets(20, 0, 20, 20));
         
-        Sidebar sidebar = new Sidebar(tempU);
-        tempU.register((Observer) sidebar);
+        Sidebar sidebar = new Sidebar(currentTempUser);
+        currentTempUser.register((Observer) sidebar);
        
 
-        GridPane homeG = new GridPane();
-        homeG.setPadding(new Insets(0, 0, 0, 0));
-        homeG.setVgap(8);
-        homeG.setHgap(10);
-        homeG.getStylesheets().add(getClass().getResource(themecss).toExternalForm());
-        homeG.getStyleClass().add("root");
+        GridPane currentHomeGrid = new GridPane();
+        currentHomeGrid.setPadding(new Insets(0, 0, 0, 0));
+        currentHomeGrid.setVgap(8);
+        currentHomeGrid.setHgap(10);
+        currentHomeGrid.getStylesheets().add(getClass().getResource(themecss).toExternalForm());
+        currentHomeGrid.getStyleClass().add("root");
         
-        HBox settingsB = new HBox();
-        settingsB.setPadding(new Insets(0,0,0,0));
-        settingsB.setMinWidth(450);
-        settingsB.setAlignment(Pos.CENTER);
+        HBox currentSettingsBox = new HBox();
+        currentSettingsBox.setPadding(new Insets(0,0,0,0));
+        currentSettingsBox.setMinWidth(450);
+        currentSettingsBox.setAlignment(Pos.CENTER);
         
         HBox resBox = new HBox();
         resBox.setPadding(new Insets(0,0,0,0));
@@ -132,17 +128,17 @@ public class AudioSettingsView
         vbSettings1.setPadding(new Insets(30, 30, 30, 30));
         vbSettings1.setMinWidth(450);
         vbSettings1.setAlignment(Pos.CENTER);
-        vbSettings1.getChildren().addAll(headerLabel, resBox, texBox, effectsBox, saveB);
+        vbSettings1.getChildren().addAll(currentHeaderLabel, resBox, texBox, effectsBox, saveB);
         
-        settingsB.getChildren().addAll(vbSettings1);
+        currentSettingsBox.getChildren().addAll(vbSettings1);
 
         BorderPane rootV = new BorderPane();
         rootV.setRight(sidebar);
-        rootV.setLeft(settingsB);
+        rootV.setLeft(currentSettingsBox);
         rootV.getStylesheets().add(getClass().getResource(themecss).toExternalForm());
         rootV.getStyleClass().add("root");
 
-        homeG.getChildren().addAll(rootV);
+        currentHomeGrid.getChildren().addAll(rootV);
        
         view1 = rootV;
     }
