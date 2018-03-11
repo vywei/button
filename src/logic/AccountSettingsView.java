@@ -16,9 +16,10 @@ import javafx.scene.control.TextField;
 
 
 public class AccountSettingsView {
-	private static String t = "theme.css"; 
+	
     private final BorderPane view;
     protected static Scene videoSettings;
+    private static String t = "theme.css"; 
     
    public Node getView()
    {
@@ -53,23 +54,21 @@ public class AccountSettingsView {
         
         BorderPane border = new BorderPane();
         border.setPadding(new Insets(20, 0, 20, 20));
-        
-        // User name Input
-      // Label facebookLabel = new Label("Facebook:");
+       
         TextField userInput = new TextField("");
         userInput.setPromptText("Facebook Email");
         TextField pass = new PasswordField();
         pass.setPromptText("Facebook Password");
         Button linkFbButton = new Button("Link Facebook");
         
-      //  Label twitterLabel = new Label("Twitter:");
+     
         TextField userInputTwitter = new TextField("");
         userInputTwitter.setPromptText("Twitter Email");
         TextField passTwitter = new PasswordField();
         passTwitter.setPromptText("Twitter Password");
         Button linkTwitterButton = new Button("Link Twitter");
         
-     //   Label instaLabel = new Label("Instagram:");
+
         TextField userInputInsta = new TextField("");
         userInputInsta.setPromptText("Instagram Email");
         TextField passInsta = new PasswordField();
