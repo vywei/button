@@ -29,13 +29,14 @@ public class AudioSettingsView
         BorderPane border = new BorderPane();
         border.setPadding(new Insets(20, 0, 20, 20));
         
+
+
+        User temp = Main.getUser();
     	Label header = new Label("Audio Settings");
         header.setMaxWidth(Double.MAX_VALUE);
         header.setAlignment(Pos.CENTER);
         header.getStylesheets().add(getClass().getResource(t).toExternalForm());
         header.getStyleClass().add("a-header"); 
-
-        User temp = Main.getUser();
         
         Sidebar sidebar = new Sidebar(temp);
         temp.register((Observer) sidebar);
