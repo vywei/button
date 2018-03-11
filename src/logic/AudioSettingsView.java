@@ -16,14 +16,9 @@ import javafx.scene.control.Slider;
 
 public class AudioSettingsView 
 {
-	private static String t = "theme.css"; 
+	private static String themecss = "theme.css"; 
     private final BorderPane view;
-    public Node getView()
-    {
-        view.getStylesheets().add(getClass().getResource(t).toExternalForm());
-        view.getStyleClass().add("root");
-        return view;
-    }
+
     public AudioSettingsView()
     {
         BorderPane border = new BorderPane();
@@ -31,43 +26,43 @@ public class AudioSettingsView
         
 
 
-        User temp = Main.getUser();
-    	Label header = new Label("Audio Settings");
-        header.setMaxWidth(Double.MAX_VALUE);
-        header.setAlignment(Pos.CENTER);
-        header.getStylesheets().add(getClass().getResource(t).toExternalForm());
-        header.getStyleClass().add("a-header"); 
+        User tempU = Main.getUser();
+    	Label headerLabel = new Label("Audio Settings");
+        headerLabel.setMaxWidth(Double.MAX_VALUE);
+        headerLabel.setAlignment(Pos.CENTER);
+        headerLabel.getStylesheets().add(getClass().getResource(themecss).toExternalForm());
+        headerLabel.getStyleClass().add("a-header"); 
         
-        Sidebar sidebar = new Sidebar(temp);
-        temp.register((Observer) sidebar);
+        Sidebar sidebar = new Sidebar(tempU);
+        tempU.register((Observer) sidebar);
        
-        HBox settingsBox = new HBox();
-        settingsBox.setPadding(new Insets(0,0,0,0));
-        settingsBox.setMinWidth(450);
-        settingsBox.setAlignment(Pos.CENTER);
+        HBox settingsB = new HBox();
+        settingsB.setPadding(new Insets(0,0,0,0));
+        settingsB.setMinWidth(450);
+        settingsB.setAlignment(Pos.CENTER);
         
-        GridPane homeGrid = new GridPane();
-        homeGrid.setPadding(new Insets(0, 0, 0, 0));
-        homeGrid.setVgap(8);
-        homeGrid.setHgap(10);
-        homeGrid.getStylesheets().add(getClass().getResource(t).toExternalForm());
-        homeGrid.getStyleClass().add("root");
+        GridPane homeG = new GridPane();
+        homeG.setPadding(new Insets(0, 0, 0, 0));
+        homeG.setVgap(8);
+        homeG.setHgap(10);
+        homeG.getStylesheets().add(getClass().getResource(themecss).toExternalForm());
+        homeG.getStyleClass().add("root");
         
-        HBox resolutionBox = new HBox();
-        resolutionBox.setPadding(new Insets(0,0,0,0));
-        resolutionBox.setMinWidth(350);
-        resolutionBox.setAlignment(Pos.CENTER);
-        resolutionBox.setSpacing(40);
+        HBox resBox = new HBox();
+        resBox.setPadding(new Insets(0,0,0,0));
+        resBox.setMinWidth(350);
+        resBox.setAlignment(Pos.CENTER);
+        resBox.setSpacing(40);
         Slider volumeSlider = new Slider(0,1,.5);
 
         Label volumeLabel = new Label("Volume:");
-        resolutionBox.getChildren().addAll(volumeLabel,volumeSlider/*resLabel, resCB*/);
+        resBox.getChildren().addAll(volumeLabel,volumeSlider/*resLabel, resCB*/);
         
-        HBox textureBox = new HBox();
-        textureBox.setPadding(new Insets(0,0,0,0));
-        textureBox.setMinWidth(350);
-        textureBox.setAlignment(Pos.CENTER);
-        textureBox.setSpacing(40);
+        HBox texBox = new HBox();
+        texBox.setPadding(new Insets(0,0,0,0));
+        texBox.setMinWidth(350);
+        texBox.setAlignment(Pos.CENTER);
+        texBox.setSpacing(40);
         
         Label texLabel = new Label("Texture Quality:");
         
@@ -85,7 +80,7 @@ public class AudioSettingsView
         
         VBox texGroupContain = new VBox(texRb1, texRb2, texRb3);
         	
-        textureBox.getChildren().addAll(texLabel, texGroupContain);
+        texBox.getChildren().addAll(texLabel, texGroupContain);
         
         HBox effectsBox = new HBox();
         effectsBox.setPadding(new Insets(0,0,0,0));
@@ -112,42 +107,47 @@ public class AudioSettingsView
         effectsBox.getChildren().addAll(effectsLabel, effectsGroupContain);
         
         
-        HBox saveBox = new HBox();
-        saveBox.setPadding(new Insets(0,0,0,0));
-        saveBox.setAlignment(Pos.CENTER);
-        saveBox.setSpacing(40);
+        HBox saveB = new HBox();
+        saveB.setPadding(new Insets(0,0,0,0));
+        saveB.setAlignment(Pos.CENTER);
+        saveB.setSpacing(40);
         
-        Button saveButton = new Button("Save Changes");
-        saveButton.setMaxWidth(Double.MAX_VALUE); 
-        saveButton.setPadding(new Insets(5, 10, 5, 10));
-        saveButton.setOnAction(e -> Main.window.setScene(Main.settings));
+        Button saveButton1 = new Button("Save Changes");
+        saveButton1.setMaxWidth(Double.MAX_VALUE); 
+        saveButton1.setPadding(new Insets(5, 10, 5, 10));
+        saveButton1.setOnAction(e -> Main.window.setScene(Main.settings));
         
-        Button cancelButton = new Button("Cancel");
-        cancelButton.setMaxWidth(Double.MAX_VALUE); 
-        cancelButton.setPadding(new Insets(5, 10, 5, 10));
-        cancelButton.setOnAction(e -> Main.window.setScene(Main.settings));
+        Button cancelButton1 = new Button("Cancel");
+        cancelButton1.setMaxWidth(Double.MAX_VALUE); 
+        cancelButton1.setPadding(new Insets(5, 10, 5, 10));
+        cancelButton1.setOnAction(e -> Main.window.setScene(Main.settings));
         
-        saveBox.getChildren().addAll(saveButton, cancelButton);
+        saveB.getChildren().addAll(saveButton1, cancelButton1);
         
-        VBox vbSettings = new VBox();
-        vbSettings.setSpacing(40);
-        vbSettings.setPadding(new Insets(30, 30, 30, 30));
-        vbSettings.setMinWidth(450);
-        vbSettings.setAlignment(Pos.CENTER);
-        vbSettings.getChildren().addAll(header, resolutionBox, textureBox, effectsBox, saveBox);
+        VBox vbSettings1 = new VBox();
+        vbSettings1.setSpacing(40);
+        vbSettings1.setPadding(new Insets(30, 30, 30, 30));
+        vbSettings1.setMinWidth(450);
+        vbSettings1.setAlignment(Pos.CENTER);
+        vbSettings1.getChildren().addAll(headerLabel, resBox, texBox, effectsBox, saveB);
         
-        settingsBox.getChildren().addAll(vbSettings);
+        settingsB.getChildren().addAll(vbSettings1);
 
-        BorderPane root = new BorderPane();
-        root.setRight(sidebar);
-        root.setLeft(settingsBox);
-        root.getStylesheets().add(getClass().getResource(t).toExternalForm());
-        root.getStyleClass().add("root");
+        BorderPane rootV = new BorderPane();
+        rootV.setRight(sidebar);
+        rootV.setLeft(settingsB);
+        rootV.getStylesheets().add(getClass().getResource(themecss).toExternalForm());
+        rootV.getStyleClass().add("root");
 
-        homeGrid.getChildren().addAll(root);
+        homeG.getChildren().addAll(rootV);
        
-        view = root;
+        view = rootV;
     }
-    
+    public Node getView()
+    {
+        view.getStylesheets().add(getClass().getResource(themecss).toExternalForm());
+        view.getStyleClass().add("rootV");
+        return view;
+    }
 
 }
