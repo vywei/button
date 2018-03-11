@@ -17,7 +17,7 @@ import javafx.scene.control.Slider;
 public class AudioSettingsView 
 {
 	private static String themecss = "theme.css"; 
-    private final BorderPane view;
+    private final BorderPane view1;
 
     public AudioSettingsView()
     {
@@ -142,13 +142,13 @@ public class AudioSettingsView
 
         homeG.getChildren().addAll(rootV);
        
-        view = rootV;
+        view1 = rootV;
     }
     public Node getView()
     {
-        view.getStylesheets().add(getClass().getResource(themecss).toExternalForm());
-        view.getStyleClass().add("rootV");
-        return view;
+        view1.getStylesheets().add(getClass().getResource(themecss).toExternalForm());
+        view1.getStyleClass().add("rootV");
+        return view1;
     }
 
 }
