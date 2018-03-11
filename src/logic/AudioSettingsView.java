@@ -21,8 +21,7 @@ public class AudioSettingsView
 
     public AudioSettingsView()
     {
-        BorderPane border = new BorderPane();
-        border.setPadding(new Insets(20, 0, 20, 20));
+
         
 
 
@@ -31,7 +30,10 @@ public class AudioSettingsView
         headerLabel.setMaxWidth(Double.MAX_VALUE);
         headerLabel.setAlignment(Pos.CENTER);
         headerLabel.getStylesheets().add(getClass().getResource(themecss).toExternalForm());
-        headerLabel.getStyleClass().add("a-header"); 
+        headerLabel.getStyleClass().add("a-header");
+        
+        BorderPane border = new BorderPane();
+        border.setPadding(new Insets(20, 0, 20, 20));
         
         Sidebar sidebar = new Sidebar(tempU);
         tempU.register((Observer) sidebar);
