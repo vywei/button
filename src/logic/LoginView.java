@@ -84,7 +84,17 @@ public class LoginView
             		Main.audioSettings.getStylesheets().add(sheet);
             		Main.accountSettings.getStylesheets().add(sheet);
             		Main.bugReport.getStylesheets().add(sheet);
+            		
+            		Main.getUser().updateItems();
+            		
             		Main.window.setScene(Main.landing);
+            		
+            	    Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
+            	        public void run() {
+            	        	Database db = Database.getDatabase();
+            	     	    db.updateUserScore(result);
+            	        }
+            	    }));
             	}
             	else {
             		System.out.println("Invalid login.");

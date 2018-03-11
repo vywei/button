@@ -18,6 +18,8 @@ public class LandingView
 {
     private static String t = "theme.css"; 
     private final BorderPane view;
+    private Image unpressedImage;
+    private Image pressedImage;
     
     public LandingView()
     {
@@ -33,7 +35,7 @@ public class LandingView
         homeGrid.getStylesheets().add(getClass().getResource(t).toExternalForm());
         homeGrid.getStyleClass().add("root");
           
-        Btn button = new Btn(new Skin(1, "red_button", 10), 1);
+        Btn button = new Btn(Main.getUser().getCurrentSkin(), 1);
               
         double buttonWidth = 150;
         Button add = new Button("Button");
@@ -47,8 +49,8 @@ public class LandingView
         System.out.println("*" + temp.getObservers().size());
        
         button.register((Observer)temp);
-        Image unpressedImage = new Image(Main.class.getResourceAsStream("red_button_unpressed.png"));
-        Image pressedImage = new Image(Main.class.getResourceAsStream("red_button_pressed.png"));
+        unpressedImage = new Image(Main.class.getResourceAsStream(button.getCurrentSkin().getImage()));
+        pressedImage = new Image(Main.class.getResourceAsStream(button.getCurrentSkin().getImagePressed()));
         ImageView iv1 = new ImageView();
         iv1.setImage(unpressedImage);
         iv1.setFitWidth(450);
@@ -84,6 +86,13 @@ public class LandingView
         homeGrid.getChildren().addAll(root);
        
         view = root;
+    }
+    
+    public void updateImages() {
+    	String unpressedPath = Main.getUser().getCurrentSkin().getImage();
+    	unpressedImage = new Image(Main.class.getResourceAsStream(unpressedPath));
+    	String pressedPath = Main.getUser().getCurrentSkin().getImagePressed();
+    	pressedImage = new Image(Main.class.getResourceAsStream(pressedPath));
     }
     
    public void prepareView() {

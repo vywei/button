@@ -4,12 +4,13 @@ import java.util.*;
 import armdb.QueryResult;
 import armdb.SQLQuery;
 import armdb.SQLQueryException;
+import armdb.SQLUpdateException;
 
 public class Shop {
-  private Database db;
+  private static Database db;
   
   public Shop() {
-    db.getDatabase();
+    db = Database.getDatabase();
   }
   
   public List<Item> getAllItems() {
@@ -58,17 +59,21 @@ public class Shop {
   }
   
   private void parseItems(QueryResult qr, List<Item> list) {
-    // Loop through all rows in the result
     while(qr.nextFlag()) {
       
-      // Parse the column data
       int id = Integer.parseInt(qr.getValue("id"));
       String name = (qr.getValue("name"));
-      int price = Integer.parseInt(qr.getValue("price"));
+      int price = Integer.parseInt(qr.getValue("price_points"));
+      String image = qr.getValue("image");
+      String imagePressed = qr.getValue("image_pressed");
+      int type = Integer.parseInt(qr.getValue("type"));
       
       //Instantiate new item and insert into result list
-      Item newItem = new Skin(id, name, price);
-      list.add(newItem);
+      Item newItem;
+      if (type == Item.SKIN) {
+    	  newItem = new Skin(id, name, price, image, imagePressed);
+          list.add(newItem);
+      }
     }
   }
   
@@ -79,7 +84,7 @@ public class Shop {
     return allItems;
   }
   
-  public boolean purchaseItem(Item i, User u) throws SQLQueryException {
+  public boolean purchaseItem(Item i, User u) {
     if(u.getBalance() >= i.getPrice()) {
         u.subtractFromBalance(i.getPrice());
         
@@ -90,10 +95,17 @@ public class Shop {
         cols.add("item_id");
         
         ArrayList<String> vals = new ArrayList<String>();
-        cols.add(Integer.toString(u.getID()));
-        cols.add(Integer.toString(i.getID()));
+        vals.add(Integer.toString(u.getID()));
+        vals.add(Integer.toString(i.getID()));
         
-        query.result("items_owned", cols, vals);
+        try {
+        	query.result("items_owned", cols, vals);
+        }
+        catch (SQLUpdateException ex) {
+        	System.out.println("Error purchasing item.");
+        }
+        
+        u.setItems(getOwnedItems(u));
         
         return true;
     } 

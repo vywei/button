@@ -2,24 +2,23 @@ package logic;
 
 import java.util.List;
 import armdb.ConnectHost;
-import armdb.QueryResult;
-import armdb.SQLQuery;
-import armdb.SQLQueryException;
+import armdb.SQLUpdate;
+import armdb.SQLUpdateException;
 
-public class SQLInsert extends SQLQuery {
+public class SQLInsert extends SQLUpdate {
     
   public SQLInsert(ConnectHost con) {
     super(con);
   }
   
-  public QueryResult result(String table, List<String> columns, List<String> values) throws SQLQueryException {
+  public int result(String table, List<String> columns, List<String> values) throws SQLUpdateException {
     
     // Initiate insert query
-    StringBuilder tempQuery = new StringBuilder("INSERT INTO " + table + "(");
+    StringBuilder tempQuery = new StringBuilder("INSERT INTO " + table + " (");
     
     // Verify arguments are valid
     if (columns.size() != values.size()) {
-      throw new SQLQueryException("Column count must match value count.");
+      throw new SQLUpdateException("Column count must match value count.");
     }
     
     // Add list of columns to query

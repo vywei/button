@@ -42,7 +42,7 @@ public class Main extends Application{
   protected static Database db;
   static String s; 
   
-  //public static Shop theShop = new Shop();
+  private static Shop theShop = new Shop();
   
   private static void setup(Stage prim, String sheet){
     s = sheet;
@@ -64,6 +64,10 @@ public class Main extends Application{
       setup(primaryStage, styleSheet);
   }
   
+  public static Shop getShop() {
+	  return theShop;
+  }
+  
   public static void main(String[] args) {
     launch(args);
   }
@@ -80,7 +84,7 @@ public class Main extends Application{
 	  user = u;
   }
   
-  private static GridPane gridSetup(Node v){
+  public static GridPane gridSetup(Node v){
 
     GridPane grid = new GridPane();
     

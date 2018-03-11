@@ -12,6 +12,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.BorderStroke;
@@ -23,6 +25,9 @@ import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.scene.text.Text;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 public class ShopView 
 {
@@ -31,10 +36,10 @@ public class ShopView
     protected static Scene store;
     boolean purchaseView = true;
     private final int spHeight = 300;
+    private VBox body;
      
     public ShopView()
-    { 
-      
+    {    
         User temp = Main.getUser();
       
         Sidebar sidebar = new Sidebar(temp);
@@ -76,7 +81,7 @@ public class ShopView
    
    private VBox getBody() 
    {
-     VBox body = new VBox();
+     body = new VBox();
      
      body.setAlignment(Pos.CENTER);
      body.setPrefHeight(Main.SCREEN_HEIGHT);
@@ -165,7 +170,9 @@ public class ShopView
    
    private TilePane getPurchase() 
    {
-     List<Item> items = dummyList(); //Main.theShop.getAllItems();
+     //List<Item> items = dummyList(); 
+	 List<Item> items = Main.getShop().getShopItems(Main.getUser());
+     
      TilePane purchaseView = new TilePane();
      purchaseView.setHgap(10);
      purchaseView.setVgap(10);
@@ -186,7 +193,8 @@ public class ShopView
    
    private TilePane getCustomize() 
    {
-     List<Item> items = dummyOwnedList(); //Main.theShop.getOwnedItems(Main.user);
+     //List<Item> items = dummyOwnedList(); 
+	 List<Item> items = Main.getShop().getOwnedItems(Main.user);
      TilePane customizedView = new TilePane();
      customizedView.setHgap(10);
      customizedView.setVgap(10);
@@ -205,13 +213,27 @@ public class ShopView
      
    }
    
+   private void refreshItems()
+   {
+	   ScrollPane sp = new ScrollPane();
+       sp.setFitToWidth(true);
+       sp.setContent(getPurchase());
+       sp.setPrefHeight(spHeight);
+       sp.getStylesheets().add(getClass().getResource(t).toExternalForm());
+       sp.getStyleClass().add("root");
+       
+       int idx = body.getChildren().size() - 1;
+       body.getChildren().remove(idx);
+       body.getChildren().add(sp);
+   }
+   
    private VBox genPurchaseFrame(Item item) 
    {
      VBox frame = new VBox();
      frame.setMaxWidth(200);
      frame.setMinWidth(200);
-     frame.setMaxHeight(150);
-     frame.setMinHeight(150);
+     frame.setMaxHeight(225);
+     frame.setMinHeight(225);
      
      frame.setBorder(new Border(new BorderStroke(Color.BLACK, 
          BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
@@ -229,7 +251,7 @@ public class ShopView
      
      BorderPane priceNBuy = new BorderPane();
      
-     Label price = new Label("$" + Integer.toString(item.getPrice()));
+     Label price = new Label(Integer.toString(item.getPrice()) + " pts");
      price.setFont(Font.font(12));
      price.setTextFill(Color.WHITE);
      Button buy = new Button("Buy");
@@ -238,14 +260,44 @@ public class ShopView
      {
        public void handle(ActionEvent event) 
        {
-         //Main.theShop.purchaseItem(item, Main.getUser());
+         boolean result = Main.getShop().purchaseItem(item, Main.getUser());
+         if (result == true) 
+         {
+        	 refreshItems();
+         }
+         else
+         {
+        	 final Stage dialog = new Stage();
+             dialog.initModality(Modality.APPLICATION_MODAL);
+             dialog.initOwner(Main.window);
+             VBox dialogVbox = new VBox(20);
+             dialogVbox.getChildren().add(new Text("Not enough points to purchase this item!"));
+             Scene dialogScene = new Scene(dialogVbox, 300, 200);
+             dialog.setScene(dialogScene);
+             dialog.show();
+         }
        }
       });
+     
+     Image image = new Image(Main.class.getResourceAsStream(item.getImage()));
+
+     VBox content = new VBox();
+     content.setAlignment(Pos.CENTER);
+     
+     ImageView iv = new ImageView();
+     iv.setImage(image);
+     iv.setFitWidth(120);
+     iv.setPreserveRatio(true);
+     iv.setSmooth(true);
+     iv.setCache(true);
      
      priceNBuy.setLeft(price);
      priceNBuy.setRight(buy);
      priceNBuy.setPadding(new Insets(5,5,0,5));
-     frame.getChildren().add(priceNBuy);
+     
+     content.getChildren().addAll(priceNBuy, iv);
+     
+     frame.getChildren().addAll(content);
      return frame;
      
    }
@@ -255,8 +307,8 @@ public class ShopView
      VBox frame = new VBox();
      frame.setMaxWidth(200);
      frame.setMinWidth(200);
-     frame.setMaxHeight(150);
-     frame.setMinHeight(150);
+     frame.setMaxHeight(225);
+     frame.setMinHeight(225);
      
      frame.setBorder(new Border(new BorderStroke(Color.BLACK, 
          BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
@@ -278,38 +330,32 @@ public class ShopView
      {
        public void handle(ActionEvent event) 
        {
-         //Main.getUser().changeSkin(item);
+    	  if (item.getType() == Item.SKIN)
+    	  {
+    		  Main.getUser().changeSkin((Skin)item);
+    	  }
        }
       });
      
+     Image image = new Image(Main.class.getResourceAsStream(item.getImage()));
+
+     VBox content = new VBox();
+     content.setAlignment(Pos.CENTER);
+     
+     ImageView iv = new ImageView();
+     iv.setImage(image);
+     iv.setFitWidth(120);
+     iv.setPreserveRatio(true);
+     iv.setSmooth(true);
+     iv.setCache(true);
+     
      equipBox.setRight(equip);
      equipBox.setPadding(new Insets(5,5,0,5));
-     frame.getChildren().add(equipBox);
+     
+     content.getChildren().addAll(equipBox, iv);
+     
+     frame.getChildren().add(content);
      return frame;
      
-   }
-   
-     private List<Item> dummyList() 
-     {
-       Skin item1 = new Skin(123, "Cool Skin", 999);
-       Skin item2 = new Skin(456, "Cool Skin 2", 123);
-       Skin item3 = new Skin(777, "Really cool skin", 1235325);
-       Skin item4 = new Skin(488856, "Really Cool Skin 2", 3583);
-       ArrayList<Item> temp = new ArrayList<Item>();
-       temp.add(item1);
-       temp.add(item2);
-       temp.add(item3);
-       temp.add(item4);
-       return temp;
-   }
-     
-     private List<Item> dummyOwnedList() 
-     {
-       Skin item1 = new Skin(123, "Owned Skin", 000);
-       Skin item2 = new Skin(456, "Owned Skin 2", 000);
-       ArrayList<Item> temp = new ArrayList<Item>();
-       temp.add(item1);
-       temp.add(item2);
-       return temp;
    }
 }

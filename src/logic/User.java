@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.ArrayList;
 import armdb.QueryResult;
 import armdb.SQLQueryException;
+import javafx.scene.Scene;
+import javafx.scene.layout.GridPane;
 
 //User observes: Button, Store
 //User is subject of: Button, UserRoster, Database(?)
@@ -13,19 +15,19 @@ public class User implements Subject, Observer {
     private String username;
     private int ID;
     private int score;
-    private ArrayList<Skin> skins;
+    private List<Item> items;
     private Skin currentSkin;
 
     public User() {
 	observers = new ArrayList<Observer>();
-	skins = new ArrayList<>();
+	items = new ArrayList<>();
     }
   
     public User(String newUsername, String newPassword) {
 	username = validateUsername(newUsername);
 	password = validatePassword(newPassword);
 	observers = new ArrayList<>();
-	skins = new ArrayList<>();
+	items = new ArrayList<>();
     }
     
     public User(String username, int ID, int score) {
@@ -33,8 +35,8 @@ public class User implements Subject, Observer {
       this.ID = ID;
       this.score = score;
       observers = new ArrayList<>();
-  	  skins = new ArrayList<>();
-  	  currentSkin = new Skin(2, "Basic", 0);
+      items = new ArrayList<>();
+  	  currentSkin = new Skin(2, "Basic Red Skin", 0, "red_button_unpressed.png", "red_button_pressed.png");
     }
 
     public User(String newUsername, int newId, String newPassword, int newScore) {
@@ -43,7 +45,7 @@ public class User implements Subject, Observer {
 	password = validatePassword(newPassword);
 	setScore(newScore);
 	observers = new ArrayList<>();
-	skins = new ArrayList<>();
+	items = new ArrayList<>();
     }
   
     /**
@@ -53,8 +55,12 @@ public class User implements Subject, Observer {
     public void addNewSkin(Skin newSkin) {
 	Skin tempSkin = validateSkin(newSkin);
 	if (tempSkin != null) {
-	    skins.add(newSkin);
+		items.add(newSkin);
 	}
+    }
+    
+    public void updateItems() {
+    	items = Main.getShop().getOwnedItems(this);
     }
 
     /**
@@ -66,10 +72,13 @@ public class User implements Subject, Observer {
      */
     public void changeSkin(Skin newSkin) {
 	Skin tempSkin = validateSkin(newSkin);
-	if (tempSkin != null) {
-	    currentSkin = tempSkin;
-	    notifyObservers();
-	}
+		if (tempSkin != null) {
+		    currentSkin = tempSkin;
+		    LandingView landingView = new LandingView();
+	        GridPane landingGrid = Main.gridSetup(landingView.getView());     
+	        Main.landing = new Scene(landingGrid, Main.SCREEN_WIDTH, Main.SCREEN_HEIGHT);
+		    notifyObservers();
+		}
     }
 
     /**
@@ -129,11 +138,11 @@ public class User implements Subject, Observer {
     }
 
     /**
-     * Public getter for ArrayList of skin names
-     * @return list of all purchased skins for this user
+     * Public getter for ArrayList of item names
+     * @return list of all purchased items for this user
      */
-    public ArrayList<Skin> getSkins() {
-	return skins;
+    public List<Item> getItems() {
+	return items;
     }
 
     /**
@@ -214,18 +223,20 @@ public class User implements Subject, Observer {
     }
 
     /**
-     * public setter for skins
+     * public setter for items
      * @param newSkins
      */
-    public void setSkins(ArrayList<Skin> newSkins) {
-	Skin tempSkin;
-	for (int i = 0; i < newSkins.size(); i++) {
-	    tempSkin = newSkins.get(i);
-	    if (validateSkin(tempSkin) == null) {
-		return;
+    public void setItems(List<Item> newItems) {
+	Item tempItem;
+	for (int i = 0; i < newItems.size(); i++) {
+	    tempItem = newItems.get(i);
+	    if (tempItem.getType() == Item.SKIN) {
+		    if (validateSkin((Skin)tempItem) == null) {
+		    	return;
+		    }
 	    }
 	}
-	skins = newSkins;
+	items = newItems;
     }
 
     /**
@@ -245,6 +256,8 @@ public class User implements Subject, Observer {
     public void subtractFromBalance(int amt) {
 	if (amt >= 0 && amt < score) {
 	    score -= amt;
+	    Database db = Database.getDatabase();
+	    db.updateUserScore(this);
 	}
     }
 
@@ -293,8 +306,8 @@ public class User implements Subject, Observer {
      * @return newSkin if valid, null if invalid
      */
     private Skin validateSkin(Skin newSkin) {
-	for (int i = 0; i < skins.size(); i++) {
-	    if (skins.get(i).equals(newSkin)) {
+	for (int i = 0; i < items.size(); i++) {
+	    if (items.get(i).equals(newSkin)) {
 		return newSkin;
 	    }
 	}

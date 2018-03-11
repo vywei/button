@@ -8,7 +8,7 @@ public class TestSkin {
 
   @Test
   public void TestGetPrice() {
-    Skin item = new Skin(0, "testSkin", 42);
+    Skin item = new Skin(0, "testSkin", 42, "", "");
     assertEquals(42, item.getPrice());
   }
 

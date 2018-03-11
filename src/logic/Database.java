@@ -12,9 +12,11 @@ import java.security.NoSuchAlgorithmException;
 import armdb.ConnectHost;             //import to make connection
 import armdb.QueryResult;
 import armdb.SQLQueryException;
+import armdb.SQLUpdateException;
 
 public class Database {
 	public static final String PLAYER_TABLE = "player";
+	public static final String SCORE_COLUMN = "score";
 	
     ConnectHost ch;
     private static Database db;
@@ -106,19 +108,19 @@ public class Database {
   
   public void updateUserScore(User u) {
     // Create query and result
-    SQLUpdate query = new SQLUpdate(ch);
+    SQLUpdateExt query = new SQLUpdateExt(ch);
     
     // Execute the query
     try {
       ArrayList<String> cols = new ArrayList<>();
-      cols.add("score");
+      cols.add(SCORE_COLUMN);
       ArrayList<String> vals = new ArrayList<>();
       vals.add(Integer.toString(u.getScore()));
       String constraint = "WHERE id = " + Integer.toString(u.getID());
       
       query.result(PLAYER_TABLE, cols, vals, constraint); 
     }
-    catch(SQLQueryException e){                   
+    catch(SQLUpdateException e){                   
         System.out.println(e.getMessage());           
     }
   }
@@ -130,7 +132,7 @@ public class Database {
       // Parse the column data
       int id = Integer.parseInt(qr.getValue("id"));
       String username = (qr.getValue("username"));
-      int score = Integer.parseInt(qr.getValue("score"));
+      int score = Integer.parseInt(qr.getValue(SCORE_COLUMN));
       
       //Instantiate new item and insert into result list
       User newUser = new User(username, id, score);
@@ -147,7 +149,7 @@ public class Database {
       // Parse the column data
       int id = Integer.parseInt(qr.getValue("id"));
       String username = (qr.getValue("username"));
-      int score = Integer.parseInt(qr.getValue("score"));
+      int score = Integer.parseInt(qr.getValue(SCORE_COLUMN));
       
       //Instantiate new item and insert into result list
       newUser = new User(username, id, score);
@@ -217,7 +219,7 @@ public class Database {
   }
   
   public void saveSettings(User u, Settings s) {
-    SQLUpdate query = new SQLUpdate(ch);
+    SQLUpdateExt query = new SQLUpdateExt(ch);
     
     try {
       ArrayList<String> cols = new ArrayList<>();
@@ -244,7 +246,7 @@ public class Database {
       
       query.result("settings", cols, vals, constraint); 
     }
-    catch(SQLQueryException e){                   
+    catch(SQLUpdateException e){                   
         System.out.println(e.getMessage());           
     }
   }
