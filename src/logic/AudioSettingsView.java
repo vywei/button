@@ -113,16 +113,16 @@ public class AudioSettingsView
         saveB.setAlignment(Pos.CENTER);
         saveB.setSpacing(40);
         
-        Button saveButton1 = new Button("Save Changes");
-        saveButton1.setMaxWidth(Double.MAX_VALUE); 
-        saveButton1.setPadding(new Insets(5, 10, 5, 10));
-        saveButton1.setOnAction(e -> Main.window.setScene(Main.settings));
+
         
         Button cancelButton1 = new Button("Cancel");
         cancelButton1.setMaxWidth(Double.MAX_VALUE); 
         cancelButton1.setPadding(new Insets(5, 10, 5, 10));
         cancelButton1.setOnAction(e -> Main.window.setScene(Main.settings));
-        
+        Button saveButton1 = new Button("Save Changes");
+        saveButton1.setMaxWidth(Double.MAX_VALUE); 
+        saveButton1.setPadding(new Insets(5, 10, 5, 10));
+        saveButton1.setOnAction(e -> Main.window.setScene(Main.settings));
         saveB.getChildren().addAll(saveButton1, cancelButton1);
         
         VBox vbSettings1 = new VBox();
