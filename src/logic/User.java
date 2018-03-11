@@ -32,7 +32,10 @@ public class User implements Subject, Observer {
       this.username = username;
       this.ID = ID;
       this.score = score;
-      }
+      observers = new ArrayList<>();
+  	  skins = new ArrayList<>();
+  	  currentSkin = new Skin(2, "Basic", 0);
+    }
 
     public User(String newUsername, int newId, String newPassword, int newScore) {
 	username = validateUsername(newUsername);

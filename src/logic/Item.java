@@ -10,13 +10,13 @@ public abstract class Item {
   
   public int getID() {
     return id;
-  };
+  }
   
   public String getName() {
     return name;
-  };
+  }
   
   public int getPrice() {
     return price;
-  };
+  }
 }

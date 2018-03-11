@@ -39,6 +39,7 @@ public class Main extends Application{
   
   protected static User user; 
   protected static ArrayList<User> users;
+  protected static Database db;
   static String s; 
   
   //public static Shop theShop = new Shop();
@@ -47,34 +48,13 @@ public class Main extends Application{
     s = sheet;
     window = prim;
     window.setTitle("Button");
+    
+    db = Database.getDatabase();
 
     loginScreen();
-    user = new User(uString,pString);
-
-    landingScreen();
-    signUpScreen();
-    storeScreen();
-    settingsScreen();
-    //leaderboardScreen();
-    //shareScreen();
-    videoSettingsScreen();
-    audioSettingsScreen();
-    accountSettingsScreen();
-    bugReportScreen();
     
     login.getStylesheets().add(sheet);
-    landing.getStylesheets().add(sheet);
-    signUp.getStylesheets().add(sheet);
-    //store.getStylesheets().add(sheet);
-    settings.getStylesheets().add(sheet);
-    //leaderboard.getStylesheets().add(sheet);
-    //share.getStylesheets().add(sheet);
-    videoSettings.getStylesheets().add(sheet);
-    audioSettings.getStylesheets().add(sheet);
-    accountSettings.getStylesheets().add(sheet);
-    bugReport.getStylesheets().add(sheet);
 
-    
     window.setScene(login);
     window.show();
 }
@@ -90,6 +70,14 @@ public class Main extends Application{
   
   public static User getUser() {
     return user;
+  }
+  
+  public static String getSheet() {
+	 return s;
+  }
+  
+  public static void setUser(User u) {
+	  user = u;
   }
   
   private static GridPane gridSetup(Node v){
@@ -111,7 +99,7 @@ public class Main extends Application{
       login = new Scene(loginGrid, SCREEN_WIDTH, SCREEN_HEIGHT);
   }
   
-  private static void signUpScreen()
+  public static void signUpScreen()
   {
       SignUpView signUpView = new SignUpView();
 
@@ -120,7 +108,7 @@ public class Main extends Application{
       signUp = new Scene(signUpGrid, SCREEN_WIDTH, SCREEN_HEIGHT);
   }
       
-  private static void landingScreen()
+  public static void landingScreen()
   {
       LandingView landingView = new LandingView();
 
@@ -129,7 +117,7 @@ public class Main extends Application{
       landing = new Scene(landingGrid, SCREEN_WIDTH, SCREEN_HEIGHT);
   }
   
-  private static void storeScreen()
+  public static void storeScreen()
   {
       ShopView storeView = new ShopView();
 
@@ -138,7 +126,7 @@ public class Main extends Application{
       store = new Scene(storeGrid, SCREEN_WIDTH, SCREEN_HEIGHT);
   }
   
-  private static void settingsScreen()
+  public static void settingsScreen()
   {
       SettingsView settingsView = new SettingsView();
 
@@ -147,7 +135,7 @@ public class Main extends Application{
       settings = new Scene(settingsGrid, SCREEN_WIDTH, SCREEN_HEIGHT);
   }
   
-  /*private static void leaderboardScreen()
+  /*public static void leaderboardScreen()
   {
       LeaderboardView leaderboardView = new LeaderboardView();
 
@@ -155,7 +143,7 @@ public class Main extends Application{
       
       leaderboard = new Scene(leaderboardGrid, SCREEN_WIDTH, SCREEN_HEIGHT);
   }
-    private static void shareScreen()
+    public static void shareScreen()
   {
       ShareView shareView = new ShareView();
 
@@ -164,7 +152,7 @@ public class Main extends Application{
       share = new Scene(shareGrid, SCREEN_WIDTH, SCREEN_HEIGHT);
   }
   */
-  private static void videoSettingsScreen()
+  public static void videoSettingsScreen()
   {
       VideoSettingsView videoSettingsView = new VideoSettingsView();
 
@@ -173,7 +161,7 @@ public class Main extends Application{
       videoSettings = new Scene(videoSettingsGrid, SCREEN_WIDTH, SCREEN_HEIGHT);
   }
   
-  private static void audioSettingsScreen()
+  public static void audioSettingsScreen()
   {
       AudioSettingsView audioSettingsView = new AudioSettingsView();
 
@@ -182,7 +170,7 @@ public class Main extends Application{
       audioSettings = new Scene(audioSettingsGrid, SCREEN_WIDTH, SCREEN_HEIGHT);
   }
   
-  private static void accountSettingsScreen()
+  public static void accountSettingsScreen()
   {
       AccountSettingsView accountSettingsView = new AccountSettingsView();
 
@@ -191,7 +179,7 @@ public class Main extends Application{
       accountSettings = new Scene(accountSettingsGrid, SCREEN_WIDTH, SCREEN_HEIGHT);
   }
   
-  private static void bugReportScreen()
+  public static void bugReportScreen()
   {
       BugReportView bugReportView = new BugReportView();
 
@@ -199,7 +187,7 @@ public class Main extends Application{
       
       bugReport = new Scene(bugReportGrid, SCREEN_WIDTH, SCREEN_HEIGHT);
   }
-  /*private static void linkAccountsScreen()
+  /*public static void linkAccountsScreen()
   {
       LinkAccountsView linkAccountsView = new LinkAccountsView();
 

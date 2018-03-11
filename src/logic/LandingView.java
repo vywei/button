@@ -21,8 +21,6 @@ public class LandingView
     
     public LandingView()
     {
-        
-
         // The title text on top and its alignment
         Label header = new Label("Welcome to Home, " + Main.user.getUsername());
         header.setMaxWidth(Double.MAX_VALUE);
@@ -34,12 +32,9 @@ public class LandingView
         homeGrid.setHgap(10);
         homeGrid.getStylesheets().add(getClass().getResource(t).toExternalForm());
         homeGrid.getStyleClass().add("root");
-      
-        
-       
+          
         Btn button = new Btn(new Skin(1, "red_button", 10), 1);
-        
-        
+              
         double buttonWidth = 150;
         Button add = new Button("Button");
         add.setMinWidth(buttonWidth);
@@ -90,6 +85,10 @@ public class LandingView
        
         view = root;
     }
+    
+   public void prepareView() {
+	   
+   }
     
    public Node getView()
    {

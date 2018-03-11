@@ -2,12 +2,14 @@ package logic;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -51,7 +53,44 @@ public class LoginView
         // Login Action
         Button loginButton = new Button("Log In");
         loginButton.setMaxWidth(Double.MAX_VALUE);
-        loginButton.setOnAction(e -> Main.window.setScene(Main.landing));
+        //loginButton.setOnAction(e -> Main.window.setScene(Main.landing));
+        loginButton.setOnMousePressed(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+            	Database db = Database.getDatabase();
+            	User result = db.loginUser(userInput.getText(), passInput.getText());
+            	if (result != null) {
+            		Main.setUser(result);
+            		Main.landingScreen();
+            		Main.signUpScreen();
+            		Main.storeScreen();
+            		Main.settingsScreen();
+            	    //Main.leaderboardScreen();
+            	    //Main.shareScreen();
+            		Main.videoSettingsScreen();
+            		Main.audioSettingsScreen();
+            		Main.accountSettingsScreen();
+            		Main.bugReportScreen();
+            		
+            		String sheet = Main.getSheet();
+            		
+            		Main.landing.getStylesheets().add(sheet);
+            		Main.signUp.getStylesheets().add(sheet);
+            	    Main.store.getStylesheets().add(sheet);
+            		Main.settings.getStylesheets().add(sheet);
+            	    //Main.leaderboard.getStylesheets().add(sheet);
+            	    //Main.share.getStylesheets().add(sheet);
+            		Main.videoSettings.getStylesheets().add(sheet);
+            		Main.audioSettings.getStylesheets().add(sheet);
+            		Main.accountSettings.getStylesheets().add(sheet);
+            		Main.bugReport.getStylesheets().add(sheet);
+            		Main.window.setScene(Main.landing);
+            	}
+            	else {
+            		System.out.println("Invalid login.");
+            	}
+            }
+          });
         
         // Sign Up Action
         Button signUpButton = new Button("Sign Up");

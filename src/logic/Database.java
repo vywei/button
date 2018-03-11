@@ -14,6 +14,8 @@ import armdb.QueryResult;
 import armdb.SQLQueryException;
 
 public class Database {
+	public static final String PLAYER_TABLE = "player";
+	
     ConnectHost ch;
     private static Database db;
   
@@ -21,7 +23,7 @@ public class Database {
     ch = loadDatabaseCredentials();
   }
   
-  public Database getDatabase() {
+  public static Database getDatabase() {
   if (db == null) {
       db = new Database();
   }
@@ -34,7 +36,7 @@ public class Database {
     String user = "";
     String pass = "";
     String dbName = "";
-    String filename = "dontPushThis.txt";
+    String filename = "./bin/logic/dontPushThis.txt";
     
     try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
       fileURL = br.readLine();
@@ -44,7 +46,7 @@ public class Database {
       dbName = br.readLine();
     }
     catch (FileNotFoundException fnfe) {
-      System.out.println("Unable to connect to database.");
+      System.out.println("Unable to connect to database, could not find database credentials.");
     }
     catch (IOException ioe) {
       System.out.println("Unable to connect to database.");
@@ -83,9 +85,9 @@ public class Database {
 
     // Execute the query
     try {
-        qr = query.result("player", new ArrayList<String>(), 
+        qr = query.result(PLAYER_TABLE, new ArrayList<String>(), 
             "WHERE username = '" + username + 
-            "' AND MD5(password) = '" + passHash + "'");
+            "' AND password = '" + passHash + "'");
 
         // Convert each row into an item
         resultUser = parseUser(qr);
@@ -114,7 +116,7 @@ public class Database {
       vals.add(Integer.toString(u.getScore()));
       String constraint = "WHERE id = " + Integer.toString(u.getID());
       
-      query.result("player", cols, vals, constraint); 
+      query.result(PLAYER_TABLE, cols, vals, constraint); 
     }
     catch(SQLQueryException e){                   
         System.out.println(e.getMessage());           
@@ -169,7 +171,7 @@ public class Database {
 
 	// Execute the query
 	try {
-	    qr = query.result("player", new ArrayList<String>(), "ORDER BY score DESC LIMIT 10");
+	    qr = query.result(PLAYER_TABLE, new ArrayList<String>(), "ORDER BY score DESC LIMIT 10");
 
 	    // Convert each row into an item
 	    parsePlayers(qr, players);
