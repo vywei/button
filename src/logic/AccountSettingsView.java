@@ -21,36 +21,31 @@ public class AccountSettingsView {
     protected static Scene videoSettings;
     private static String t = "theme.css"; 
     
-   public Node getView()
-   {
-       view.getStylesheets().add(getClass().getResource(t).toExternalForm());
-       view.getStyleClass().add("root");
-       return view;
-   }
+
     public AccountSettingsView()
     {
-    	Label header = new Label("Link Accounts");
-        header.setMaxWidth(Double.MAX_VALUE);
-        header.setAlignment(Pos.CENTER);
-        header.getStylesheets().add(getClass().getResource(t).toExternalForm());
-        header.getStyleClass().add("a-header"); 
+    	Label head = new Label("Link Accounts");
+        head.setMaxWidth(Double.MAX_VALUE);
+        head.setAlignment(Pos.CENTER);
+        head.getStylesheets().add(getClass().getResource(t).toExternalForm());
+        head.getStyleClass().add("a-header"); 
     	
-        GridPane homeGrid = new GridPane();
-        homeGrid.setPadding(new Insets(0, 0, 0, 0));
-        homeGrid.setVgap(8);
-        homeGrid.setHgap(10);
-        homeGrid.getStylesheets().add(getClass().getResource(t).toExternalForm());
-        homeGrid.getStyleClass().add("root");
+        GridPane hGrid = new GridPane();
+        hGrid.setPadding(new Insets(0, 0, 0, 0));
+        hGrid.setVgap(8);
+        hGrid.setHgap(10);
+        hGrid.getStylesheets().add(getClass().getResource(t).toExternalForm());
+        hGrid.getStyleClass().add("root");
 
-        User temp = Main.getUser();
+        User tempUser = Main.getUser();
         
-        Sidebar sidebar = new Sidebar(temp);
-        temp.register((Observer) sidebar);
+        Sidebar sideBar = new Sidebar(tempUser);
+        tempUser.register((Observer) sideBar);
        
-        HBox settingsBox = new HBox();
-        settingsBox.setPadding(new Insets(0,0,0,0));
-        settingsBox.setMinWidth(450);
-        settingsBox.setAlignment(Pos.CENTER);
+        HBox sBox = new HBox();
+        sBox.setPadding(new Insets(0,0,0,0));
+        sBox.setMinWidth(450);
+        sBox.setAlignment(Pos.CENTER);
         
         BorderPane border = new BorderPane();
         border.setPadding(new Insets(20, 0, 20, 20));
@@ -85,24 +80,30 @@ public class AccountSettingsView {
         submitButton.setPadding(new Insets(10, 0, 10, 0));
         submitButton.setOnAction(e -> Main.window.setScene(Main.bugReport));
 
-        VBox vbButtons = new VBox();
-        vbButtons.setSpacing(10);
-        vbButtons.setPadding(new Insets(30, 30, 30, 30));
-        vbButtons.setMinWidth(450);
-        vbButtons.setAlignment(Pos.TOP_LEFT);
-        vbButtons.getChildren().addAll(header, userInput,pass,linkFbButton,userInputTwitter,passTwitter,linkTwitterButton,userInputInsta,passInsta,linkInstaButton);
+        VBox vButtons = new VBox();
+        vButtons.setSpacing(10);
+        vButtons.setPadding(new Insets(30, 30, 30, 30));
+        vButtons.setMinWidth(450);
+        vButtons.setAlignment(Pos.TOP_LEFT);
+        vButtons.getChildren().addAll(head, userInput,pass,linkFbButton,userInputTwitter,passTwitter,linkTwitterButton,userInputInsta,passInsta,linkInstaButton);
         
-        settingsBox.getChildren().addAll(vbButtons);
+        sBox.getChildren().addAll(vButtons);
 
-        BorderPane root = new BorderPane();
-        root.setRight(sidebar);
-        root.setLeft(settingsBox);
-        root.getStylesheets().add(getClass().getResource(t).toExternalForm());
-        root.getStyleClass().add("root");
+        BorderPane rootPane = new BorderPane();
+        rootPane.setRight(sideBar);
+        rootPane.setLeft(sBox);
+        rootPane.getStylesheets().add(getClass().getResource(t).toExternalForm());
+        rootPane.getStyleClass().add("root");
 
-        homeGrid.getChildren().addAll(root);
+        hGrid.getChildren().addAll(rootPane);
        
-        view = root;
+        view = rootPane;
+    }
+    public Node getView()
+    {
+        view.getStylesheets().add(getClass().getResource(t).toExternalForm());
+        view.getStyleClass().add("rootPane");
+        return view;
     }
 
 }
