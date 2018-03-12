@@ -76,12 +76,19 @@ public class Sidebar extends VBox implements Observer
         });
         leaderboardButton.setMaxWidth(Double.MAX_VALUE);
         
+        Button logoutButton = new Button("Logout");
+        logoutButton.setOnAction(e -> 
+        {
+          Main.window.setScene(Main.login);
+        });
+        logoutButton.setMaxWidth(Double.MAX_VALUE);
+        
         // Populating the nav bar
-        this.setSpacing(30);
+        this.setSpacing(25);
         
         this.setMaxWidth(buttonWidth);
         this.setPadding(new Insets(20,20,10,10));
-        this.getChildren().addAll(scoreBox, homeButton, storeButton, settingsButton, shareButton, leaderboardButton);   
+        this.getChildren().addAll(scoreBox, homeButton, storeButton, settingsButton, shareButton, leaderboardButton, logoutButton);   
         this.getStylesheets().add(getClass().getResource("theme.css").toExternalForm());
         this.getStyleClass().add("root");
     }

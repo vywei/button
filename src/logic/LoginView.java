@@ -62,7 +62,6 @@ public class LoginView
             	if (result != null) {
             		Main.setUser(result);
             		Main.landingScreen();
-            		Main.signUpScreen();
             		Main.storeScreen();
             		Main.settingsScreen();
             	    //Main.leaderboardScreen();

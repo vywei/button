@@ -52,8 +52,10 @@ public class Main extends Application{
     db = Database.getDatabase();
 
     loginScreen();
+    signUpScreen();
     
     login.getStylesheets().add(sheet);
+    signUp.getStylesheets().add(sheet);
 
     window.setScene(login);
     window.show();
