@@ -1,13 +1,13 @@
 package logic;
 
 public abstract class Item {
-  public static final int ITEM = 0;
+  public static final int BASE_ITEM = 0;
   public static final int SKIN = 1;
   
-  public int id;
-  public String name;
-  public int price;
-  public String image;
+  protected int id;
+  protected String name;
+  protected int price;
+  protected String image;
   
   //constructors are specific to Skin, SoundEffect, and VisualEffect
   //so future changes to specific constructors can be made
@@ -29,7 +29,7 @@ public abstract class Item {
   }
   
   public int getType() {
-	  return ITEM;
+	  return BASE_ITEM;
   }
   
   @Override

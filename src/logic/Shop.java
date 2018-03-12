@@ -67,11 +67,12 @@ public class Shop {
       String image = qr.getValue("image");
       String imagePressed = qr.getValue("image_pressed");
       int type = Integer.parseInt(qr.getValue("type"));
+      String sound = qr.getValue("sound");
       
       //Instantiate new item and insert into result list
       Item newItem;
       if (type == Item.SKIN) {
-    	  newItem = new Skin(id, name, price, image, imagePressed);
+    	  newItem = new Skin(id, name, price, image, imagePressed, sound);
           list.add(newItem);
       }
     }

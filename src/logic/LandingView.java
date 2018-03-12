@@ -2,6 +2,7 @@ package logic;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import java.io.File;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -11,6 +12,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.input.MouseEvent;
 
 
@@ -66,6 +69,11 @@ public class LandingView
           public void handle(MouseEvent event) {
             iv1.setImage(pressedImage);
             button.increaseScore();
+            String soundFx = button.getCurrentSkin().getSound();
+            Main.class.getResource(soundFx);
+            Media hit = new Media(Main.class.getResource(soundFx).toString());
+            MediaPlayer mediaPlayer = new MediaPlayer(hit);
+            mediaPlayer.play();
           }
         });
         iv1.setOnMouseReleased(new EventHandler<MouseEvent>() {
