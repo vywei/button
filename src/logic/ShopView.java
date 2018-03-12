@@ -9,7 +9,6 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
@@ -116,8 +115,8 @@ public class ShopView
    
    private HBox getSwitcher(VBox body) 
    {
-     Button purchase  = new Button("Purchase");
-     Button customize = new Button("Customize");
+     Btn purchase  = new Btn(null, 1, "Purchase");
+     Btn customize = new Btn(null, 1, "Customize");
      purchase.setMinWidth(200);
      customize.setMinWidth(200);
      
@@ -125,6 +124,7 @@ public class ShopView
      {
        public void handle(ActionEvent event) 
        {
+         customize.increaseScore();
          purchaseView = false;
          int size = body.getChildren().size();
          body.getChildren().remove(size - 1);
@@ -145,6 +145,7 @@ public class ShopView
      {
        public void handle(ActionEvent event) 
        {
+         purchase.increaseScore();
          purchaseView = true;
          int size = body.getChildren().size();
          body.getChildren().remove(size - 1);
@@ -254,12 +255,13 @@ public class ShopView
      Label price = new Label(Integer.toString(item.getPrice()) + " pts");
      price.setFont(Font.font(12));
      price.setTextFill(Color.WHITE);
-     Button buy = new Button("Buy");
+     Btn buy = new Btn(null, 1, "Buy");
     
      buy.setOnAction(new EventHandler<ActionEvent>() 
      {
        public void handle(ActionEvent event) 
        {
+         buy.increaseScore();
          boolean result = Main.getShop().purchaseItem(item, Main.getUser());
          if (result == true) 
          {
@@ -325,11 +327,12 @@ public class ShopView
      
      BorderPane equipBox = new BorderPane();
      
-     Button equip = new Button("Use");
+     Btn equip = new Btn(null, 1, "Use");
      equip.setOnAction(new EventHandler<ActionEvent>() 
      {
        public void handle(ActionEvent event) 
        {
+         equip.increaseScore();
     	  if (item.getType() == Item.SKIN)
     	  {
     		  Main.getUser().changeSkin((Skin)item);
