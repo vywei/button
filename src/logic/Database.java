@@ -2,6 +2,9 @@ package logic;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import javax.xml.bind.DatatypeConverter;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -17,6 +20,7 @@ import armdb.SQLUpdateException;
 public class Database {
 	public static final String PLAYER_TABLE = "player";
 	public static final String SCORE_COLUMN = "score";
+	private static final Logger LOGGER = Logger.getLogger(Database.class.getName());
 	
     ConnectHost ch;
     private static Database db;
@@ -48,10 +52,10 @@ public class Database {
       dbName = br.readLine();
     }
     catch (FileNotFoundException fnfe) {
-      System.out.println("Unable to connect to database, could not find database credentials.");
+      LOGGER.log( Level.SEVERE, fnfe.toString(), fnfe );
     }
     catch (IOException ioe) {
-      System.out.println("Unable to connect to database.");
+      LOGGER.log( Level.SEVERE, ioe.toString(), ioe );
     }
     
     return new ConnectHost(fileURL, host, user, pass, dbName);
@@ -70,7 +74,7 @@ public class Database {
       byte[] digest = md.digest();
       passHash = DatatypeConverter.printHexBinary(digest).toUpperCase();
     } catch (NoSuchAlgorithmException e) {
-      e.printStackTrace();
+    	LOGGER.log( Level.SEVERE, e.toString(), e );
     }
     
     return passHash;
@@ -95,7 +99,7 @@ public class Database {
         resultUser = parseUser(qr);
     }
     catch(SQLQueryException e){
-        System.out.println(e.getMessage());
+    	LOGGER.log( Level.SEVERE, e.toString(), e );
     }
     
     if (resultUser != null) {
@@ -121,7 +125,7 @@ public class Database {
       query.result(PLAYER_TABLE, cols, vals, constraint); 
     }
     catch(SQLUpdateException e){                   
-        System.out.println(e.getMessage());           
+    	LOGGER.log( Level.SEVERE, e.toString(), e );         
     }
   }
   
@@ -179,7 +183,7 @@ public class Database {
 	    parsePlayers(qr, players);
 	}
 	catch(SQLQueryException e){
-	    System.out.println(e.getMessage());
+		LOGGER.log( Level.SEVERE, e.toString(), e );
 	}
 
 	return players;
@@ -213,7 +217,7 @@ public class Database {
 	    }
 	}
 	catch(SQLQueryException e){
-	    System.out.println(e.getMessage());
+		LOGGER.log( Level.SEVERE, e.toString(), e );
 	}
 	
   }
@@ -247,7 +251,7 @@ public class Database {
       query.result("settings", cols, vals, constraint); 
     }
     catch(SQLUpdateException e){                   
-        System.out.println(e.getMessage());           
+        LOGGER.log( Level.SEVERE, e.toString(), e );          
     }
   }
 
