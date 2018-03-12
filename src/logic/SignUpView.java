@@ -87,13 +87,13 @@ public class SignUpView {
       // Puts the login box in the middle-ish part of the screen
       newUse.setPadding(new Insets(height/2-100, width/2-100, height/2, width/2-75));
       
-      final BooleanProperty firstTime = new SimpleBooleanProperty(true); 
+      /*final BooleanProperty firstTime = new SimpleBooleanProperty(true); 
       fNameInput.focusedProperty().addListener((observable,  oldValue,  newValue) -> {
           if(newValue && firstTime.get()){
               signUpBox.requestFocus(); 
               firstTime.setValue(false); 
           }
-      });
+      });*/
       
       view = new BorderPane();
       view.setCenter(newUse);

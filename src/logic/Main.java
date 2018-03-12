@@ -32,6 +32,7 @@ public class Main extends Application{
   protected static Scene accountSettings;
   protected static Scene linkAccounts;
   protected static Scene bugReport;
+  protected static Scene credits;
 
   protected static String pString = "Password";
   protected static String uString = "Username";
@@ -193,6 +194,16 @@ public class Main extends Application{
       
       bugReport = new Scene(bugReportGrid, SCREEN_WIDTH, SCREEN_HEIGHT);
   }
+  
+  public static void creditsScreen()
+  {
+      CreditsView creditsView = new CreditsView();
+
+      GridPane creditsGrid = gridSetup(creditsView.getView());
+      
+      credits = new Scene(creditsGrid, SCREEN_WIDTH, SCREEN_HEIGHT);
+  }
+  
   /*public static void linkAccountsScreen()
   {
       LinkAccountsView linkAccountsView = new LinkAccountsView();

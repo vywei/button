@@ -77,12 +77,18 @@ public class SettingsView
           Main.window.setScene(Main.bugReport);
         });
         bugButton.setMaxWidth(Double.MAX_VALUE);
+        
+        Button creditsButton = new Button("Credits");
+        creditsButton.setMaxWidth(Double.MAX_VALUE); 
+        creditsButton.setPadding(new Insets(10, 0, 10, 0));
+        creditsButton.setOnAction(e -> Main.window.setScene(Main.credits));
+        
         VBox vbButtons = new VBox();
-        vbButtons.setSpacing(40);
+        vbButtons.setSpacing(20);
         vbButtons.setPadding(new Insets(30, 30, 30, 30));
         vbButtons.setMinWidth(450);
         vbButtons.setAlignment(Pos.CENTER);
-        vbButtons.getChildren().addAll(header, videoButton, audioButton, accountsButton, bugButton);
+        vbButtons.getChildren().addAll(header, videoButton, audioButton, accountsButton, bugButton, creditsButton);
         
         settingsBox.getChildren().addAll(vbButtons);
 

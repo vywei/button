@@ -38,7 +38,7 @@ public class LoginView
 
         HBox imageBox = new HBox();
         imageBox.getChildren().add(iv1);
-        imageBox.setPadding(new Insets(-300,0,0,-130));
+        imageBox.setPadding(new Insets(-225,0,0,-130));
         
         // User name Input
         TextField userInput = new TextField("");
@@ -89,17 +89,22 @@ public class LoginView
             		Main.window.setScene(Main.landing);
             		
             	    Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
-            	        public void run() {
+            	        public void run() 
+            	        {
             	        	Database db = Database.getDatabase();
             	     	    db.updateUserScore(result);
             	        }
-            	    }));
+            	      }
+            	    )
+            	  );
             	}
-            	else {
+            	else  
+            	{
             		System.out.println("Invalid login.");
             	}
-            }
-          });
+              }
+            } 
+         );
         
         // Sign Up Action
         Button signUpButton = new Button("Sign Up");
@@ -120,11 +125,12 @@ public class LoginView
                 loginBox.requestFocus(); 
                 firstTime.setValue(false); 
             }
-        });
+          }
+        );
         
         GridPane loginGrid = new GridPane();
         // Puts the login box in the middle-ish part of the screen
-        loginGrid.setPadding(new Insets(height/2-100, width/2-100, height/2, width/2-75));
+        loginGrid.setPadding(new Insets(Main.SCREEN_HEIGHT/2-50, Main.SCREEN_WIDTH/2, Main.SCREEN_HEIGHT/2, Main.SCREEN_WIDTH/2-90));
         loginGrid.setVgap(8);
         loginGrid.setHgap(10);
         loginGrid.getChildren().addAll(imageBox, loginBox);
