@@ -47,8 +47,7 @@ public class LandingView
         temp.register((Observer) button);
         
         System.out.println("*" + temp.getObservers().size());
-       
-        //button.register((Observer) temp);
+
         unpressedImage = new Image(Main.class.getResourceAsStream(button.getCurrentSkin().getImage()));
         pressedImage = new Image(Main.class.getResourceAsStream(button.getCurrentSkin().getImagePressed()));
         ImageView iv1 = new ImageView();
