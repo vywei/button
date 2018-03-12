@@ -66,7 +66,7 @@ public class LoginView
             		Main.storeScreen();
             		Main.settingsScreen();
             	    //Main.leaderboardScreen();
-            	    //Main.shareScreen();
+            	    Main.shareScreen();
             		Main.videoSettingsScreen();
             		Main.audioSettingsScreen();
             		Main.accountSettingsScreen();
@@ -79,7 +79,7 @@ public class LoginView
             	    Main.store.getStylesheets().add(sheet);
             		Main.settings.getStylesheets().add(sheet);
             	    //Main.leaderboard.getStylesheets().add(sheet);
-            	    //Main.share.getStylesheets().add(sheet);
+            	    Main.share.getStylesheets().add(sheet);
             		Main.videoSettings.getStylesheets().add(sheet);
             		Main.audioSettings.getStylesheets().add(sheet);
             		Main.accountSettings.getStylesheets().add(sheet);

@@ -26,7 +26,8 @@ public class SettingsView
      
     public SettingsView()
     {
-    	Label header = new Label("Settings");
+
+    	    Label header = new Label("Settings");
         header.setMaxWidth(Double.MAX_VALUE);
         header.setAlignment(Pos.CENTER);
         header.getStylesheets().add(getClass().getResource(t).toExternalForm());

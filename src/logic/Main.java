@@ -146,8 +146,8 @@ public class Main extends Application{
       GridPane leaderboardGrid = gridSetup(leaderboardView.getView());
       
       leaderboard = new Scene(leaderboardGrid, SCREEN_WIDTH, SCREEN_HEIGHT);
-  }
-    public static void shareScreen()
+  }*/
+  public static void shareScreen()
   {
       ShareView shareView = new ShareView();
 
@@ -155,7 +155,7 @@ public class Main extends Application{
       
       share = new Scene(shareGrid, SCREEN_WIDTH, SCREEN_HEIGHT);
   }
-  */
+  
   public static void videoSettingsScreen()
   {
       VideoSettingsView videoSettingsView = new VideoSettingsView();
