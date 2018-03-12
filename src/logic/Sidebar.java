@@ -31,10 +31,10 @@ public class Sidebar extends VBox implements Observer
         Label scoreLabel = new Label("SCORE:");
         text = new Text (Integer.toString(user.getCurrentScore()));
         
-        HBox scoreBox = new HBox();
+        VBox scoreBox = new VBox();
         scoreBox.getChildren().addAll(scoreLabel, text);
         scoreBox.setSpacing(20); 
-        scoreBox.setPadding(new Insets(0,0,70,0));
+        scoreBox.setPadding(new Insets(0,0,30,0));
         
         // Home Back Button
         Button homeButton = new Button("Home");
