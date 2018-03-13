@@ -3,7 +3,6 @@ package test;
 import static org.junit.Assert.*;
 
 import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.TimeUnit;
 
 import javax.swing.SwingUtilities;
 
@@ -29,8 +28,8 @@ public class TestButton {
              latch.countDown();
          });
 
-         if (!latch.await(5L, TimeUnit.SECONDS))
-             throw new ExceptionInInitializerError();
+         //if (!latch.await(5L, TimeUnit.SECONDS))
+           //  throw new ExceptionInInitializerError();
      }
 	
 	@Test
