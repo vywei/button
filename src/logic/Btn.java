@@ -2,6 +2,7 @@ package logic;
 
 import java.util.ArrayList;
 import java.util.logging.Logger;
+import javafx.scene.Node;
 
 public class Btn extends javafx.scene.control.Button implements Subject, Observer {
     private Skin currentSkin;
@@ -23,6 +24,16 @@ public class Btn extends javafx.scene.control.Button implements Subject, Observe
     	  observers = new ArrayList<>();
     	  User temp = Main.getUser();
     	  this.register((Observer)temp);
+    }
+    
+    public Btn(Skin currentSkin, int weight, String label, Node graphic) {
+      super(label, graphic);
+      this.currentSkin = currentSkin;
+          this.isPressed = false;
+          this.buttonWeight = weight;
+          observers = new ArrayList<>();
+          User temp = Main.getUser();
+          this.register((Observer)temp);
     }
     /**
      * getter method for whether or not the button is pressed

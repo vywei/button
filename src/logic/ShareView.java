@@ -95,9 +95,12 @@ public class ShareView {
     shared2.setSmooth(true);
     shared2.setCache(true);
     
-    Button facebookB = new Button("",facebook);
+    Btn facebookB = new Btn(null, 1, "", facebook);
     facebookB.setOnAction((ActionEvent e)-> 
-            facebookB.setGraphic(shared2)
+    {
+        facebookB.increaseScore();
+            facebookB.setGraphic(shared2);
+    }
     );
     
     twitterImage = new Image("/logic/images/twitter.png");
@@ -116,8 +119,9 @@ public class ShareView {
     shared3.setSmooth(true);
     shared3.setCache(true);
     
-    Button twitterB = new Button("",twitter);
+    Btn twitterB = new Btn(null, 1, "",twitter);
     twitterB.setOnAction((ActionEvent e)-> {
+      twitterB.increaseScore();
             Button button = (Button) e.getSource();
             button.setGraphic(shared3);
     });
@@ -130,8 +134,9 @@ public class ShareView {
     instagram.setSmooth(true);
     instagram.setCache(true);
     
-    Button instagramB = new Button("",instagram);
+    Btn instagramB = new Btn(null, 1, "",instagram);
     instagramB.setOnAction((ActionEvent e)->  {
+      instagramB.increaseScore();
             Button button = (Button) e.getSource();
             button.setGraphic(shared);
     });
