@@ -118,15 +118,25 @@ public class VideoSettingsView
         saveBox.setAlignment(Pos.CENTER);
         saveBox.setSpacing(40);
         
-        Button saveButton = new Button("Save Changes");
+        Btn saveButton = new Btn(null, 1, "Save Changes");
         saveButton.setMaxWidth(Double.MAX_VALUE); 
         saveButton.setPadding(new Insets(5, 10, 5, 10));
-        saveButton.setOnAction(e -> Main.window.setScene(Main.settings));
+        saveButton.setOnAction(e -> 
+        {
+          saveButton.increaseScore();
+          Main.window.setScene(Main.settings);
+        }
+        );
         
-        Button cancelButton = new Button("Cancel");
+        Btn cancelButton = new Btn(null, 1, "Cancel");
         cancelButton.setMaxWidth(Double.MAX_VALUE); 
         cancelButton.setPadding(new Insets(5, 10, 5, 10));
-        cancelButton.setOnAction(e -> Main.window.setScene(Main.settings));
+        cancelButton.setOnAction(e -> 
+        {
+          Main.window.setScene(Main.settings);
+          cancelButton.increaseScore();
+        }
+        );
         
         saveBox.getChildren().addAll(saveButton, cancelButton);
         

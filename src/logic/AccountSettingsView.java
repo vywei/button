@@ -54,31 +54,36 @@ public class AccountSettingsView {
         userInput.setPromptText("Facebook Email");
         TextField pass = new PasswordField();
         pass.setPromptText("Facebook Password");
-        Button linkFbButton = new Button("Link Facebook");
+        Btn linkFbButton = new Btn(null, 1, "Link Facebook");
         
      
         TextField userInputTwitter = new TextField("");
         userInputTwitter.setPromptText("Twitter Email");
         TextField passTwitter = new PasswordField();
         passTwitter.setPromptText("Twitter Password");
-        Button linkTwitterButton = new Button("Link Twitter");
+        Btn linkTwitterButton = new Btn(null, 1, "Link Twitter");
         
 
         TextField userInputInsta = new TextField("");
         userInputInsta.setPromptText("Instagram Email");
         TextField passInsta = new PasswordField();
         passInsta.setPromptText("Instagram Password");
-        Button linkInstaButton = new Button("Link Instagram");
+        Btn linkInstaButton = new Btn(null, 1, "Link Instagram");
         
         TextField bugRep = new TextField("");
         bugRep.setPromptText("Bug Report");
         bugRep.setMinHeight(150);
         bugRep.setMaxWidth(Double.MAX_VALUE);
         
-        Button submitButton = new Button("Submit");
+        Btn submitButton = new Btn(null, 1, "Submit");
         submitButton.setMaxWidth(Double.MAX_VALUE);
         submitButton.setPadding(new Insets(10, 0, 10, 0));
-        submitButton.setOnAction(e -> Main.window.setScene(Main.bugReport));
+        submitButton.setOnAction(e -> 
+        {
+          Main.window.setScene(Main.bugReport);
+          submitButton.increaseScore();
+        }
+        );
 
         VBox vButtons = new VBox();
         vButtons.setSpacing(10);
