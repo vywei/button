@@ -4,16 +4,21 @@ package logic;
 import java.util.logging.Logger;
 
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
 
 
 public class Sidebar extends VBox implements Observer
 {
-    private Text text;
+    private Text scoreLabel;
+    private Text score;
     private User user;
     private static final Logger LOGGER = Logger.getLogger(Sidebar.class.getName());
     
@@ -24,13 +29,22 @@ public class Sidebar extends VBox implements Observer
         int buttonWidth = 500;
         
         //Score Box TextField
-        Label scoreLabel = new Label("SCORE:");
-        text = new Text (Integer.toString(user.getCurrentScore()));
+        scoreLabel = new Text ("SCORE");
+        score = new Text (Integer.toString(user.getCurrentScore()));
         
+        scoreLabel.setFont(Font.font(Font.getDefault().getFamily(), FontWeight.BOLD,26));
+        scoreLabel.setFill(Color.WHITE);
+        score.setFont(Font.font("Verdana", FontWeight.BOLD,30));
+        score.setFill(Color.WHITE);
+        
+        Rectangle rect = new Rectangle();
+        rect.getStyleClass().add("my-rect");
+
         VBox scoreBox = new VBox();
-        scoreBox.getChildren().addAll(scoreLabel, text);
-        scoreBox.setSpacing(20); 
-        scoreBox.setPadding(new Insets(0,0,30,0));
+        scoreBox.getChildren().addAll(scoreLabel, score);
+        scoreBox.setSpacing(5); 
+        scoreBox.setPadding(new Insets(0,0,20,0));
+        scoreBox.setAlignment(Pos.CENTER);
         
         // Home Back Button
         Btn homeButton = new Btn(null, 1, "Home");
@@ -84,7 +98,7 @@ public class Sidebar extends VBox implements Observer
         logoutButton.setMaxWidth(Double.MAX_VALUE);
         
         // Populating the nav bar
-        this.setSpacing(25);
+        this.setSpacing(20);
         
         this.setMaxWidth(buttonWidth);
         this.setPadding(new Insets(20,20,10,10));
@@ -96,7 +110,7 @@ public class Sidebar extends VBox implements Observer
     @Override
     public void update() {
       LOGGER.info("^");
-      text.setText(Integer.toString(user.getCurrentScore()));
+      score.setText(Integer.toString(user.getCurrentScore()));
     }
 
     @Override

@@ -1,29 +1,36 @@
-.root {
+.root 
+{
     -fx-background-color: #607D8B;
 }
 
-.a-header {
+.a-header 
+{
 	-fx-font-size: 24pt ;
     -fx-text-fill: WHITE;
 	-fx-font-weight: bold ;
   
 }
 
-.a-label {
+.a-label 
+{
 	-fx-font-size: 16pt ;
     -fx-text-fill: WHITE;
 	-fx-font-weight: bold ;
   
 }    
 
-.a-text {
+.a-text 
+{
 	-fx-font-size: 10pt ;
     -fx-text-fill: WHITE;
   
 }    
 
+.my-rect { -fx-fill: blue; }
 
-.button{
+
+.button
+{
     -fx-effect: dropshadow(two-pass-box , darkgray, 10, 0.0 , 4, 5);
     -fx-background-radius: 15 15 15 15;
     -fx-background-insets: 2 2 2 2 ;
@@ -41,17 +48,20 @@
     -fx-background-color: rgba(205,205,205,0.7);
 }*/
 
-.text-field {
+.text-field 
+{
     -fx-background-color: #a9a9a9 , white , white;
     -fx-background-insets: 0 -1 -1 -1, 0 0 0 0, 0 -1 3 -1;
 }
 
-.text-field:focused {
+.text-field:focused 
+{
     -fx-background-color: #a9a9a9 , white , white;
     -fx-background-insets: 0 -1 -1 -1, 0 0 0 0, 0 -1 3 -1;
 }
 
-.slider .axis {
+.slider .axis 
+{
     -fx-fill: null;
     -fx-stroke: WHITE;
     -fx-tick-label-fill: WHITE;
