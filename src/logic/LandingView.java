@@ -2,8 +2,10 @@ package logic;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import java.io.File;
-import javafx.event.EventHandler;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -23,6 +25,7 @@ public class LandingView
     private final BorderPane view;
     private Image unpressedImage;
     private Image pressedImage;
+    private static final Logger LOGGER = Logger.getLogger(LandingView.class.getName());
     
     public LandingView()
     {
@@ -44,12 +47,12 @@ public class LandingView
         Button add = new Button("Button");
         add.setMinWidth(buttonWidth);
         User temp = Main.getUser();
-        
+
         Sidebar sidebar = new Sidebar(temp);
         temp.register((Observer) sidebar);
         temp.register((Observer) button);
         
-        System.out.println("*" + temp.getObservers().size());
+        LOGGER.log(Level.INFO, "* {0}", temp.getObservers().size());
        
         button.register((Observer)temp);
         unpressedImage = new Image(Main.class.getResourceAsStream(button.getCurrentSkin().getImage()));
@@ -64,24 +67,18 @@ public class LandingView
         imageBox.getChildren().add(iv1);
         imageBox.setPadding(new Insets(0,0,0,0));
         
-        iv1.setOnMousePressed(new EventHandler<MouseEvent>() {
-          @Override
-          public void handle(MouseEvent event) {
-            iv1.setImage(pressedImage);
-            button.increaseScore();
-            String soundFx = button.getCurrentSkin().getSound();
-            Main.class.getResource(soundFx);
-            Media hit = new Media(Main.class.getResource(soundFx).toString());
-            MediaPlayer mediaPlayer = new MediaPlayer(hit);
-            mediaPlayer.play();
-          }
-        });
-        iv1.setOnMouseReleased(new EventHandler<MouseEvent>() {
-          @Override
-          public void handle(MouseEvent event) {
-            iv1.setImage(unpressedImage);
-          }
-        });
+        iv1.setOnMousePressed((MouseEvent event)-> {
+              iv1.setImage(pressedImage);
+              button.increaseScore();
+              String soundFx = button.getCurrentSkin().getSound();
+              Main.class.getResource(soundFx);
+              Media hit = new Media(Main.class.getResource(soundFx).toString());
+              MediaPlayer mediaPlayer = new MediaPlayer(hit);
+              mediaPlayer.play();
+          });
+        iv1.setOnMouseReleased((MouseEvent event)-> 
+            iv1.setImage(unpressedImage)
+        );
         
         
         
@@ -104,7 +101,7 @@ public class LandingView
     }
     
    public void prepareView() {
-	   
+	   throw new UnsupportedOperationException();
    }
     
    public Node getView()

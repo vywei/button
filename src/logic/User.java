@@ -1,11 +1,11 @@
 package logic;
 
 import java.util.List;
+import java.util.logging.Level;
 import java.util.ArrayList;
-import armdb.QueryResult;
-import armdb.SQLQueryException;
 import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
+import java.util.logging.Logger;
 
 //User observes: Button, Store
 //User is subject of: Button, UserRoster, Database(?)
@@ -13,13 +13,14 @@ public class User implements Subject, Observer {
     private ArrayList<Observer> observers;
     private String password;
     private String username;
-    private int ID;
+    private int id;
     private int score;
     private List<Item> items;
     private Skin currentSkin;
+    private static final Logger LOGGER = Logger.getLogger(Database.class.getName());
 
     public User() {
-	observers = new ArrayList<Observer>();
+	observers = new ArrayList<>();
 	items = new ArrayList<>();
     }
   
@@ -30,14 +31,23 @@ public class User implements Subject, Observer {
 	items = new ArrayList<>();
     }
     
-    public User(String username, int ID, int score) {
+    public User(String username, int id, int score) {
       this.username = username;
-      this.ID = ID;
+      this.id = id;
       this.score = score;
       observers = new ArrayList<>();
       items = new ArrayList<>();
   	  currentSkin = new Skin(2, "Basic Red Skin", 0, "red_button_unpressed.png", "red_button_pressed.png", "click.mp3");
     }
+    
+    public User(String username, int id, int score, Skin skin) {
+        this.username = username;
+        this.id = id;
+        this.score = score;
+        observers = new ArrayList<>();
+        items = new ArrayList<>();
+        currentSkin = skin;
+      }
 
     public User(String newUsername, int newId, String newPassword, int newScore) {
 	username = validateUsername(newUsername);
@@ -77,6 +87,7 @@ public class User implements Subject, Observer {
 		    LandingView landingView = new LandingView();
 	        GridPane landingGrid = Main.gridSetup(landingView.getView());     
 	        Main.landing = new Scene(landingGrid, Main.SCREEN_WIDTH, Main.SCREEN_HEIGHT);
+		    Main.db.updateUserSkin(this);
 		    notifyObservers();
 		}
     }
@@ -109,7 +120,7 @@ public class User implements Subject, Observer {
      * @return user ID
      */
     public int getID() {
-	return ID;
+	return id;
     }
 
     /**
@@ -117,7 +128,7 @@ public class User implements Subject, Observer {
      * (For User observers should be Button and UserRoster)
      * @return array of Observers
      */
-    public ArrayList<Observer> getObservers() {
+    public List<Observer> getObservers() {
 	return observers;
     }
 
@@ -160,7 +171,7 @@ public class User implements Subject, Observer {
     public void increaseScore(int x) {
 	if (x > 0) {
 	    score += x;
-	    System.out.println("adding " + x + ", score: " + score);
+	    LOGGER.log( Level.INFO, "adding {0}", x );
 	    notifyObservers();
 	}
     }
@@ -199,7 +210,7 @@ public class User implements Subject, Observer {
      */
     public void setId(int newId) {
 	if (newId >= 0) {
-	    ID = newId;
+	    id = newId;
 	}
     }
 
@@ -230,10 +241,8 @@ public class User implements Subject, Observer {
 	Item tempItem;
 	for (int i = 0; i < newItems.size(); i++) {
 	    tempItem = newItems.get(i);
-	    if (tempItem.getType() == Item.SKIN) {
-		    if (validateSkin((Skin)tempItem) == null) {
-		    	return;
-		    }
+	    if (tempItem.getType() == Item.SKIN && validateSkin((Skin)tempItem) == null) {
+		    return;
 	    }
 	}
 	items = newItems;
@@ -275,6 +284,7 @@ public class User implements Subject, Observer {
      */
   @Override
   public void update() {
+	  // No need to implement this
   }
 
     /**
@@ -284,6 +294,7 @@ public class User implements Subject, Observer {
      */
   @Override
   public void update(String type) {
+	  // No need to implement this
   }
 
     /**
@@ -330,7 +341,15 @@ public class User implements Subject, Observer {
   @Override
   public void update(int amount) {
       increaseScore(amount);
-      System.out.println("amount: " + amount);
+      LOGGER.log(Level.INFO, "amount: {0}", amount);
+  }
+
+  public String toString() {
+      StringBuilder sb = new StringBuilder();
+      sb.append(username);
+      sb.append("\t\t\t");
+      sb.append(score);
+      return sb.toString();
   }
 
 }

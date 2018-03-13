@@ -1,6 +1,7 @@
 package logic;
 
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
 public class Btn implements Subject, Observer {
     private Skin currentSkin;
@@ -8,6 +9,7 @@ public class Btn implements Subject, Observer {
     private User currentUser;
     private int buttonWeight;
     private ArrayList<Observer> observers;
+    private static final Logger LOGGER = Logger.getLogger(Btn.class.getName());
         
     /**
      * Button constructor, set current skin and weight of the button
@@ -91,7 +93,7 @@ public class Btn implements Subject, Observer {
 	for (int i = 0; i < observers.size(); i++) {
 	    observers.get(i).update(buttonWeight); //need to update with buttonweight
 	}
-	  System.out.println("updating button's observers");
+		LOGGER.info("Updating button's observers.");
     }
     
     @Override

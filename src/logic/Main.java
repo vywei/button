@@ -4,8 +4,6 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.util.ArrayList;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
@@ -142,14 +140,14 @@ public class Main extends Application{
       settings = new Scene(settingsGrid, SCREEN_WIDTH, SCREEN_HEIGHT);
   }
   
-  /*public static void leaderboardScreen()
+  public static void leaderboardScreen()
   {
       LeaderboardView leaderboardView = new LeaderboardView();
 
       GridPane leaderboardGrid = gridSetup(leaderboardView.getView());
       
       leaderboard = new Scene(leaderboardGrid, SCREEN_WIDTH, SCREEN_HEIGHT);
-  }*/
+  }
   public static void shareScreen()
   {
       ShareView shareView = new ShareView();

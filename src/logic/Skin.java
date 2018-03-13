@@ -33,12 +33,23 @@ public class Skin extends Item{
             return true;
         }
 
-        if (!(o instanceof Item)) {
+        if (!(o instanceof Skin)) {
             return false;
         }
          
-        Item i = (Item) o;
+        Skin s = (Skin) o;
          
-        return i.id == this.id;
+        return s.id == this.id;
+    }
+    
+    @Override
+    public int hashCode() {
+        int result = 17;
+        result = 31 * result + name.hashCode();
+        result = 31 * result + id;
+        result = 31 * result + price;
+        result = 31 * result + image.hashCode();
+        result = 31 * result + imagePressed.hashCode();
+        return result;
     }
 }

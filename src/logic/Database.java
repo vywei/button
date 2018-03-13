@@ -2,6 +2,9 @@ package logic;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import javax.xml.bind.DatatypeConverter;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -17,6 +20,10 @@ import armdb.SQLUpdateException;
 public class Database {
 	public static final String PLAYER_TABLE = "player";
 	public static final String SCORE_COLUMN = "score";
+	public static final String USERNAME_COLUMN = "username";
+	public static final String CUR_SKIN_COLUMN = "current_skin";
+	public static final String WHERE_ID = "WHERE id = ";
+	private static final Logger LOGGER = Logger.getLogger(Database.class.getName());
 	
     ConnectHost ch;
     private static Database db;
@@ -48,10 +55,10 @@ public class Database {
       dbName = br.readLine();
     }
     catch (FileNotFoundException fnfe) {
-      System.out.println("Unable to connect to database, could not find database credentials.");
+      LOGGER.log( Level.SEVERE, fnfe.toString(), fnfe );
     }
     catch (IOException ioe) {
-      System.out.println("Unable to connect to database.");
+      LOGGER.log( Level.SEVERE, ioe.toString(), ioe );
     }
     
     return new ConnectHost(fileURL, host, user, pass, dbName);
@@ -70,7 +77,7 @@ public class Database {
       byte[] digest = md.digest();
       passHash = DatatypeConverter.printHexBinary(digest).toUpperCase();
     } catch (NoSuchAlgorithmException e) {
-      e.printStackTrace();
+    	LOGGER.log( Level.SEVERE, e.toString(), e );
     }
     
     return passHash;
@@ -87,7 +94,18 @@ public class Database {
 
     // Execute the query
     try {
-        qr = query.result(PLAYER_TABLE, new ArrayList<String>(), 
+    	ArrayList<String> cols = new ArrayList<>();
+    	cols.add("player.id AS pid");
+    	cols.add(USERNAME_COLUMN);
+    	cols.add(SCORE_COLUMN);
+    	cols.add(CUR_SKIN_COLUMN );
+    	cols.add("name");
+    	cols.add("image");
+    	cols.add("image_pressed");
+    	cols.add("price_points");
+    	cols.add("sound");
+    	
+        qr = query.result(PLAYER_TABLE + " JOIN item ON current_skin = item.id", cols, 
             "WHERE username = '" + username + 
             "' AND password = '" + passHash + "'");
 
@@ -95,7 +113,7 @@ public class Database {
         resultUser = parseUser(qr);
     }
     catch(SQLQueryException e){
-        System.out.println(e.getMessage());
+    	LOGGER.log( Level.SEVERE, e.toString(), e );
     }
     
     if (resultUser != null) {
@@ -116,14 +134,33 @@ public class Database {
       cols.add(SCORE_COLUMN);
       ArrayList<String> vals = new ArrayList<>();
       vals.add(Integer.toString(u.getScore()));
-      String constraint = "WHERE id = " + Integer.toString(u.getID());
+      String constraint = WHERE_ID + Integer.toString(u.getID());
       
       query.result(PLAYER_TABLE, cols, vals, constraint); 
     }
     catch(SQLUpdateException e){                   
-        System.out.println(e.getMessage());           
+    	LOGGER.log( Level.SEVERE, e.toString(), e );         
     }
   }
+  
+  public void updateUserSkin(User u) {
+	    // Create query and result
+	    SQLUpdateExt query = new SQLUpdateExt(ch);
+	    
+	    // Execute the query
+	    try {
+	      ArrayList<String> cols = new ArrayList<>();
+	      cols.add(CUR_SKIN_COLUMN);
+	      ArrayList<String> vals = new ArrayList<>();
+	      vals.add(Integer.toString(u.getCurrentSkin().getID()));
+	      String constraint = WHERE_ID + Integer.toString(u.getID());
+	      
+	      query.result(PLAYER_TABLE, cols, vals, constraint); 
+	    }
+	    catch(SQLUpdateException e){                   
+	    	LOGGER.log( Level.SEVERE, e.toString(), e );         
+	    }
+	  }
   
   private void parsePlayers(QueryResult qr, List<User> list) {
     // Loop through all rows in the result
@@ -131,7 +168,7 @@ public class Database {
       
       // Parse the column data
       int id = Integer.parseInt(qr.getValue("id"));
-      String username = (qr.getValue("username"));
+      String username = (qr.getValue(USERNAME_COLUMN));
       int score = Integer.parseInt(qr.getValue(SCORE_COLUMN));
       
       //Instantiate new item and insert into result list
@@ -147,12 +184,18 @@ public class Database {
     while(qr.nextFlag()) {
       
       // Parse the column data
-      int id = Integer.parseInt(qr.getValue("id"));
-      String username = (qr.getValue("username"));
+      int id = Integer.parseInt(qr.getValue("pid"));
+      String username = (qr.getValue(USERNAME_COLUMN));
       int score = Integer.parseInt(qr.getValue(SCORE_COLUMN));
+      int sid = Integer.parseInt(qr.getValue(CUR_SKIN_COLUMN));
+      String name = (qr.getValue("name"));
+      int price = Integer.parseInt(qr.getValue("price_points"));
+      String image = qr.getValue("image");
+      String imagePressed = qr.getValue("image_pressed");
+      String sound = qr.getValue("sound");
       
       //Instantiate new item and insert into result list
-      newUser = new User(username, id, score);
+      newUser = new User(username, id, score, new Skin(sid, name, price, image, imagePressed, sound));
     }
     if (newUser != null) {
       return newUser;
@@ -179,13 +222,13 @@ public class Database {
 	    parsePlayers(qr, players);
 	}
 	catch(SQLQueryException e){
-	    System.out.println(e.getMessage());
+		LOGGER.log( Level.SEVERE, e.toString(), e );
 	}
 
 	return players;
     }
   
-  public void getSettings(User u, Settings s) {
+  public void getSettings(User u) {
 	
 	SQLSelect query = new SQLSelect(ch);
 	QueryResult qr;
@@ -195,25 +238,25 @@ public class Database {
 	
 	    while (qr.nextFlag()) {
 	    	int temp = Integer.parseInt(qr.getValue("vid_res_width"));
-	        s.setVideoResWidth(temp);
+	        Settings.setVideoResWidth(temp);
 	        temp = Integer.parseInt(qr.getValue("vid_res_height"));
-	        s.setVideoResHeight(temp);
+	        Settings.setVideoResHeight(temp);
 	        temp = Integer.parseInt(qr.getValue("vid_textures"));
-	        s.setTextureQual(temp);
+	        Settings.setTextureQual(temp);
 	        temp = Integer.parseInt(qr.getValue("vid_effects"));
-	        s.setEffectsQual(temp);
+	        Settings.setEffectsQual(temp);
 	        temp = Integer.parseInt(qr.getValue("audio"));
-	        s.setAudioEnabled(temp);
+	        Settings.setAudioEnabled(temp);
 	        temp = Integer.parseInt(qr.getValue("music_vol"));
-	        s.setMusicVol(temp);
+	        Settings.setMusicVol(temp);
 	        temp = Integer.parseInt(qr.getValue("effects_vol"));
-	        s.setEffectsVol(temp);
+	        Settings.setEffectsVol(temp);
 	        String stemp = qr.getValue("music");
-	        s.setMusicPath(stemp);
+	        Settings.setMusicPath(stemp);
 	    }
 	}
 	catch(SQLQueryException e){
-	    System.out.println(e.getMessage());
+		LOGGER.log( Level.SEVERE, e.toString(), e );
 	}
 	
   }
@@ -242,12 +285,12 @@ public class Database {
       vals.add(Integer.toString(s.getEffectsVol()));
       vals.add(s.getMusicPath());
       
-      String constraint = "WHERE id = " + Integer.toString(u.getID());
+      String constraint = WHERE_ID + Integer.toString(u.getID());
       
       query.result("settings", cols, vals, constraint); 
     }
     catch(SQLUpdateException e){                   
-        System.out.println(e.getMessage());           
+        LOGGER.log( Level.SEVERE, e.toString(), e );          
     }
   }
 
