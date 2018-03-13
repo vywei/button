@@ -39,6 +39,15 @@ public class User implements Subject, Observer {
       items = new ArrayList<>();
   	  currentSkin = new Skin(2, "Basic Red Skin", 0, "red_button_unpressed.png", "red_button_pressed.png", "click.mp3");
     }
+    
+    public User(String username, int id, int score, Skin skin) {
+        this.username = username;
+        this.id = id;
+        this.score = score;
+        observers = new ArrayList<>();
+        items = new ArrayList<>();
+        currentSkin = skin;
+      }
 
     public User(String newUsername, int newId, String newPassword, int newScore) {
 	username = validateUsername(newUsername);

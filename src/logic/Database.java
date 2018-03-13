@@ -91,7 +91,18 @@ public class Database {
 
     // Execute the query
     try {
-        qr = query.result(PLAYER_TABLE, new ArrayList<String>(), 
+    	ArrayList<String> cols = new ArrayList<>();
+    	cols.add("player.id AS pid");
+    	cols.add("username");
+    	cols.add("score");
+    	cols.add("current_skin");
+    	cols.add("name");
+    	cols.add("image");
+    	cols.add("image_pressed");
+    	cols.add("price_points");
+    	cols.add("sound");
+    	
+        qr = query.result(PLAYER_TABLE + " JOIN item ON current_skin = item.id", cols, 
             "WHERE username = '" + username + 
             "' AND password = '" + passHash + "'");
 
@@ -151,12 +162,18 @@ public class Database {
     while(qr.nextFlag()) {
       
       // Parse the column data
-      int id = Integer.parseInt(qr.getValue("id"));
+      int id = Integer.parseInt(qr.getValue("pid"));
       String username = (qr.getValue("username"));
       int score = Integer.parseInt(qr.getValue(SCORE_COLUMN));
+      int sid = Integer.parseInt(qr.getValue("current_skin"));
+      String name = (qr.getValue("name"));
+      int price = Integer.parseInt(qr.getValue("price_points"));
+      String image = qr.getValue("image");
+      String imagePressed = qr.getValue("image_pressed");
+      String sound = qr.getValue("sound");
       
       //Instantiate new item and insert into result list
-      newUser = new User(username, id, score);
+      newUser = new User(username, id, score, new Skin(sid, name, price, image, imagePressed, sound));
     }
     if (newUser != null) {
       return newUser;

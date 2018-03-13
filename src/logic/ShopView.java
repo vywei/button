@@ -268,9 +268,6 @@ public class ShopView
       });
      
      Image image = new Image(Main.class.getResourceAsStream(item.getImage()));
-
-     VBox content = new VBox();
-     content.setAlignment(Pos.CENTER);
      
      ImageView iv = new ImageView();
      iv.setImage(image);
@@ -278,6 +275,9 @@ public class ShopView
      iv.setPreserveRatio(true);
      iv.setSmooth(true);
      iv.setCache(true);
+     
+     VBox content = new VBox();
+     content.setAlignment(Pos.CENTER);
      
      priceNBuy.setLeft(price);
      priceNBuy.setRight(buy);
