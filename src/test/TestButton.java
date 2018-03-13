@@ -34,6 +34,7 @@ public class TestButton {
 	
 	@Test
 	public void testButtonSetSkin() {
+		Main m = new Main();
 		Main.setUser(new User("testuser", 1, 0));
 		Skin s = new Skin(0, "Test Skin", 500, "america_button_unpressed.png", "america_button_pressed.png", "click.mp3");
 		Btn b = new Btn(s, 1, "Label");
