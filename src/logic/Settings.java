@@ -21,9 +21,9 @@ public class Settings {
 	private Database db;
 	
 	public Settings(User u) {
-	    db.getDatabase();
+	    db = Database.getDatabase();
 	    
-	    db.getSettings(u, this);
+	    db.getSettings(u);
 	}
 	
 	public void saveSettings(User u) {
@@ -35,7 +35,7 @@ public class Settings {
 	}
 
 
-	public void setVideoResWidth(int videoResWidth) {
+	public static void setVideoResWidth(int videoResWidth) {
 		Settings.videoResWidth = videoResWidth;
 	}
 	
@@ -44,7 +44,7 @@ public class Settings {
 	}
 
 
-	public void setVideoResHeight(int videoResHeight) {
+	public static void setVideoResHeight(int videoResHeight) {
 		Settings.videoResHeight = videoResHeight;
 	}
 
@@ -52,7 +52,7 @@ public class Settings {
 		return textureQual;
 	}
 
-	public void setTextureQual(int textureQual) {
+	public static void setTextureQual(int textureQual) {
 		if (textureQual == LOW || textureQual == MED || textureQual == HIGH) {
 			Settings.textureQual = textureQual;
 		}
@@ -62,7 +62,7 @@ public class Settings {
 		return effectsQual;
 	}
 
-	public void setEffectsQual(int effectsQual) {
+	public static void setEffectsQual(int effectsQual) {
 		if (effectsQual == LOW || effectsQual == MED || effectsQual == HIGH) {
 			Settings.effectsQual = effectsQual;
 		}
@@ -72,7 +72,7 @@ public class Settings {
 		return audioEnabled;
 	}
 
-	public void setAudioEnabled(int audioEnabled) {
+	public static void setAudioEnabled(int audioEnabled) {
 		if (audioEnabled == ENABLED || audioEnabled == DISABLED) {
 			Settings.audioEnabled = audioEnabled;
 		}
@@ -82,7 +82,7 @@ public class Settings {
 		return musicVol;
 	}
 
-	public void setMusicVol(int musicVol) {
+	public static void setMusicVol(int musicVol) {
 		if (musicVol >= 0 && musicVol <= 100) {
 			Settings.musicVol = musicVol;
 		}
@@ -92,7 +92,7 @@ public class Settings {
 		return effectsVol;
 	}
 
-	public void setEffectsVol(int effectsVol) {
+	public static void setEffectsVol(int effectsVol) {
 		if (effectsVol >= 0 && effectsVol <= 100) {
 			Settings.effectsVol = effectsVol;
 		}
@@ -102,7 +102,7 @@ public class Settings {
 		return musicPath;
 	}
 
-	public void setMusicPath(String musicPath) {
+	public static void setMusicPath(String musicPath) {
 		Settings.musicPath = musicPath;
 	}
 	  

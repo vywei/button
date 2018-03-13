@@ -1,13 +1,16 @@
 package logic;
 
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import armdb.QueryResult;
-import armdb.SQLQuery;
 import armdb.SQLQueryException;
 import armdb.SQLUpdateException;
 
 public class Shop {
-  private static Database db;
+  private Database db;
+  private static final Logger LOGGER = Logger.getLogger(Shop.class.getName());
   
   public Shop() {
     db = Database.getDatabase();
@@ -15,7 +18,7 @@ public class Shop {
   
   public List<Item> getAllItems() {
     // Create result list
-    List<Item> allItems = new ArrayList<Item>();
+    List<Item> allItems = new ArrayList<>();
     
     // Create query and result
     SQLSelect query = new SQLSelect(db.getCH());
@@ -29,7 +32,7 @@ public class Shop {
       parseItems(qr, allItems);
     }
     catch(SQLQueryException e){                   
-        System.out.println(e.getMessage());           
+    	LOGGER.log( Level.SEVERE, e.toString(), e );        
     }
     
     return allItems;
@@ -37,7 +40,7 @@ public class Shop {
   
   public List<Item> getOwnedItems(User u) {
     // Create result list
-    List<Item> playerItems = new ArrayList<Item>();
+    List<Item> playerItems = new ArrayList<>();
     
     // Create query and result
     SQLSelect query = new SQLSelect(db.getCH());
@@ -52,7 +55,7 @@ public class Shop {
       parseItems(qr, playerItems);
     }
     catch(SQLQueryException e){                   
-        System.out.println(e.getMessage());           
+    	LOGGER.log( Level.SEVERE, e.toString(), e );           
     }
     
     return playerItems;
@@ -67,11 +70,12 @@ public class Shop {
       String image = qr.getValue("image");
       String imagePressed = qr.getValue("image_pressed");
       int type = Integer.parseInt(qr.getValue("type"));
+      String sound = qr.getValue("sound");
       
       //Instantiate new item and insert into result list
       Item newItem;
       if (type == Item.SKIN) {
-    	  newItem = new Skin(id, name, price, image, imagePressed);
+    	  newItem = new Skin(id, name, price, image, imagePressed, sound);
           list.add(newItem);
       }
     }
@@ -90,11 +94,11 @@ public class Shop {
         
         SQLInsert query = new SQLInsert(db.getCH());
         
-        ArrayList<String> cols = new ArrayList<String>();
+        ArrayList<String> cols = new ArrayList<>();
         cols.add("player_id");
         cols.add("item_id");
         
-        ArrayList<String> vals = new ArrayList<String>();
+        ArrayList<String> vals = new ArrayList<>();
         vals.add(Integer.toString(u.getID()));
         vals.add(Integer.toString(i.getID()));
         
@@ -102,7 +106,7 @@ public class Shop {
         	query.result("items_owned", cols, vals);
         }
         catch (SQLUpdateException ex) {
-        	System.out.println("Error purchasing item.");
+        	LOGGER.log( Level.SEVERE, ex.toString(), ex );   
         }
         
         u.setItems(getOwnedItems(u));

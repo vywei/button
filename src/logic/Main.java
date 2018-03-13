@@ -4,8 +4,6 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.util.ArrayList;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
@@ -32,6 +30,7 @@ public class Main extends Application{
   protected static Scene accountSettings;
   protected static Scene linkAccounts;
   protected static Scene bugReport;
+  protected static Scene credits;
 
   protected static String pString = "Password";
   protected static String uString = "Username";
@@ -52,8 +51,10 @@ public class Main extends Application{
     db = Database.getDatabase();
 
     loginScreen();
+    signUpScreen();
     
     login.getStylesheets().add(sheet);
+    signUp.getStylesheets().add(sheet);
 
     window.setScene(login);
     window.show();
@@ -139,14 +140,14 @@ public class Main extends Application{
       settings = new Scene(settingsGrid, SCREEN_WIDTH, SCREEN_HEIGHT);
   }
   
-  /*public static void leaderboardScreen()
+  public static void leaderboardScreen()
   {
       LeaderboardView leaderboardView = new LeaderboardView();
 
       GridPane leaderboardGrid = gridSetup(leaderboardView.getView());
       
       leaderboard = new Scene(leaderboardGrid, SCREEN_WIDTH, SCREEN_HEIGHT);
-  }*/
+  }
   public static void shareScreen()
   {
       ShareView shareView = new ShareView();
@@ -191,6 +192,16 @@ public class Main extends Application{
       
       bugReport = new Scene(bugReportGrid, SCREEN_WIDTH, SCREEN_HEIGHT);
   }
+  
+  public static void creditsScreen()
+  {
+      CreditsView creditsView = new CreditsView();
+
+      GridPane creditsGrid = gridSetup(creditsView.getView());
+      
+      credits = new Scene(creditsGrid, SCREEN_WIDTH, SCREEN_HEIGHT);
+  }
+  
   /*public static void linkAccountsScreen()
   {
       LinkAccountsView linkAccountsView = new LinkAccountsView();

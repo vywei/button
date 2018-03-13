@@ -172,7 +172,7 @@ public class ShopView
    private TilePane getPurchase() 
    {
      //List<Item> items = dummyList(); 
-	 List<Item> items = Main.getShop().getShopItems(Main.getUser());
+     List<Item> items = Main.getShop().getShopItems(Main.getUser());
      
      TilePane purchaseView = new TilePane();
      purchaseView.setHgap(10);
@@ -195,7 +195,7 @@ public class ShopView
    private TilePane getCustomize() 
    {
      //List<Item> items = dummyOwnedList(); 
-	 List<Item> items = Main.getShop().getOwnedItems(Main.user);
+     List<Item> items = Main.getShop().getOwnedItems(Main.user);
      TilePane customizedView = new TilePane();
      customizedView.setHgap(10);
      customizedView.setVgap(10);
@@ -216,7 +216,7 @@ public class ShopView
    
    private void refreshItems()
    {
-	   ScrollPane sp = new ScrollPane();
+       ScrollPane sp = new ScrollPane();
        sp.setFitToWidth(true);
        sp.setContent(getPurchase());
        sp.setPrefHeight(spHeight);
@@ -265,11 +265,11 @@ public class ShopView
          boolean result = Main.getShop().purchaseItem(item, Main.getUser());
          if (result == true) 
          {
-        	 refreshItems();
+             refreshItems();
          }
          else
          {
-        	 final Stage dialog = new Stage();
+             final Stage dialog = new Stage();
              dialog.initModality(Modality.APPLICATION_MODAL);
              dialog.initOwner(Main.window);
              VBox dialogVbox = new VBox(20);
@@ -333,10 +333,10 @@ public class ShopView
        public void handle(ActionEvent event) 
        {
          equip.increaseScore();
-    	  if (item.getType() == Item.SKIN)
-    	  {
-    		  Main.getUser().changeSkin((Skin)item);
-    	  }
+          if (item.getType() == Item.SKIN)
+          {
+              Main.getUser().changeSkin((Skin)item);
+          }
        }
       });
      

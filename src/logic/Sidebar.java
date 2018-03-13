@@ -1,10 +1,11 @@
 package logic;
 
 
+import java.util.logging.Logger;
+
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
@@ -14,6 +15,7 @@ public class Sidebar extends VBox implements Observer
 {
     private Text text;
     private User user;
+    private static final Logger LOGGER = Logger.getLogger(Sidebar.class.getName());
     
     public Sidebar(User user)
     {
@@ -21,20 +23,14 @@ public class Sidebar extends VBox implements Observer
 
         int buttonWidth = 500;
         
-
-        // Logout Button
-        //Button logoutButton = new Button("Log Out");
-        //logoutButton.setOnAction(e -> Main.window.setScene(Main.login));
-        //logoutButton.setMaxWidth(Double.MAX_VALUE);
-        
         //Score Box TextField
         Label scoreLabel = new Label("SCORE:");
         text = new Text (Integer.toString(user.getCurrentScore()));
         
-        HBox scoreBox = new HBox();
+        VBox scoreBox = new VBox();
         scoreBox.getChildren().addAll(scoreLabel, text);
         scoreBox.setSpacing(20); 
-        scoreBox.setPadding(new Insets(0,0,70,0));
+        scoreBox.setPadding(new Insets(0,0,30,0));
         
         // Home Back Button
         Btn homeButton = new Btn(null, 1, "Home");
@@ -81,29 +77,36 @@ public class Sidebar extends VBox implements Observer
         });
         leaderboardButton.setMaxWidth(Double.MAX_VALUE);
         
+        Button logoutButton = new Button("Logout");
+        logoutButton.setOnAction(e -> 
+        {
+          Main.window.setScene(Main.login);
+        });
+        logoutButton.setMaxWidth(Double.MAX_VALUE);
+        
         // Populating the nav bar
-        this.setSpacing(30);
+        this.setSpacing(25);
         
         this.setMaxWidth(buttonWidth);
         this.setPadding(new Insets(20,20,10,10));
-        this.getChildren().addAll(scoreBox, homeButton, storeButton, settingsButton, shareButton, leaderboardButton);   
+        this.getChildren().addAll(scoreBox, homeButton, storeButton, settingsButton, shareButton, leaderboardButton, logoutButton);   
         this.getStylesheets().add(getClass().getResource("theme.css").toExternalForm());
         this.getStyleClass().add("root");
     }
 
     @Override
     public void update() {
-      System.out.println("^");
+      LOGGER.info("^");
       text.setText(Integer.toString(user.getCurrentScore()));
     }
 
     @Override
     public void update(String type) {
-      
+      // No need to do anything here
     }
 
     @Override
     public void update(int amount) {
-      
+      // No need to do anything here
     }   
 }

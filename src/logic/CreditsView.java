@@ -15,8 +15,6 @@ public class CreditsView {
     private static String cssTheme = "theme.css";
     private final BorderPane bp;
     protected static Scene credits;
-    private static Text textCredits;
-
 
     public CreditsView()
     {
@@ -29,38 +27,44 @@ public class CreditsView {
 	left.getChildren().addAll(getHeader(), getBody());
 
 
-	BorderPane root = new BorderPane();
-	root.setRight(sidebar);
-	root.setLeft(left);
-	root.getStylesheets().add(getClass().getResource(cssTheme).toExternalForm());
-	root.getStyleClass().add("root");
+	BorderPane rootbp = new BorderPane();
+	rootbp.setLeft(left);
+	rootbp.setRight(sidebar);
+	rootbp.getStylesheets().add(getClass().getResource(cssTheme).toExternalForm());
+	rootbp.getStyleClass().add("root");
 
-	bp = root;
+	bp = rootbp;
 
     }
-    public Node getView()
-    {
-	bp.getStylesheets().add(getClass().getResource(cssTheme).toExternalForm());
-	bp.getStyleClass().add("root");
-	return bp;
-    }
-
+    
     private HBox getHeader()
     {
+    HBox header = new HBox();
+    
 	Label title = new Label("Credits");
 	title.getStylesheets().add(getClass().getResource(cssTheme).toExternalForm());
 	title.getStyleClass().add("a-header");
 
-	HBox header = new HBox();
 	header.getChildren().add(title);
 	header.setAlignment(Pos.CENTER);
 	header.setPadding(new Insets(20,0,0,0));
+	
 	return header;
+    }
+    
+    public Node getView()
+    {
+	bp.getStylesheets().add(getClass().getResource(cssTheme).toExternalForm());
+	bp.getStyleClass().add("root");
+	
+	return bp;
     }
 
     private HBox getBody()
     {
 
+    Text textCredits;
+    	
     String entirety = "CSC 309 Winter 2018\n"
         + "Prof Davide Falessi\n\n"
         + "Button Programmed by\n"

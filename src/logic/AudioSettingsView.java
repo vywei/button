@@ -47,6 +47,27 @@ public class AudioSettingsView
         currentSettingsBox.setMinWidth(450);
         currentSettingsBox.setAlignment(Pos.CENTER);
         
+        HBox audBox = new HBox();
+        audBox.setPadding(new Insets(0,0,0,0));
+        audBox.setMinWidth(350);
+        audBox.setAlignment(Pos.CENTER);
+        audBox.setSpacing(40);
+        
+        Label audLabel = new Label("Audio:");
+        
+        final ToggleGroup audGroup = new ToggleGroup();
+
+        RadioButton audRb1 = new RadioButton("Enabled");
+        audRb1.setToggleGroup(audGroup);
+        audRb1.setSelected(true);
+
+        RadioButton audRb2 = new RadioButton("Disabled");
+        audRb2.setToggleGroup(audGroup);
+        
+        VBox audGroupContain = new VBox(audRb1, audRb2);
+        	
+        audBox.getChildren().addAll(audLabel, audGroupContain);
+        
         HBox resBox = new HBox();
         resBox.setPadding(new Insets(0,0,0,0));
         resBox.setMinWidth(350);
@@ -55,63 +76,12 @@ public class AudioSettingsView
         Slider volumeSlider = new Slider(0,1,.5);
 
         Label volumeLabel = new Label("Volume:");
-        resBox.getChildren().addAll(volumeLabel,volumeSlider/*resLabel, resCB*/);
-        
-        HBox texBox = new HBox();
-        texBox.setPadding(new Insets(0,0,0,0));
-        texBox.setMinWidth(350);
-        texBox.setAlignment(Pos.CENTER);
-        texBox.setSpacing(40);
-        
-        Label texLabel = new Label("Texture Quality:");
-        
-        final ToggleGroup texGroup = new ToggleGroup();
-
-        RadioButton texRb1 = new RadioButton("High");
-        texRb1.setToggleGroup(texGroup);
-        texRb1.setSelected(true);
-
-        RadioButton texRb2 = new RadioButton("Medium");
-        texRb2.setToggleGroup(texGroup);
-         
-        RadioButton texRb3 = new RadioButton("Low");
-        texRb3.setToggleGroup(texGroup);
-        
-        VBox texGroupContain = new VBox(texRb1, texRb2, texRb3);
-        	
-        texBox.getChildren().addAll(texLabel, texGroupContain);
-        
-        HBox effectsBox = new HBox();
-        effectsBox.setPadding(new Insets(0,0,0,0));
-        effectsBox.setMinWidth(350);
-        effectsBox.setAlignment(Pos.CENTER);
-        effectsBox.setSpacing(40);
-        
-        Label effectsLabel = new Label("Effects Volume:");
-        
-        final ToggleGroup fxGroup = new ToggleGroup();
-
-        RadioButton fxRb1 = new RadioButton("High");
-        fxRb1.setToggleGroup(fxGroup);
-        fxRb1.setSelected(true);
-
-        RadioButton fxRb2 = new RadioButton("Medium");
-        fxRb2.setToggleGroup(fxGroup);
-         
-        RadioButton fxRb3 = new RadioButton("Low");
-        fxRb3.setToggleGroup(fxGroup);
-        
-        VBox effectsGroupContain = new VBox(fxRb1, fxRb2, fxRb3);
-        	
-        effectsBox.getChildren().addAll(effectsLabel, effectsGroupContain);
-        
+        resBox.getChildren().addAll(volumeLabel, volumeSlider);
         
         HBox saveB = new HBox();
         saveB.setPadding(new Insets(0,0,0,0));
         saveB.setAlignment(Pos.CENTER);
         saveB.setSpacing(40);
-        
-
         
         Btn cancelButton1 = new Btn(null, 1, "Cancel");
         cancelButton1.setMaxWidth(Double.MAX_VALUE); 
@@ -139,7 +109,7 @@ public class AudioSettingsView
         vbSettings1.setPadding(new Insets(30, 30, 30, 30));
         vbSettings1.setMinWidth(450);
         vbSettings1.setAlignment(Pos.CENTER);
-        vbSettings1.getChildren().addAll(currentHeaderLabel, resBox, texBox, effectsBox, saveB);
+        vbSettings1.getChildren().addAll(currentHeaderLabel, audBox, resBox, saveB);
         
         currentSettingsBox.getChildren().addAll(vbSettings1);
 

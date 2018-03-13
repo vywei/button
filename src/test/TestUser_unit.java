@@ -1,12 +1,9 @@
 package test;
 import static org.junit.Assert.*;
-import java.util.ArrayList;
 import java.util.List;
 import org.junit.Test;
 import logic.Observer;
-import logic.Skin;
 import logic.User;
-import logic.Item;
 
 public class TestUser_unit {
   @Test
