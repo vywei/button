@@ -42,12 +42,13 @@ public class LandingView
         homeGrid.getStyleClass().add("root");
           
         Btn button = new Btn(Main.getUser().getCurrentSkin(), 1);
+        System.out.println(Main.getUser().getCurrentSkin().getName());
               
         double buttonWidth = 150;
         Button add = new Button("Button");
         add.setMinWidth(buttonWidth);
         User temp = Main.getUser();
-        
+
         Sidebar sidebar = new Sidebar(temp);
         temp.register((Observer) sidebar);
         temp.register((Observer) button);

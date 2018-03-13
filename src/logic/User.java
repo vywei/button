@@ -87,6 +87,7 @@ public class User implements Subject, Observer {
 		    LandingView landingView = new LandingView();
 	        GridPane landingGrid = Main.gridSetup(landingView.getView());     
 	        Main.landing = new Scene(landingGrid, Main.SCREEN_WIDTH, Main.SCREEN_HEIGHT);
+		    Main.db.updateUserSkin(this);
 		    notifyObservers();
 		}
     }

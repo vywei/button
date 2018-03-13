@@ -20,6 +20,8 @@ import armdb.SQLUpdateException;
 public class Database {
 	public static final String PLAYER_TABLE = "player";
 	public static final String SCORE_COLUMN = "score";
+	public static final String USERNAME_COLUMN = "username";
+	public static final String CUR_SKIN_COLUMN = "current_skin";
 	private static final Logger LOGGER = Logger.getLogger(Database.class.getName());
 	
     ConnectHost ch;
@@ -93,9 +95,9 @@ public class Database {
     try {
     	ArrayList<String> cols = new ArrayList<>();
     	cols.add("player.id AS pid");
-    	cols.add("username");
-    	cols.add("score");
-    	cols.add("current_skin");
+    	cols.add(USERNAME_COLUMN);
+    	cols.add(SCORE_COLUMN);
+    	cols.add(CUR_SKIN_COLUMN );
     	cols.add("name");
     	cols.add("image");
     	cols.add("image_pressed");
@@ -140,13 +142,32 @@ public class Database {
     }
   }
   
+  public void updateUserSkin(User u) {
+	    // Create query and result
+	    SQLUpdateExt query = new SQLUpdateExt(ch);
+	    
+	    // Execute the query
+	    try {
+	      ArrayList<String> cols = new ArrayList<>();
+	      cols.add(CUR_SKIN_COLUMN);
+	      ArrayList<String> vals = new ArrayList<>();
+	      vals.add(Integer.toString(u.getCurrentSkin().getID()));
+	      String constraint = "WHERE id = " + Integer.toString(u.getID());
+	      
+	      query.result(PLAYER_TABLE, cols, vals, constraint); 
+	    }
+	    catch(SQLUpdateException e){                   
+	    	LOGGER.log( Level.SEVERE, e.toString(), e );         
+	    }
+	  }
+  
   private void parsePlayers(QueryResult qr, List<User> list) {
     // Loop through all rows in the result
     while(qr.nextFlag()) {
       
       // Parse the column data
       int id = Integer.parseInt(qr.getValue("id"));
-      String username = (qr.getValue("username"));
+      String username = (qr.getValue(USERNAME_COLUMN));
       int score = Integer.parseInt(qr.getValue(SCORE_COLUMN));
       
       //Instantiate new item and insert into result list
@@ -163,9 +184,9 @@ public class Database {
       
       // Parse the column data
       int id = Integer.parseInt(qr.getValue("pid"));
-      String username = (qr.getValue("username"));
+      String username = (qr.getValue(USERNAME_COLUMN));
       int score = Integer.parseInt(qr.getValue(SCORE_COLUMN));
-      int sid = Integer.parseInt(qr.getValue("current_skin"));
+      int sid = Integer.parseInt(qr.getValue(CUR_SKIN_COLUMN));
       String name = (qr.getValue("name"));
       int price = Integer.parseInt(qr.getValue("price_points"));
       String image = qr.getValue("image");
