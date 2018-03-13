@@ -65,12 +65,13 @@ public class LoginView
             		Main.landingScreen();
             		Main.storeScreen();
             		Main.settingsScreen();
-            	    //Main.leaderboardScreen();
+            	    Main.leaderboardScreen();
             	    Main.shareScreen();
             		Main.videoSettingsScreen();
             		Main.audioSettingsScreen();
             		Main.accountSettingsScreen();
             		Main.bugReportScreen();
+            		Main.creditsScreen();
             		
             		String sheet = Main.getSheet();
             		
@@ -78,12 +79,13 @@ public class LoginView
             		Main.signUp.getStylesheets().add(sheet);
             	    Main.store.getStylesheets().add(sheet);
             		Main.settings.getStylesheets().add(sheet);
-            	    //Main.leaderboard.getStylesheets().add(sheet);
+            	    Main.leaderboard.getStylesheets().add(sheet);
             	    Main.share.getStylesheets().add(sheet);
             		Main.videoSettings.getStylesheets().add(sheet);
             		Main.audioSettings.getStylesheets().add(sheet);
             		Main.accountSettings.getStylesheets().add(sheet);
             		Main.bugReport.getStylesheets().add(sheet);
+            		Main.credits.getStylesheets().add(sheet);
             		
             		Main.getUser().updateItems();
             		

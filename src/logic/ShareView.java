@@ -43,22 +43,23 @@ public class ShareView {
   }
   public Node getView()
   {
+	view.getStyleClass().add("root");
     view.getStylesheets().add(getClass().getResource(t).toExternalForm());
-    view.getStyleClass().add("root");
     return view;
   }
   
   private HBox getHeader()
   {
+	HBox head = new HBox();
+	    
     Label title = new Label("Share");
     title.getStylesheets().add(getClass().getResource(t).toExternalForm());
     title.getStyleClass().add("a-header");
     
-    HBox header = new HBox();
-    header.getChildren().add(title);
-    header.setAlignment(Pos.CENTER);
-    header.setPadding(new Insets(20,0,0,0));
-    return header;
+    head.getChildren().add(title);
+    head.setAlignment(Pos.CENTER);
+    head.setPadding(new Insets(20,0,0,0));
+    return head;
   }
   
   private HBox getBody() 

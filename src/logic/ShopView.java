@@ -164,21 +164,21 @@ public class ShopView
    {
 	 List<Item> items = Main.getShop().getShopItems(Main.getUser());
      
-     TilePane purchaseView = new TilePane();
-     purchaseView.setHgap(10);
-     purchaseView.setVgap(10);
+     TilePane purchaseViewTP = new TilePane();
+     purchaseViewTP.setHgap(10);
+     purchaseViewTP.setVgap(10);
      
      for (Iterator<Item> i = items.iterator(); i.hasNext();) 
      {
-       purchaseView.getChildren().add(genPurchaseFrame(i.next()));
+       purchaseViewTP.getChildren().add(genPurchaseFrame(i.next()));
      }
      
-     purchaseView.setTileAlignment(Pos.CENTER);
-     purchaseView.setAlignment(Pos.CENTER);
-     purchaseView.getStylesheets().add(getClass().getResource(t).toExternalForm());
-     purchaseView.getStyleClass().add("root");
-     purchaseView.setPrefHeight(SPHEIGHT);
-     return purchaseView;
+     purchaseViewTP.setTileAlignment(Pos.CENTER);
+     purchaseViewTP.setAlignment(Pos.CENTER);
+     purchaseViewTP.getStylesheets().add(getClass().getResource(t).toExternalForm());
+     purchaseViewTP.getStyleClass().add("root");
+     purchaseViewTP.setPrefHeight(SPHEIGHT);
+     return purchaseViewTP;
      
    }
    
@@ -219,14 +219,15 @@ public class ShopView
    
    private VBox genPurchaseFrame(Item item) 
    {
-     VBox frame = new VBox();
-     frame.setMaxWidth(200);
-     frame.setMinWidth(200);
-     frame.setMaxHeight(225);
-     frame.setMinHeight(225);
+     VBox pFrame = new VBox();
      
-     frame.setBorder(new Border(new BorderStroke(Color.BLACK, 
+     pFrame.setBorder(new Border(new BorderStroke(Color.BLACK, 
          BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+     
+     pFrame.setMaxWidth(200);
+     pFrame.setMinWidth(200);
+     pFrame.setMaxHeight(225);
+     pFrame.setMinHeight(225);
      
      Label name = new Label(item.getName());
      name.setFont(Font.font(20));
@@ -237,7 +238,7 @@ public class ShopView
      title.setAlignment(Pos.CENTER);
      
      
-     frame.getChildren().add(title);
+     pFrame.getChildren().add(title);
      
      BorderPane priceNBuy = new BorderPane();
      
@@ -284,8 +285,8 @@ public class ShopView
      
      content.getChildren().addAll(priceNBuy, iv);
      
-     frame.getChildren().addAll(content);
-     return frame;
+     pFrame.getChildren().addAll(content);
+     return pFrame;
      
    }
    

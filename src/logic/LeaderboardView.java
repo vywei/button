@@ -26,6 +26,8 @@ public class LeaderboardView {
         Sidebar sidebar = new Sidebar(temp);
         temp.register((Observer) sidebar);
 
+        leader = Leaderboard.getLeaderboard();
+        
         VBox left = new VBox();
         left.getChildren().addAll(getHeader(), getBody());
 
@@ -37,7 +39,6 @@ public class LeaderboardView {
         root.getStyleClass().add("root");
 
         bp = root;
-        leader = Leaderboard.getLeaderboard();
 
     }
     public Node getView()

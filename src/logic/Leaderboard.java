@@ -9,7 +9,7 @@ public class Leaderboard implements Subject, Observer {
     private ArrayList<User> users;
     private static Leaderboard leaderboard;
     private Database db;
-    private static final String brk =  "\t\t\t";
+    private static final String BRK =  "\t\t\t";
   
     private Leaderboard() {
     	observers = new ArrayList<>();
@@ -66,14 +66,14 @@ public class Leaderboard implements Subject, Observer {
   public String listLeaderboard() {
       StringBuilder sb = new StringBuilder();
       sb.append("RANK");
-      sb.append(brk);
+      sb.append(BRK);
       sb.append("USERNAME");
-      sb.append(brk);
+      sb.append(BRK);
       sb.append("SCORE");
       sb.append("\n");
       for (int i = 0; i < users.size(); i++) {
          sb.append(i + 1);
-         sb.append(brk);
+         sb.append(BRK);
          sb.append(users.get(i).toString());
          sb.append("\n");
       }
