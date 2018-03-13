@@ -4,7 +4,6 @@ import java.util.logging.Logger;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -58,10 +57,7 @@ public class LoginView
         // Login Action
         Button loginButton = new Button("Log In");
         loginButton.setMaxWidth(Double.MAX_VALUE);
-        //loginButton.setOnAction(e -> Main.window.setScene(Main.landing));
-        loginButton.setOnMousePressed(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
+        loginButton.setOnMousePressed((MouseEvent event)-> {
             	Database db = Database.getDatabase();
             	User result = db.loginUser(userInput.getText(), passInput.getText());
             	if (result != null) {
@@ -93,12 +89,8 @@ public class LoginView
             		
             		Main.window.setScene(Main.landing);
             		
-            	    Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
-            	        public void run() 
-            	        {
-            	        	Database db = Database.getDatabase();
+            	    Runtime.getRuntime().addShutdownHook(new Thread(() -> {
             	     	    db.updateUserScore(result);
-            	        }
             	      }
             	    )
             	  );
@@ -115,7 +107,6 @@ public class LoginView
                     dialog.setScene(dialogScene);
                     dialog.show();
             	}
-              }
             } 
          );
         

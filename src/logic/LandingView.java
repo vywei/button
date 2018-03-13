@@ -52,7 +52,7 @@ public class LandingView
         temp.register((Observer) sidebar);
         temp.register((Observer) button);
         
-        LOGGER.log(Level.INFO, "* {}", temp.getObservers().size());
+        LOGGER.log(Level.INFO, "* {0}", temp.getObservers().size());
        
         button.register((Observer)temp);
         unpressedImage = new Image(Main.class.getResourceAsStream(button.getCurrentSkin().getImage()));

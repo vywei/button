@@ -33,13 +33,13 @@ public class Skin extends Item{
             return true;
         }
 
-        if (!(o instanceof Item)) {
+        if (!(o instanceof Skin)) {
             return false;
         }
          
-        Item i = (Item) o;
+        Skin s = (Skin) o;
          
-        return i.id == this.id;
+        return s.id == this.id;
     }
     
     @Override

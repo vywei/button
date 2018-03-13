@@ -23,7 +23,7 @@ public class Settings {
 	public Settings(User u) {
 	    db = Database.getDatabase();
 	    
-	    db.getSettings(u, this);
+	    db.getSettings(u);
 	}
 	
 	public void saveSettings(User u) {

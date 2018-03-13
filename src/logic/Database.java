@@ -189,7 +189,7 @@ public class Database {
 	return players;
     }
   
-  public void getSettings(User u, Settings s) {
+  public void getSettings(User u) {
 	
 	SQLSelect query = new SQLSelect(ch);
 	QueryResult qr;
@@ -199,21 +199,21 @@ public class Database {
 	
 	    while (qr.nextFlag()) {
 	    	int temp = Integer.parseInt(qr.getValue("vid_res_width"));
-	        s.setVideoResWidth(temp);
+	        Settings.setVideoResWidth(temp);
 	        temp = Integer.parseInt(qr.getValue("vid_res_height"));
-	        s.setVideoResHeight(temp);
+	        Settings.setVideoResHeight(temp);
 	        temp = Integer.parseInt(qr.getValue("vid_textures"));
-	        s.setTextureQual(temp);
+	        Settings.setTextureQual(temp);
 	        temp = Integer.parseInt(qr.getValue("vid_effects"));
-	        s.setEffectsQual(temp);
+	        Settings.setEffectsQual(temp);
 	        temp = Integer.parseInt(qr.getValue("audio"));
-	        s.setAudioEnabled(temp);
+	        Settings.setAudioEnabled(temp);
 	        temp = Integer.parseInt(qr.getValue("music_vol"));
-	        s.setMusicVol(temp);
+	        Settings.setMusicVol(temp);
 	        temp = Integer.parseInt(qr.getValue("effects_vol"));
-	        s.setEffectsVol(temp);
+	        Settings.setEffectsVol(temp);
 	        String stemp = qr.getValue("music");
-	        s.setMusicPath(stemp);
+	        Settings.setMusicPath(stemp);
 	    }
 	}
 	catch(SQLQueryException e){

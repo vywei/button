@@ -15,8 +15,6 @@ public class CreditsView {
     private static String cssTheme = "theme.css";
     private final BorderPane bp;
     protected static Scene credits;
-    private static Text textCredits;
-
 
     public CreditsView()
     {
@@ -61,6 +59,8 @@ public class CreditsView {
     private HBox getBody()
     {
 
+    Text textCredits;
+    	
     String entirety = "CSC 309 Winter 2018\n"
         + "Prof Davide Falessi\n\n"
         + "Button Programmed by\n"
