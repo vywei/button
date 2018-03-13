@@ -1,10 +1,11 @@
 package logic;
 
 
+import java.util.logging.Logger;
+
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
@@ -14,18 +15,13 @@ public class Sidebar extends VBox implements Observer
 {
     private Text text;
     private User user;
+    private static final Logger LOGGER = Logger.getLogger(Sidebar.class.getName());
     
     public Sidebar(User user)
     {
         this.user = user;
 
         int buttonWidth = 500;
-        
-
-        // Logout Button
-        //Button logoutButton = new Button("Log Out");
-        //logoutButton.setOnAction(e -> Main.window.setScene(Main.login));
-        //logoutButton.setMaxWidth(Double.MAX_VALUE);
         
         //Score Box TextField
         Label scoreLabel = new Label("SCORE:");
@@ -95,17 +91,17 @@ public class Sidebar extends VBox implements Observer
 
     @Override
     public void update() {
-      System.out.println("^");
+      LOGGER.info("^");
       text.setText(Integer.toString(user.getCurrentScore()));
     }
 
     @Override
     public void update(String type) {
-      
+      // No need to do anything here
     }
 
     @Override
     public void update(int amount) {
-      
+      // No need to do anything here
     }   
 }

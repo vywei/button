@@ -1,13 +1,16 @@
 package logic;
 
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import armdb.QueryResult;
-import armdb.SQLQuery;
 import armdb.SQLQueryException;
 import armdb.SQLUpdateException;
 
 public class Shop {
   private static Database db;
+  private static final Logger LOGGER = Logger.getLogger(Shop.class.getName());
   
   public Shop() {
     db = Database.getDatabase();
@@ -29,7 +32,7 @@ public class Shop {
       parseItems(qr, allItems);
     }
     catch(SQLQueryException e){                   
-        System.out.println(e.getMessage());           
+    	LOGGER.log( Level.SEVERE, e.toString(), e );        
     }
     
     return allItems;
@@ -52,7 +55,7 @@ public class Shop {
       parseItems(qr, playerItems);
     }
     catch(SQLQueryException e){                   
-        System.out.println(e.getMessage());           
+    	LOGGER.log( Level.SEVERE, e.toString(), e );           
     }
     
     return playerItems;
@@ -103,7 +106,7 @@ public class Shop {
         	query.result("items_owned", cols, vals);
         }
         catch (SQLUpdateException ex) {
-        	System.out.println("Error purchasing item.");
+        	LOGGER.log( Level.SEVERE, ex.toString(), ex );   
         }
         
         u.setItems(getOwnedItems(u));

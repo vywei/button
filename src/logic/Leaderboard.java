@@ -11,9 +11,9 @@ public class Leaderboard implements Subject, Observer {
     private static Database db;
   
     private Leaderboard() {
-	observers = new ArrayList<Observer>();
-	users = new ArrayList<User>();
-	db = db.getDatabase();
+	observers = new ArrayList<>();
+	users = new ArrayList<>();
+		db = Database.getDatabase();
     }
   
     public static Leaderboard getLeaderboard() {
@@ -53,11 +53,13 @@ public class Leaderboard implements Subject, Observer {
     }
 
   @Override
-  public void update(String username) {  
+  public void update(String username) {
+	  // No need to implement this
   }
 
   @Override
   public void update(int amount) {
+	 // No need to implement this
   }
 
 }

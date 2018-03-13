@@ -1,10 +1,13 @@
 package logic;
 
+import java.util.logging.Logger;
+
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -14,10 +17,14 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 public class LoginView 
 {
     private final BorderPane view;
+    private static final Logger LOGGER = Logger.getLogger(LoginView.class.getName());
      
     public LoginView()
     {
@@ -100,7 +107,15 @@ public class LoginView
             	}
             	else  
             	{
-            		System.out.println("Invalid login.");
+            		LOGGER.info("Invalid login.");
+            		final Stage dialog = new Stage();
+                    dialog.initModality(Modality.APPLICATION_MODAL);
+                    dialog.initOwner(Main.window);
+                    VBox dialogVbox = new VBox(20);
+                    dialogVbox.getChildren().add(new Text("Invalid username and/or password."));
+                    Scene dialogScene = new Scene(dialogVbox, 300, 200);
+                    dialog.setScene(dialogScene);
+                    dialog.show();
             	}
               }
             } 
