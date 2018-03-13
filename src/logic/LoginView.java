@@ -32,8 +32,6 @@ public class LoginView
         view = new BorderPane();
         VBox loginBox = new VBox();
         double loginWidth = 200;
-        double height = Main.SCREEN_HEIGHT;
-        double width = Main.SCREEN_WIDTH;
 
         Image image = new Image(Main.class.getResourceAsStream("images/login.png"));
         ImageView iv1 = new ImageView();

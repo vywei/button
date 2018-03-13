@@ -1,18 +1,11 @@
 package logic;
 
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.SimpleBooleanProperty;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -71,7 +64,6 @@ public class SettingsView
         Button bugButton = new Button("Report a Bug");
         bugButton.setMaxWidth(Double.MAX_VALUE);  
         bugButton.setPadding(new Insets(10, 0, 10, 0));
-        //bugButton.setOnAction(e -> Main.window.setScene(Main.landing));
         bugButton.setOnAction(e -> 
         {
           Main.window.setScene(Main.bugReport);
@@ -93,12 +85,12 @@ public class SettingsView
         settingsBox.getChildren().addAll(vbButtons);
 
         BorderPane root = new BorderPane();
-        root.setRight(sidebar);
         root.setLeft(settingsBox);
+        root.setRight(sidebar);  
         root.getStylesheets().add(getClass().getResource(t).toExternalForm());
         root.getStyleClass().add("root");
 
-        homeGrid.getChildren().addAll(root);
+        homeGrid.getChildren().add(root);
        
         view = root;
         

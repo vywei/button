@@ -2,6 +2,8 @@ package logic;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javafx.scene.Node;
@@ -50,7 +52,7 @@ public class LandingView
         temp.register((Observer) sidebar);
         temp.register((Observer) button);
         
-        LOGGER.info("*" + temp.getObservers().size());
+        LOGGER.log(Level.INFO, "* {}", temp.getObservers().size());
        
         button.register((Observer)temp);
         unpressedImage = new Image(Main.class.getResourceAsStream(button.getCurrentSkin().getImage()));
@@ -65,18 +67,6 @@ public class LandingView
         imageBox.getChildren().add(iv1);
         imageBox.setPadding(new Insets(0,0,0,0));
         
-        /*iv1.setOnMousePressed(new EventHandler<MouseEvent>() {
-          @Override
-          public void handle(MouseEvent event) {
-            iv1.setImage(pressedImage);
-            button.increaseScore();
-            String soundFx = button.getCurrentSkin().getSound();
-            Main.class.getResource(soundFx);
-            Media hit = new Media(Main.class.getResource(soundFx).toString());
-            MediaPlayer mediaPlayer = new MediaPlayer(hit);
-            mediaPlayer.play();
-          }
-        });*/
         iv1.setOnMousePressed((MouseEvent event)-> {
               iv1.setImage(pressedImage);
               button.increaseScore();

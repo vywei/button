@@ -44,9 +44,16 @@ public abstract class Item {
        
       Item i = (Item) o;
        
-      if (i.id == this.id) {
-    	  return true;
-      }
-      return false;
+      return i.id == this.id;
+  }
+  
+  @Override
+  public int hashCode() {
+      int result = 17;
+      result = 31 * result + name.hashCode();
+      result = 31 * result + id;
+      result = 31 * result + price;
+      result = 31 * result + image.hashCode();
+      return result;
   }
 }

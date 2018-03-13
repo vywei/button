@@ -2,7 +2,6 @@ package logic;
 
 
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -20,12 +19,7 @@ public class ShareView {
   private static String t = "theme.css"; 
   private final BorderPane view;
   protected static Scene share;
-  private Image facebookImage;
-  private Image twitterImage;
-  private Image instagramImage;
-  private Image sharedImage;
-  private Image sharedImage2;
-  private Image sharedImage3;
+  private static final String completeImage = "/logic/images/6156-200.png";
   
   public ShareView()
   {
@@ -69,6 +63,13 @@ public class ShareView {
   
   private HBox getBody() 
   {
+	Image facebookImage;
+	Image twitterImage;
+	Image instagramImage;
+	Image sharedImage;
+	Image sharedImage2;
+	Image sharedImage3;
+	  
     facebookImage = new Image("/logic/images/facebook.png");
     ImageView facebook = new ImageView();
     facebook.setImage(facebookImage);
@@ -77,7 +78,7 @@ public class ShareView {
     facebook.setSmooth(true);
     facebook.setCache(true);  
     
-    sharedImage = new Image("/logic/images/6156-200.png");
+    sharedImage = new Image(completeImage);
     ImageView shared = new ImageView();
     shared.setImage(sharedImage);
     shared.setFitWidth(70);
@@ -85,7 +86,7 @@ public class ShareView {
     shared.setSmooth(true);
     shared.setCache(true);  
     
-    sharedImage2 = new Image("/logic/images/6156-200.png");
+    sharedImage2 = new Image(completeImage);
     ImageView shared2 = new ImageView();
     shared2.setImage(sharedImage2);
     shared2.setFitWidth(70);
@@ -94,11 +95,9 @@ public class ShareView {
     shared2.setCache(true);
     
     Button facebookB = new Button("",facebook);
-    facebookB.setOnAction(new EventHandler<ActionEvent>() {
-        @Override public void handle(ActionEvent e) {
+    facebookB.setOnAction((ActionEvent e)-> {
             //Button button = (Button) e.getSource();
             facebookB.setGraphic(shared2);
-        }
     });
     
     twitterImage = new Image("/logic/images/twitter.png");
@@ -109,20 +108,18 @@ public class ShareView {
     twitter.setSmooth(true);
     twitter.setCache(true);
     
-    sharedImage3 = new Image("/logic/images/6156-200.png");
+    sharedImage3 = new Image(completeImage);
     ImageView shared3 = new ImageView();
-    shared3.setImage(sharedImage2);
+    shared3.setImage(sharedImage3);
     shared3.setFitWidth(70);
     shared3.setPreserveRatio(true);
     shared3.setSmooth(true);
     shared3.setCache(true);
     
     Button twitterB = new Button("",twitter);
-    twitterB.setOnAction(new EventHandler<ActionEvent>() {
-        @Override public void handle(ActionEvent e) {
+    twitterB.setOnAction((ActionEvent e)-> {
             Button button = (Button) e.getSource();
             button.setGraphic(shared3);
-        }
     });
     
     instagramImage = new Image("/logic/images/instagram.png");
@@ -134,11 +131,9 @@ public class ShareView {
     instagram.setCache(true);
     
     Button instagramB = new Button("",instagram);
-    instagramB.setOnAction(new EventHandler<ActionEvent>() {
-        @Override public void handle(ActionEvent e) {
+    instagramB.setOnAction((ActionEvent e)->  {
             Button button = (Button) e.getSource();
             button.setGraphic(shared);
-        }
     });
     
     HBox imageBox = new HBox();
