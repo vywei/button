@@ -76,9 +76,9 @@ public class LandingView
               MediaPlayer mediaPlayer = new MediaPlayer(hit);
               mediaPlayer.play();
           });
-        iv1.setOnMouseReleased((MouseEvent event)-> {
-            iv1.setImage(unpressedImage);
-        });
+        iv1.setOnMouseReleased((MouseEvent event)-> 
+            iv1.setImage(unpressedImage)
+        );
         
         
         

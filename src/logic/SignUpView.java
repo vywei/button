@@ -1,7 +1,5 @@
 package logic;
 
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -24,18 +22,17 @@ public class SignUpView {
       double height = Main.screenSize.getHeight();
       double width = Main.screenSize.getWidth();
       
-      
       Image image = new Image(Main.class.getResourceAsStream("images/signup.png"));
-      ImageView iv1 = new ImageView();
-      iv1.setImage(image);
-      iv1.setFitWidth(450);
-      iv1.setPreserveRatio(true);
-      iv1.setSmooth(true);
-      iv1.setCache(true);
+      ImageView iv = new ImageView();
+      iv.setImage(image);
+      iv.setFitWidth(450);
+      iv.setPreserveRatio(true);
+      iv.setSmooth(true);
+      iv.setCache(true);
 
       HBox imageBox = new HBox();
-      imageBox.getChildren().add(iv1);
       imageBox.setPadding(new Insets(-300,0,0,-130));
+      imageBox.getChildren().add(iv);
       
       GridPane newUse = new GridPane();
       newUse.setPadding(new Insets(0, 0, 0, 0));

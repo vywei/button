@@ -19,7 +19,7 @@ public class ShareView {
   private static String t = "theme.css"; 
   private final BorderPane view;
   protected static Scene share;
-  private static final String completeImage = "/logic/images/6156-200.png";
+  private static final String COMPLETEIMAGE = "/logic/images/6156-200.png";
   
   public ShareView()
   {
@@ -78,7 +78,7 @@ public class ShareView {
     facebook.setSmooth(true);
     facebook.setCache(true);  
     
-    sharedImage = new Image(completeImage);
+    sharedImage = new Image(COMPLETEIMAGE);
     ImageView shared = new ImageView();
     shared.setImage(sharedImage);
     shared.setFitWidth(70);
@@ -86,7 +86,7 @@ public class ShareView {
     shared.setSmooth(true);
     shared.setCache(true);  
     
-    sharedImage2 = new Image(completeImage);
+    sharedImage2 = new Image(COMPLETEIMAGE);
     ImageView shared2 = new ImageView();
     shared2.setImage(sharedImage2);
     shared2.setFitWidth(70);
@@ -95,10 +95,9 @@ public class ShareView {
     shared2.setCache(true);
     
     Button facebookB = new Button("",facebook);
-    facebookB.setOnAction((ActionEvent e)-> {
-            //Button button = (Button) e.getSource();
-            facebookB.setGraphic(shared2);
-    });
+    facebookB.setOnAction((ActionEvent e)-> 
+            facebookB.setGraphic(shared2)
+    );
     
     twitterImage = new Image("/logic/images/twitter.png");
     ImageView twitter = new ImageView();
@@ -108,7 +107,7 @@ public class ShareView {
     twitter.setSmooth(true);
     twitter.setCache(true);
     
-    sharedImage3 = new Image(completeImage);
+    sharedImage3 = new Image(COMPLETEIMAGE);
     ImageView shared3 = new ImageView();
     shared3.setImage(sharedImage3);
     shared3.setFitWidth(70);

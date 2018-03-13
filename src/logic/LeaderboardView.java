@@ -16,8 +16,7 @@ public class LeaderboardView {
     private static String cssTheme = "theme.css";
     private final BorderPane bp;
     protected static Scene credits;
-    private static Text textCredits;
-    private static Leaderboard leader;
+    private Leaderboard leader;
 
 
     public LeaderboardView()
@@ -63,15 +62,16 @@ public class LeaderboardView {
 
     private HBox getBody()
     {
+    Text textBoard;
 	leader.update();  
 	String entirety = leader.listLeaderboard();
 
-	textCredits = new Text();
-	textCredits.setText(entirety);
-	textCredits.setCache(true);
+	textBoard = new Text();
+	textBoard.setText(entirety);
+	textBoard.setCache(true);
 
 	HBox textBox = new HBox();
-	textBox.getChildren().addAll(textCredits);
+	textBox.getChildren().addAll(textBoard);
 	textBox.setPadding(new Insets(130,0,0,0));
 	textBox.setMinWidth(450);
 	textBox.setMaxWidth(Double.MAX_VALUE);
