@@ -3,7 +3,7 @@ package logic;
 import java.util.ArrayList;
 import java.util.logging.Logger;
 
-public class Btn implements Subject, Observer {
+public class Btn extends javafx.scene.control.Button implements Subject, Observer {
     private Skin currentSkin;
     private Boolean isPressed;
     private User currentUser;
@@ -15,11 +15,14 @@ public class Btn implements Subject, Observer {
      * Button constructor, set current skin and weight of the button
      * @param currentSkin, weight
      */
-    public Btn(Skin currentSkin, int weight) {
-    	this.currentSkin = currentSkin;
-    	this.isPressed = false;
-    	this.buttonWeight = weight;
-    	observers = new ArrayList<>();
+    public Btn(Skin currentSkin, int weight, String label) {
+      super(label);
+      this.currentSkin = currentSkin;
+    	  this.isPressed = false;
+    	  this.buttonWeight = weight;
+    	  observers = new ArrayList<>();
+    	  User temp = Main.getUser();
+    	  this.register((Observer)temp);
     }
     /**
      * getter method for whether or not the button is pressed

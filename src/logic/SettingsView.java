@@ -46,28 +46,45 @@ public class SettingsView
         BorderPane border = new BorderPane();
         border.setPadding(new Insets(20, 0, 20, 20));
         
-        Button videoButton = new Button("Video");
+        Btn videoButton = new Btn(null, 1, "Video");
         videoButton.setMaxWidth(Double.MAX_VALUE);
         videoButton.setPadding(new Insets(10, 0, 10, 0));
-        videoButton.setOnAction(e -> Main.window.setScene(Main.videoSettings));
+        videoButton.setOnAction(e -> 
+        {
+          Main.window.setScene(Main.videoSettings);
+          videoButton.increaseScore();
+          }
+        );
         
-        Button audioButton = new Button("Audio");
+        Btn audioButton = new Btn(null, 1, "Audio");
         audioButton.setMaxWidth(Double.MAX_VALUE);
         audioButton.setPadding(new Insets(10, 0, 10, 0));
-        audioButton.setOnAction(e -> Main.window.setScene(Main.audioSettings));
+        audioButton.setOnAction(e -> 
+        {
+          Main.window.setScene(Main.audioSettings);
+          audioButton.increaseScore();
+        }
+        );
         
-        Button accountsButton = new Button("Link Accounts");
+        Btn accountsButton = new Btn(null, 1, "Link Accounts");
         accountsButton.setMaxWidth(Double.MAX_VALUE); 
         accountsButton.setPadding(new Insets(10, 0, 10, 0));
-        accountsButton.setOnAction(e -> Main.window.setScene(Main.accountSettings));
+        accountsButton.setOnAction(e ->
+        {
+          Main.window.setScene(Main.accountSettings);
+          accountsButton.increaseScore();
+        }
+        );
         
-        Button bugButton = new Button("Report a Bug");
+        Btn bugButton = new Btn(null, 1, "Report a Bug");
         bugButton.setMaxWidth(Double.MAX_VALUE);  
         bugButton.setPadding(new Insets(10, 0, 10, 0));
         bugButton.setOnAction(e -> 
         {
           Main.window.setScene(Main.bugReport);
-        });
+          bugButton.increaseScore();
+        }
+        );
         bugButton.setMaxWidth(Double.MAX_VALUE);
         
         Button creditsButton = new Button("Credits");

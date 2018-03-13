@@ -62,10 +62,15 @@ public class BugReportView {
         bugRep.setMinHeight(150);
         bugRep.setMaxWidth(Double.MAX_VALUE);
         
-        Button submitButton = new Button("Submit");
+        Btn submitButton = new Btn(null, 1, "Submit");
         submitButton.setMaxWidth(Double.MAX_VALUE);
         submitButton.setPadding(new Insets(10, 0, 10, 0));
-        submitButton.setOnAction(e -> Main.window.setScene(Main.bugReport));
+        submitButton.setOnAction(e ->
+        {
+          Main.window.setScene(Main.bugReport);
+          submitButton.increaseScore();
+        }
+        );
 
         VBox vbButtons = new VBox();
         vbButtons.setSpacing(40);

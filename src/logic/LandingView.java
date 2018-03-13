@@ -41,7 +41,7 @@ public class LandingView
         homeGrid.getStylesheets().add(getClass().getResource(t).toExternalForm());
         homeGrid.getStyleClass().add("root");
           
-        Btn button = new Btn(Main.getUser().getCurrentSkin(), 1);
+        Btn button = new Btn(Main.getUser().getCurrentSkin(), 1, null);
               
         double buttonWidth = 150;
         Button add = new Button("Button");
@@ -52,9 +52,8 @@ public class LandingView
         temp.register((Observer) sidebar);
         temp.register((Observer) button);
         
-        LOGGER.log(Level.INFO, "* {0}", temp.getObservers().size());
-       
-        button.register((Observer)temp);
+        System.out.println("*" + temp.getObservers().size());
+        
         unpressedImage = new Image(Main.class.getResourceAsStream(button.getCurrentSkin().getImage()));
         pressedImage = new Image(Main.class.getResourceAsStream(button.getCurrentSkin().getImagePressed()));
         ImageView iv1 = new ImageView();

@@ -33,41 +33,46 @@ public class Sidebar extends VBox implements Observer
         scoreBox.setPadding(new Insets(0,0,30,0));
         
         // Home Back Button
-        Button homeButton = new Button("Home");
+        Btn homeButton = new Btn(null, 1, "Home");
         homeButton.setOnAction(e -> 
         {
+            homeButton.increaseScore();
             Main.window.setScene(Main.landing);    
         });
         homeButton.setMaxWidth(Double.MAX_VALUE);
 
         // Add Store
-        Button storeButton = new Button("Store");
+        Btn storeButton = new Btn(null, 1, "Store");
         storeButton.setOnAction(e -> 
         {
+          storeButton.increaseScore();
           Main.window.setScene(Main.store);
         });
         storeButton.setMaxWidth(Double.MAX_VALUE);
         
         // Add Settings
-        Button settingsButton = new Button("Settings");
+        Btn settingsButton = new Btn(null, 1, "Settings");
         settingsButton.setOnAction(e -> 
         {
+          settingsButton.increaseScore();
           Main.window.setScene(Main.settings);
         });
         settingsButton.setMaxWidth(Double.MAX_VALUE);
         
         //Add Share
-        Button shareButton = new Button("Share");
+        Btn shareButton = new Btn(null, 1, "Share");
         shareButton.setOnAction(e -> 
         {
+          shareButton.increaseScore();
           Main.window.setScene(Main.share);
         });
         shareButton.setMaxWidth(Double.MAX_VALUE);
 
         // Add Leaderboard
-        Button leaderboardButton = new Button("Leaderboard");
+        Btn leaderboardButton = new Btn(null, 1, "Leaderboard");
         leaderboardButton.setOnAction(e -> 
         {
+          leaderboardButton.increaseScore();
           Main.window.setScene(Main.leaderboard);
         });
         leaderboardButton.setMaxWidth(Double.MAX_VALUE);
