@@ -78,10 +78,9 @@ public class Sidebar extends VBox implements Observer
         leaderboardButton.setMaxWidth(Double.MAX_VALUE);
         
         Button logoutButton = new Button("Logout");
-        logoutButton.setOnAction(e -> 
-        {
-          Main.window.setScene(Main.login);
-        });
+        logoutButton.setOnAction(e ->       
+          Main.window.setScene(Main.login)
+        );
         logoutButton.setMaxWidth(Double.MAX_VALUE);
         
         // Populating the nav bar

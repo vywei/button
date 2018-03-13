@@ -70,9 +70,9 @@ public class AccountSettingsView {
         Btn linkInstaButton = new Btn(null, 1, "Link Instagram");
         
         TextField bugRep = new TextField("");
+        bugRep.setMaxWidth(Double.MAX_VALUE); 
         bugRep.setPromptText("Bug Report");
         bugRep.setMinHeight(150);
-        bugRep.setMaxWidth(Double.MAX_VALUE);
         
         Btn submitButton = new Btn(null, 1, "Submit");
         submitButton.setMaxWidth(Double.MAX_VALUE);

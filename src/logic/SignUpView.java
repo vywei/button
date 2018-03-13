@@ -63,9 +63,8 @@ public class SignUpView {
       Button createSignUpButton = new Button("Create Account");
       createSignUpButton.setMaxWidth(Double.MAX_VALUE);
       createSignUpButton.setOnAction(e -> 
-      {
-          Main.window.setScene(Main.login);
-      });
+          Main.window.setScene(Main.login)
+      );
       
       Button cancelButton = new Button(Main.cancelString);
       cancelButton.setMaxWidth(Double.MAX_VALUE);

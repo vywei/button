@@ -3,7 +3,6 @@ package logic;
 import java.util.Iterator;
 import java.util.List;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -33,7 +32,7 @@ public class ShopView
     private final BorderPane view;
     protected static Scene store;
     boolean purchaseView = true;
-    private final int spHeight = 300;
+    private static final int SPHEIGHT = 300;
     private VBox body;
      
     public ShopView()
@@ -92,7 +91,7 @@ public class ShopView
        ScrollPane sp = new ScrollPane();
        sp.setFitToWidth(true);
        sp.setContent(getPurchase());
-       sp.setPrefHeight(spHeight);
+       sp.setPrefHeight(SPHEIGHT);
        sp.getStylesheets().add(getClass().getResource(t).toExternalForm());
        sp.getStyleClass().add("root");
        
@@ -103,7 +102,7 @@ public class ShopView
        ScrollPane sp = new ScrollPane();
        sp.setFitToWidth(true);
        sp.setContent(getCustomize());
-       sp.setPrefHeight(spHeight);
+       sp.setPrefHeight(SPHEIGHT);
        sp.getStylesheets().add(getClass().getResource(t).toExternalForm());
        sp.getStyleClass().add("root");
        
@@ -119,10 +118,8 @@ public class ShopView
      purchase.setMinWidth(200);
      customize.setMinWidth(200);
      
-     customize.setOnAction(new EventHandler<ActionEvent>() 
+     customize.setOnAction((ActionEvent event) ->
      {
-       public void handle(ActionEvent event) 
-       {
          customize.increaseScore();
          purchaseView = false;
          int size = body.getChildren().size();
@@ -131,19 +128,16 @@ public class ShopView
          ScrollPane sp = new ScrollPane();
          sp.setFitToWidth(true);
          sp.setContent(getCustomize());
-         sp.setPrefHeight(spHeight);
+         sp.setPrefHeight(SPHEIGHT);
          sp.getStylesheets().add(getClass().getResource(t).toExternalForm());
          sp.getStyleClass().add("root");
          
          body.getChildren().add(sp);
-       }
      }
      );
      
-     purchase.setOnAction(new EventHandler<ActionEvent>() 
+     purchase.setOnAction((ActionEvent event) ->
      {
-       public void handle(ActionEvent event) 
-       {
          purchase.increaseScore();
          purchaseView = true;
          int size = body.getChildren().size();
@@ -151,12 +145,11 @@ public class ShopView
          ScrollPane sp = new ScrollPane();
          sp.setFitToWidth(true);
          sp.setContent(getPurchase());
-         sp.setPrefHeight(spHeight);
+         sp.setPrefHeight(SPHEIGHT);
          sp.getStylesheets().add(getClass().getResource(t).toExternalForm());
          sp.getStyleClass().add("root");
          
          body.getChildren().add(sp);
-       }
      }
      );
      
@@ -170,30 +163,28 @@ public class ShopView
    
    private TilePane getPurchase() 
    {
-     //List<Item> items = dummyList(); 
      List<Item> items = Main.getShop().getShopItems(Main.getUser());
      
-     TilePane purchaseView = new TilePane();
-     purchaseView.setHgap(10);
-     purchaseView.setVgap(10);
+     TilePane purchaseViewTP = new TilePane();
+     purchaseViewTP.setHgap(10);
+     purchaseViewTP.setVgap(10);
      
      for (Iterator<Item> i = items.iterator(); i.hasNext();) 
      {
-       purchaseView.getChildren().add(genPurchaseFrame(i.next()));
+       purchaseViewTP.getChildren().add(genPurchaseFrame(i.next()));
      }
      
-     purchaseView.setTileAlignment(Pos.CENTER);
-     purchaseView.setAlignment(Pos.CENTER);
-     purchaseView.getStylesheets().add(getClass().getResource(t).toExternalForm());
-     purchaseView.getStyleClass().add("root");
-     purchaseView.setPrefHeight(spHeight);
-     return purchaseView;
+     purchaseViewTP.setTileAlignment(Pos.CENTER);
+     purchaseViewTP.setAlignment(Pos.CENTER);
+     purchaseViewTP.getStylesheets().add(getClass().getResource(t).toExternalForm());
+     purchaseViewTP.getStyleClass().add("root");
+     purchaseViewTP.setPrefHeight(SPHEIGHT);
+     return purchaseViewTP;
      
    }
    
    private TilePane getCustomize() 
    {
-     //List<Item> items = dummyOwnedList(); 
      List<Item> items = Main.getShop().getOwnedItems(Main.user);
      TilePane customizedView = new TilePane();
      customizedView.setHgap(10);
@@ -208,7 +199,7 @@ public class ShopView
      customizedView.setAlignment(Pos.CENTER);
      customizedView.getStylesheets().add(getClass().getResource(t).toExternalForm());
      customizedView.getStyleClass().add("root");
-     customizedView.setPrefHeight(spHeight);
+     customizedView.setPrefHeight(SPHEIGHT);
      return customizedView;
      
    }
@@ -218,7 +209,7 @@ public class ShopView
        ScrollPane sp = new ScrollPane();
        sp.setFitToWidth(true);
        sp.setContent(getPurchase());
-       sp.setPrefHeight(spHeight);
+       sp.setPrefHeight(SPHEIGHT);
        sp.getStylesheets().add(getClass().getResource(t).toExternalForm());
        sp.getStyleClass().add("root");
        
@@ -256,13 +247,11 @@ public class ShopView
      price.setTextFill(Color.WHITE);
      Btn buy = new Btn(null, 1, "Buy");
     
-     buy.setOnAction(new EventHandler<ActionEvent>() 
+     buy.setOnAction((ActionEvent event) ->
      {
-       public void handle(ActionEvent event) 
-       {
          buy.increaseScore();
          boolean result = Main.getShop().purchaseItem(item, Main.getUser());
-         if (result == true) 
+         if (result) 
          {
              refreshItems();
          }
@@ -277,7 +266,6 @@ public class ShopView
              dialog.setScene(dialogScene);
              dialog.show();
          }
-       }
       });
      
      Image image = new Image(Main.class.getResourceAsStream(item.getImage()));
@@ -327,16 +315,13 @@ public class ShopView
      BorderPane equipBox = new BorderPane();
      
      Btn equip = new Btn(null, 1, "Use");
-     equip.setOnAction(new EventHandler<ActionEvent>() 
+     equip.setOnAction((ActionEvent event) -> 
      {
-       public void handle(ActionEvent event) 
-       {
          equip.increaseScore();
           if (item.getType() == Item.SKIN)
           {
               Main.getUser().changeSkin((Skin)item);
           }
-       }
       });
      
      Image image = new Image(Main.class.getResourceAsStream(item.getImage()));

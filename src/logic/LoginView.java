@@ -91,9 +91,9 @@ public class LoginView
             		
             		Main.window.setScene(Main.landing);
             		
-            	    Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-            	     	    db.updateUserScore(result);
-            	      }
+            	    Runtime.getRuntime().addShutdownHook(new Thread(() -> 
+            	     	    db.updateUserScore(result)
+            	      
             	    )
             	  );
             	}

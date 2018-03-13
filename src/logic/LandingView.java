@@ -1,5 +1,8 @@
 package logic;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 
@@ -22,6 +25,7 @@ public class LandingView
     private final BorderPane view;
     private Image unpressedImage;
     private Image pressedImage;
+    private static final Logger LOGGER = Logger.getLogger(Database.class.getName());
     
     public LandingView()
     {
@@ -48,7 +52,7 @@ public class LandingView
         temp.register((Observer) sidebar);
         temp.register((Observer) button);
         
-        System.out.println("*" + temp.getObservers().size());
+        LOGGER.log(Level.INFO, "* {0}", temp.getObservers().size());
         
         unpressedImage = new Image(Main.class.getResourceAsStream(button.getCurrentSkin().getImage()));
         pressedImage = new Image(Main.class.getResourceAsStream(button.getCurrentSkin().getImagePressed()));

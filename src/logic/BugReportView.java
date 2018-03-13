@@ -62,12 +62,12 @@ public class BugReportView {
         bugRep.setMaxWidth(Double.MAX_VALUE);
         
         Btn submitButton = new Btn(null, 1, "Submit");
-        submitButton.setMaxWidth(Double.MAX_VALUE);
         submitButton.setPadding(new Insets(10, 0, 10, 0));
+        submitButton.setMaxWidth(Double.MAX_VALUE);
         submitButton.setOnAction(e ->
         {
-          Main.window.setScene(Main.bugReport);
           submitButton.increaseScore();
+          Main.window.setScene(Main.bugReport);
         }
         );
 
