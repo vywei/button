@@ -3,9 +3,6 @@ package logic;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -25,7 +22,6 @@ public class LandingView
     private final BorderPane view;
     private Image unpressedImage;
     private Image pressedImage;
-    private static final Logger LOGGER = Logger.getLogger(LandingView.class.getName());
     
     public LandingView()
     {
