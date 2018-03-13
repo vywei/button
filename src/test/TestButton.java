@@ -12,7 +12,7 @@ public class TestButton {
 		Skin s = new Skin(0, "Test Skin", 500, "", "", "");
 		Btn b = new Btn(s, 1, null);
 		b.setSkin(s);
-		assertEquals(s, s);
+		assertEquals(b.getCurrentSkin(), s);
 	}
 
 }
