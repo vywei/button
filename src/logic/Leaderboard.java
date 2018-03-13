@@ -62,4 +62,21 @@ public class Leaderboard implements Subject, Observer {
 	 // No need to implement this
   }
 
+  public String listLeaderboard() {
+      StringBuilder sb = new StringBuilder();
+      sb.append("RANK");
+      sb.append("\t\t\t");
+      sb.append("USERNAME");
+      sb.append("\t\t\t");
+      sb.append("SCORE");
+      sb.append("\n");
+      for (int i = 0; i < users.size(); i++) {
+         sb.append(i + 1);
+         sb.append("\t\t\t");
+         sb.append(users.get(i).toString());
+         sb.append("\n");
+      }
+      return sb.toString();
+  }
+
 }

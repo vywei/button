@@ -333,4 +333,12 @@ public class User implements Subject, Observer {
       System.out.println("amount: " + amount);
   }
 
+  public String toString() {
+      StringBuilder sb = new StringBuilder();
+      sb.append(username);
+      sb.append("\t\t\t");
+      sb.append(score);
+      return sb.toString();
+  }
+
 }
