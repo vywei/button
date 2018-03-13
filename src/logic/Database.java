@@ -32,6 +32,18 @@ public class Database {
     ch = loadDatabaseCredentials();
   }
   
+  // Constructor for testing without loading database credentials
+  public Database(boolean test) {
+	
+  }
+  
+  public static Database getTestDatabase() {
+	  if (db == null) {
+	      db = new Database(true);
+	  }
+	  return db;
+  }
+  
   public static Database getDatabase() {
   if (db == null) {
       db = new Database();

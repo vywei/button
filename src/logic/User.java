@@ -302,7 +302,7 @@ public class User implements Subject, Observer {
      * @param newPassword
      * @return newPassword if valid, null if invalid
    */
-    private String validatePassword(String newPassword) {
+    public String validatePassword(String newPassword) {
 	if (newPassword.length() > 8) {
 	    return newPassword;
 	}
