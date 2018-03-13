@@ -1,2 +1,3 @@
 /bin/
 **/dontPushThis.*
+**/.DS_Store
