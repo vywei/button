@@ -221,18 +221,18 @@ public class ShopView
    private VBox genPurchaseFrame(Item item) 
    {
      VBox frame = new VBox();
-     frame.setMaxWidth(200);
-     frame.setMinWidth(200);
      frame.setMaxHeight(225);
      frame.setMinHeight(225);
+     frame.setMaxWidth(200);
+     frame.setMinWidth(200);
      
      frame.setBorder(new Border(new BorderStroke(Color.BLACK, 
          BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
      
      Label name = new Label(item.getName());
-     name.setFont(Font.font(20));
      name.setTextFill(Color.WHITE);
      name.setPadding(new Insets(5,0,0,0));
+     name.setFont(Font.font(20));
      HBox title = new HBox();
      title.getChildren().add(name);
      title.setAlignment(Pos.CENTER);
@@ -330,11 +330,11 @@ public class ShopView
      content.setAlignment(Pos.CENTER);
      
      ImageView iv = new ImageView();
+     iv.setSmooth(true);
+     iv.setCache(true);
      iv.setImage(image);
      iv.setFitWidth(120);
      iv.setPreserveRatio(true);
-     iv.setSmooth(true);
-     iv.setCache(true);
      
      equipBox.setRight(equip);
      equipBox.setPadding(new Insets(5,5,0,5));
