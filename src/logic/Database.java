@@ -22,6 +22,7 @@ public class Database {
 	public static final String SCORE_COLUMN = "score";
 	public static final String USERNAME_COLUMN = "username";
 	public static final String CUR_SKIN_COLUMN = "current_skin";
+	public static final String WHERE_ID = "WHERE id = ";
 	private static final Logger LOGGER = Logger.getLogger(Database.class.getName());
 	
     ConnectHost ch;
@@ -133,7 +134,7 @@ public class Database {
       cols.add(SCORE_COLUMN);
       ArrayList<String> vals = new ArrayList<>();
       vals.add(Integer.toString(u.getScore()));
-      String constraint = "WHERE id = " + Integer.toString(u.getID());
+      String constraint = WHERE_ID + Integer.toString(u.getID());
       
       query.result(PLAYER_TABLE, cols, vals, constraint); 
     }
@@ -152,7 +153,7 @@ public class Database {
 	      cols.add(CUR_SKIN_COLUMN);
 	      ArrayList<String> vals = new ArrayList<>();
 	      vals.add(Integer.toString(u.getCurrentSkin().getID()));
-	      String constraint = "WHERE id = " + Integer.toString(u.getID());
+	      String constraint = WHERE_ID + Integer.toString(u.getID());
 	      
 	      query.result(PLAYER_TABLE, cols, vals, constraint); 
 	    }
@@ -284,7 +285,7 @@ public class Database {
       vals.add(Integer.toString(s.getEffectsVol()));
       vals.add(s.getMusicPath());
       
-      String constraint = "WHERE id = " + Integer.toString(u.getID());
+      String constraint = WHERE_ID + Integer.toString(u.getID());
       
       query.result("settings", cols, vals, constraint); 
     }

@@ -42,7 +42,6 @@ public class LandingView
         homeGrid.getStyleClass().add("root");
           
         Btn button = new Btn(Main.getUser().getCurrentSkin(), 1);
-        System.out.println(Main.getUser().getCurrentSkin().getName());
               
         double buttonWidth = 150;
         Button add = new Button("Button");
