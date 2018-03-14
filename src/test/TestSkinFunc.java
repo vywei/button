@@ -24,24 +24,5 @@ public class TestSkinFunc {
       String actual = skin.getImagePressed();
       assertEquals(expected, actual);
     }
-    
-    @Test public void TestItemIntegration()
-    {
-      Item item = new Skin(12345, "Waterfall", 500, "image.png", "imagePressed.png", "sound.mp3");
-      String expected = "Waterfall";
-      String actual = item.getName();
-      assertEquals(expected, actual);
-    }
-    
-    @Test public void TestIntegration()
-    {
-      User user = new User ("testuser", "test");
-      Settings settings = new Settings(user);
-      settings.setMusicVol(50);
-      settings.saveSettings(user);
-      int expected = 50;
-      int actual = settings.getMusicVol();
-      assertEquals(expected, actual, 0);
-    }
 }
 

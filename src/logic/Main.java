@@ -31,6 +31,7 @@ public class Main extends Application{
   protected static Scene linkAccounts;
   protected static Scene bugReport;
   protected static Scene credits;
+  protected static LandingView landingView;
 
   protected static String pString = "Password";
   protected static String uString = "Username";
@@ -115,7 +116,7 @@ public class Main extends Application{
       
   public static void landingScreen()
   {
-      LandingView landingView = new LandingView();
+      landingView  = new LandingView();
 
       GridPane landingGrid = gridSetup(landingView.getView());
       

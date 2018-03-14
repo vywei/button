@@ -3,8 +3,6 @@ package logic;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.ArrayList;
-import javafx.scene.Scene;
-import javafx.scene.layout.GridPane;
 import java.util.logging.Logger;
 
 //User observes: Button, Store
@@ -94,9 +92,7 @@ public class User implements Subject, Observer {
 	Skin tempSkin = validateSkin(newSkin);
 		if (tempSkin != null) {
 		    currentSkin = tempSkin;
-		    LandingView landingView = new LandingView();
-	        GridPane landingGrid = Main.gridSetup(landingView.getView());     
-	        Main.landing = new Scene(landingGrid, Main.SCREEN_WIDTH, Main.SCREEN_HEIGHT);
+		    Main.landingView.updateImages();
 		    Main.db.updateUserSkin(this);
 		    notifyObservers();
 		}

@@ -9,6 +9,7 @@ import javafx.scene.text.Text;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 
 public class CreditsView {
 
@@ -80,6 +81,7 @@ public class CreditsView {
     textCredits = new Text();
     textCredits.setText(entirety);
     textCredits.setCache(true);
+    textCredits.setFill(Color.WHITE);
     
     HBox textBox = new HBox();
     textBox.getChildren().addAll(textCredits);
