@@ -78,11 +78,11 @@ public class SignUpView {
 	    			  Main.window.setScene(Main.login);
 	    		  }
 	    		  else {
+	                  VBox dialogVbox = new VBox(20);
+	                  dialogVbox.setAlignment(Pos.CENTER);
 	    			  final Stage dialog = new Stage();
 	                  dialog.initModality(Modality.APPLICATION_MODAL);
 	                  dialog.initOwner(Main.window);
-	                  VBox dialogVbox = new VBox(20);
-	                  dialogVbox.setAlignment(Pos.CENTER);
 	                  Label msgLabel = new Label("Username not available.");
 	                  msgLabel.setFont(Font.font(Font.getDefault().getFamily(), FontWeight.BOLD,14));
 	                  dialogVbox.getChildren().add(msgLabel);
@@ -128,14 +128,6 @@ public class SignUpView {
       
       // Puts the box in the middle-ish part of the screen
       newUse.setPadding(new Insets(height/2-100, width/2, height/2, width/2-90));
-      
-      /*final BooleanProperty firstTime = new SimpleBooleanProperty(true); 
-      fNameInput.focusedProperty().addListener((observable,  oldValue,  newValue) -> {
-          if(newValue && firstTime.get()){
-              signUpBox.requestFocus(); 
-              firstTime.setValue(false); 
-          }
-      });*/
       
       view = new BorderPane();
       view.setCenter(newUse);

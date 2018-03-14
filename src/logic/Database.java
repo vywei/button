@@ -18,6 +18,7 @@ import armdb.SQLQueryException;
 import armdb.SQLUpdateException;
 
 public class Database {
+	private static final String SETTINGS_COL = "settings";
 	private static final String MUSIC_COL = "music";
 	private static final String EFFECTS_VOL_COL = "effects_vol";
 	private static final String MUSIC_VOL_VOL = "music_vol";
@@ -198,7 +199,7 @@ public class Database {
 	    	vals2.add("100");
 	    	vals2.add("");
 	    	
-	    	query2.result("settings", cols2, vals2);
+	    	query2.result(SETTINGS_COL, cols2, vals2);
 	    	
 	        SQLInsert query3 = new SQLInsert(ch);
 	        
@@ -332,7 +333,7 @@ public class Database {
 	QueryResult qr;
 	
 	try {
-	    qr = query.result("settings", new ArrayList<String>(), "WHERE user_id = " + u.getID());
+	    qr = query.result(SETTINGS_COL, new ArrayList<String>(), "WHERE user_id = " + u.getID());
 	
 	    while (qr.nextFlag()) {
 	    	int temp = Integer.parseInt(qr.getValue(VID_RES_WIDTH_COL));
@@ -387,7 +388,7 @@ public class Database {
       
       String constraint = "WHERE user_id = " + Integer.toString(u.getID());
       
-      query.result("settings", cols, vals, constraint); 
+      query.result(SETTINGS_COL, cols, vals, constraint); 
     }
     catch(SQLUpdateException e){                   
         LOGGER.log( Level.SEVERE, e.toString(), e );          
