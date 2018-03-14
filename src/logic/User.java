@@ -3,8 +3,6 @@ package logic;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.ArrayList;
-import javafx.scene.Scene;
-import javafx.scene.layout.GridPane;
 import java.util.logging.Logger;
 
 //User observes: Button, Store
