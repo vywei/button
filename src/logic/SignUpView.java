@@ -1,8 +1,12 @@
 package logic;
 
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -10,6 +14,10 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 public class SignUpView {
   private final BorderPane view;
@@ -51,18 +59,57 @@ public class SignUpView {
       userSignUpInput.setPromptText("Username");
       userSignUpInput.setMaxWidth(Double.MAX_VALUE);
 
-      TextField passSignUpInput = new TextField("");
+      TextField passSignUpInput = new PasswordField();
       passSignUpInput.setPromptText("Password");
       passSignUpInput.setMaxWidth(Double.MAX_VALUE);
 
-      TextField confirmPassInput = new TextField("");
+      TextField confirmPassInput = new PasswordField();
       confirmPassInput.setPromptText("Confirm Password");
       confirmPassInput.setMaxWidth(Double.MAX_VALUE);
 
       Button createSignUpButton = new Button("Create Account");
       createSignUpButton.setMaxWidth(Double.MAX_VALUE);
       createSignUpButton.setOnAction(e -> 
-          Main.window.setScene(Main.login)
+      {
+    	  if (!passSignUpInput.getText().equals("") && !userSignUpInput.getText().equals("")) {
+	    	  if (passSignUpInput.getText().equals((confirmPassInput.getText()))) {
+	    		  Database db = Database.getDatabase();
+	    		  if (db.createAccount(userSignUpInput.getText(), passSignUpInput.getText()) != null) {
+	    			  Main.window.setScene(Main.login);
+	    		  }
+	    		  else {
+	    			  final Stage dialog = new Stage();
+	                  dialog.initModality(Modality.APPLICATION_MODAL);
+	                  dialog.initOwner(Main.window);
+	                  VBox dialogVbox = new VBox(20);
+	                  dialogVbox.setAlignment(Pos.CENTER);
+	                  Label msgLabel = new Label("Username not available.");
+	                  msgLabel.setFont(Font.font(Font.getDefault().getFamily(), FontWeight.BOLD,14));
+	                  dialogVbox.getChildren().add(msgLabel);
+	                  Scene dialogScene = new Scene(dialogVbox, 250, 100);
+	                  String sheet = Main.getSheet();
+	            	  dialogScene.getStylesheets().add(sheet);
+	                  dialog.setScene(dialogScene);
+	                  dialog.show();
+	    		  }
+	    	  }
+	    	  else {
+	    		  final Stage dialog = new Stage();
+                  dialog.initModality(Modality.APPLICATION_MODAL);
+                  dialog.initOwner(Main.window);
+                  VBox dialogVbox = new VBox(20);
+                  dialogVbox.setAlignment(Pos.CENTER);
+                  Label msgLabel = new Label("Passwords do not match.");
+                  msgLabel.setFont(Font.font(Font.getDefault().getFamily(), FontWeight.BOLD,14));
+                  dialogVbox.getChildren().add(msgLabel);
+                  Scene dialogScene = new Scene(dialogVbox, 250, 100);
+                  String sheet = Main.getSheet();
+            	  dialogScene.getStylesheets().add(sheet);
+                  dialog.setScene(dialogScene);
+                  dialog.show();
+	    	  }
+    	  }
+      }
       );
       
       Button cancelButton = new Button(Main.cancelString);

@@ -6,6 +6,8 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -88,13 +90,17 @@ public class LeaderboardView {
     textLeft.setFill(Color.WHITE);
     textRight.setFill(Color.WHITE);
     textCenter.setFill(Color.WHITE);
+    
+    textLeft.setFont(Font.font(Font.getDefault().getFamily(), FontWeight.BOLD,13));
+    textCenter.setFont(Font.font(Font.getDefault().getFamily(), FontWeight.BOLD,13));
+    textRight.setFont(Font.font(Font.getDefault().getFamily(), FontWeight.BOLD,13));
 
 	BorderPane textBox = new BorderPane();
 	textBox.setRight(textRight);
 	textBox.setCenter(textCenter);
 	textBox.setLeft(textLeft);
-	textBox.setPadding(new Insets(130,20,0,20));
-	textBox.setMinWidth(450);
+	textBox.setPadding(new Insets(50,40,0,40));
+	textBox.setMinWidth(400);
 	textBox.setMaxWidth(Double.MAX_VALUE);
 
 	return textBox;
