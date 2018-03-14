@@ -14,6 +14,7 @@ public class Skin extends Item{
 	    this.sound = sound;
     }
         
+    @Override
     public int getPrice() {
       return price;
     }

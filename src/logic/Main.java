@@ -202,13 +202,4 @@ public class Main extends Application{
       
       credits = new Scene(creditsGrid, SCREEN_WIDTH, SCREEN_HEIGHT);
   }
-  
-  /*public static void linkAccountsScreen()
-  {
-      LinkAccountsView linkAccountsView = new LinkAccountsView();
-
-      GridPane linkAccountsGrid = gridSetup(linkAccountsView.getView());
-      
-      bugReport = new Scene(linkAccountsGrid, SCREEN_WIDTH, SCREEN_HEIGHT);
-  }*/
 }
