@@ -104,19 +104,19 @@ public class LoginView
             	}
             	else  
             	{
-            		LOGGER.info("Invalid login.");
             		final Stage dialog = new Stage();
                     dialog.initModality(Modality.APPLICATION_MODAL);
                     dialog.initOwner(Main.window);
                     VBox dialogVbox = new VBox(20);
                     dialogVbox.setAlignment(Pos.CENTER);
                     Label msgLabel = new Label("Invalid username and/or password.");
+            		LOGGER.info("Invalid login.");
                     msgLabel.setFont(Font.font(Font.getDefault().getFamily(), FontWeight.BOLD,14));
                     dialogVbox.getChildren().add(msgLabel);
                     Scene dialogScene = new Scene(dialogVbox, 250, 100);
+                    dialog.setScene(dialogScene);
                     String sheet = Main.getSheet();
               	    dialogScene.getStylesheets().add(sheet);
-                    dialog.setScene(dialogScene);
                     dialog.show();
             	}
             } 
