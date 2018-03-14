@@ -9,21 +9,25 @@ public class Settings {
 	public static final int DISABLED = 0;
 	public static final int ENABLED = 1;
 	
-	private static int videoResWidth;
-	private static int videoResHeight;
-	private static int textureQual;
-	private static int effectsQual;
-	private static int audioEnabled;
-	private static int musicVol;
-	private static int effectsVol;
-	private static String musicPath;
+	private int videoResWidth;
+	private int videoResHeight;
+	private int textureQual;
+	private int effectsQual;
+	private int audioEnabled;
+	private int musicVol;
+	private int effectsVol;
+	private String musicPath;
 	
 	private Database db;
+	
+	public Settings() {
+	  
+	}
 	
 	public Settings(User u) {
 	    db = Database.getDatabase();
 	    
-	    db.getSettings(u);
+	    db.getSettings(u, this);
 	}
 	
 	public void saveSettings(User u) {
@@ -35,8 +39,8 @@ public class Settings {
 	}
 
 
-	public static void setVideoResWidth(int videoResWidth) {
-		Settings.videoResWidth = videoResWidth;
+	public void setVideoResWidth(int videoResWidth) {
+		this.videoResWidth = videoResWidth;
 	}
 	
 	public int getVideoResHeight() {
@@ -44,17 +48,17 @@ public class Settings {
 	}
 
 
-	public static void setVideoResHeight(int videoResHeight) {
-		Settings.videoResHeight = videoResHeight;
+	public void setVideoResHeight(int videoResHeight) {
+	  this.videoResHeight = videoResHeight;
 	}
 
 	public int getTextureQual() {
 		return textureQual;
 	}
 
-	public static void setTextureQual(int textureQual) {
+	public void setTextureQual(int textureQual) {
 		if (textureQual == LOW || textureQual == MED || textureQual == HIGH) {
-			Settings.textureQual = textureQual;
+		  this.textureQual = textureQual;
 		}
 	}
 
@@ -62,9 +66,9 @@ public class Settings {
 		return effectsQual;
 	}
 
-	public static void setEffectsQual(int effectsQual) {
+	public void setEffectsQual(int effectsQual) {
 		if (effectsQual == LOW || effectsQual == MED || effectsQual == HIGH) {
-			Settings.effectsQual = effectsQual;
+		  this.effectsQual = effectsQual;
 		}
 	}
 
@@ -72,9 +76,9 @@ public class Settings {
 		return audioEnabled;
 	}
 
-	public static void setAudioEnabled(int audioEnabled) {
+	public void setAudioEnabled(int audioEnabled) {
 		if (audioEnabled == ENABLED || audioEnabled == DISABLED) {
-			Settings.audioEnabled = audioEnabled;
+		  this.audioEnabled = audioEnabled;
 		}
 	}
 
@@ -82,9 +86,9 @@ public class Settings {
 		return musicVol;
 	}
 
-	public static void setMusicVol(int musicVol) {
+	public void setMusicVol(int musicVol) {
 		if (musicVol >= 0 && musicVol <= 100) {
-			Settings.musicVol = musicVol;
+		  this.musicVol = musicVol;
 		}
 	}
 
@@ -92,9 +96,9 @@ public class Settings {
 		return effectsVol;
 	}
 
-	public static void setEffectsVol(int effectsVol) {
+	public void setEffectsVol(int effectsVol) {
 		if (effectsVol >= 0 && effectsVol <= 100) {
-			Settings.effectsVol = effectsVol;
+		  this.effectsVol = effectsVol;
 		}
 	}
 
@@ -102,8 +106,8 @@ public class Settings {
 		return musicPath;
 	}
 
-	public static void setMusicPath(String musicPath) {
-		Settings.musicPath = musicPath;
+	public void setMusicPath(String musicPath) {
+	  this.musicPath = musicPath;
 	}
 	  
 }

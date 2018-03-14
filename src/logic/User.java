@@ -18,6 +18,7 @@ public class User implements Subject, Observer {
     private List<Item> items;
     private Skin currentSkin;
     private static final Logger LOGGER = Logger.getLogger(Database.class.getName());
+    private Settings settings;
 
     public User() {
 	observers = new ArrayList<>();
@@ -47,6 +48,7 @@ public class User implements Subject, Observer {
         observers = new ArrayList<>();
         items = new ArrayList<>();
         currentSkin = skin;
+        settings = new Settings(this);
       }
 
     public User(String newUsername, int newId, String newPassword, int newScore) {
@@ -56,6 +58,14 @@ public class User implements Subject, Observer {
 	setScore(newScore);
 	observers = new ArrayList<>();
 	items = new ArrayList<>();
+    }
+    
+    public Settings getSettings() {
+      return settings;
+    }
+    
+    public void setSettings(Settings s) {
+      settings = s;
     }
   
     /**

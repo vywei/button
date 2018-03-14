@@ -31,6 +31,7 @@ public class VideoSettingsView
         header.getStyleClass().add("a-header"); 
 
         User temp = Main.getUser();
+        Settings currentSettings = temp.getSettings();
         
         Sidebar sidebar = new Sidebar(temp);
         temp.register((Observer) sidebar);
@@ -56,10 +57,10 @@ public class VideoSettingsView
         Label resLabel = new Label("Resolution:");
         ObservableList<String> resOptions = 
         	    FXCollections.observableArrayList(
-    	    		"1024 x 768",
-    	    		"1920 x 1080"
+    	    		currentSettings.getVideoResWidth() + " x " + currentSettings.getVideoResHeight()
         	    );
         final ComboBox<String> resCB = new ComboBox<>(resOptions);
+        resCB.setValue(currentSettings.getVideoResWidth() + " x " + currentSettings.getVideoResHeight());
         	
         resolutionBox.getChildren().addAll(resLabel, resCB);
         
@@ -75,13 +76,22 @@ public class VideoSettingsView
 
         RadioButton texRb1 = new RadioButton("High");
         texRb1.setToggleGroup(texGroup);
-        texRb1.setSelected(true);
 
         RadioButton texRb2 = new RadioButton("Medium");
         texRb2.setToggleGroup(texGroup);
          
         RadioButton texRb3 = new RadioButton("Low");
         texRb3.setToggleGroup(texGroup);
+        
+        if (currentSettings.getTextureQual() == Settings.HIGH) {
+          texRb1.setSelected(true);
+        }
+        else if (currentSettings.getTextureQual() == Settings.MED) {
+          texRb2.setSelected(true);
+        }
+        else if (currentSettings.getTextureQual() == Settings.LOW) {
+          texRb3.setSelected(true);
+        }
         
         VBox texGroupContain = new VBox(texRb1, texRb2, texRb3);
         	
@@ -107,6 +117,16 @@ public class VideoSettingsView
         RadioButton fxRb3 = new RadioButton("Low");
         fxRb3.setToggleGroup(fxGroup);
         
+        if (currentSettings.getEffectsQual() == Settings.HIGH) {
+          fxRb1.setSelected(true);
+        }
+        else if (currentSettings.getEffectsQual() == Settings.MED) {
+          fxRb2.setSelected(true);
+        }
+        else if (currentSettings.getEffectsQual() == Settings.LOW) {
+          fxRb3.setSelected(true);
+        }
+        
         VBox effectsGroupContain = new VBox(fxRb1, fxRb2, fxRb3);
         	
         effectsBox.getChildren().addAll(effectsLabel, effectsGroupContain);
@@ -122,6 +142,29 @@ public class VideoSettingsView
         saveButton.setPadding(new Insets(5, 10, 5, 10));
         saveButton.setOnAction(e -> 
         {
+          if (texGroup.getSelectedToggle().equals(texRb1)) {
+            currentSettings.setTextureQual(Settings.HIGH);
+          }
+          else if (texGroup.getSelectedToggle().equals(texRb2)) {
+            currentSettings.setTextureQual(Settings.MED);
+          }
+          else {
+            currentSettings.setTextureQual(Settings.LOW);
+          }
+          if (fxGroup.getSelectedToggle().equals(fxRb1)) {
+            currentSettings.setEffectsQual(Settings.HIGH);
+          }
+          else if (fxGroup.getSelectedToggle().equals(fxRb2)) {
+            currentSettings.setEffectsQual(Settings.MED);
+          }
+          else {
+            currentSettings.setEffectsQual(Settings.LOW);
+          }
+          int width = Integer.parseInt(resCB.getValue().split(" x ")[0]);
+          int height = Integer.parseInt(resCB.getValue().split(" x ")[1]);
+          currentSettings.setVideoResWidth(width);
+          currentSettings.setVideoResHeight(height);
+          Main.db.saveSettings(temp, currentSettings);
           saveButton.increaseScore();
           Main.window.setScene(Main.settings);
         }

@@ -240,7 +240,7 @@ public class Database {
 	return players;
     }
   
-  public void getSettings(User u) {
+  public void getSettings(User u, Settings userSettings) {
 	
 	SQLSelect query = new SQLSelect(ch);
 	QueryResult qr;
@@ -250,21 +250,21 @@ public class Database {
 	
 	    while (qr.nextFlag()) {
 	    	int temp = Integer.parseInt(qr.getValue("vid_res_width"));
-	        Settings.setVideoResWidth(temp);
+	    	userSettings.setVideoResWidth(temp);
 	        temp = Integer.parseInt(qr.getValue("vid_res_height"));
-	        Settings.setVideoResHeight(temp);
+	        userSettings.setVideoResHeight(temp);
 	        temp = Integer.parseInt(qr.getValue("vid_textures"));
-	        Settings.setTextureQual(temp);
+	        userSettings.setTextureQual(temp);
 	        temp = Integer.parseInt(qr.getValue("vid_effects"));
-	        Settings.setEffectsQual(temp);
+	        userSettings.setEffectsQual(temp);
 	        temp = Integer.parseInt(qr.getValue("audio"));
-	        Settings.setAudioEnabled(temp);
+	        userSettings.setAudioEnabled(temp);
 	        temp = Integer.parseInt(qr.getValue("music_vol"));
-	        Settings.setMusicVol(temp);
+	        userSettings.setMusicVol(temp);
 	        temp = Integer.parseInt(qr.getValue("effects_vol"));
-	        Settings.setEffectsVol(temp);
+	        userSettings.setEffectsVol(temp);
 	        String stemp = qr.getValue("music");
-	        Settings.setMusicPath(stemp);
+	        userSettings.setMusicPath(stemp);
 	    }
 	}
 	catch(SQLQueryException e){
@@ -297,7 +297,7 @@ public class Database {
       vals.add(Integer.toString(s.getEffectsVol()));
       vals.add(s.getMusicPath());
       
-      String constraint = WHERE_ID + Integer.toString(u.getID());
+      String constraint = "WHERE user_id = " + Integer.toString(u.getID());
       
       query.result("settings", cols, vals, constraint); 
     }

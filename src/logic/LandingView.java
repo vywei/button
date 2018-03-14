@@ -69,11 +69,14 @@ public class LandingView
         iv1.setOnMousePressed((MouseEvent event)-> {
               iv1.setImage(pressedImage);
               button.increaseScore();
-              String soundFx = button.getCurrentSkin().getSound();
-              Main.class.getResource(soundFx);
-              Media hit = new Media(Main.class.getResource(soundFx).toString());
-              MediaPlayer mediaPlayer = new MediaPlayer(hit);
-              mediaPlayer.play();
+              if (Main.getUser().getSettings().getAudioEnabled() == 1) {
+                String soundFx = button.getCurrentSkin().getSound();
+                Main.class.getResource(soundFx);
+                Media hit = new Media(Main.class.getResource(soundFx).toString());
+                MediaPlayer mediaPlayer = new MediaPlayer(hit);
+                mediaPlayer.setVolume(Main.getUser().getSettings().getEffectsVol() / 100.0);
+                mediaPlayer.play();
+              }
           });
         iv1.setOnMouseReleased((MouseEvent event)-> 
             iv1.setImage(unpressedImage)

@@ -21,6 +21,7 @@ public class AudioSettingsView
     public AudioSettingsView()
     {
         User currentTempUser = Main.getUser();
+        Settings currentSettings = currentTempUser.getSettings();
     	Label currentHeaderLabel = new Label("Audio Settings");
         currentHeaderLabel.setMaxWidth(Double.MAX_VALUE);
         currentHeaderLabel.setAlignment(Pos.CENTER);
@@ -58,10 +59,16 @@ public class AudioSettingsView
 
         RadioButton audRb1 = new RadioButton("Enabled");
         audRb1.setToggleGroup(audGroup);
-        audRb1.setSelected(true);
 
         RadioButton audRb2 = new RadioButton("Disabled");
         audRb2.setToggleGroup(audGroup);
+        
+        if (currentSettings.getAudioEnabled() == 1) {
+          audRb1.setSelected(true);
+        }
+        else {
+          audRb2.setSelected(true);
+        }
         
         VBox audGroupContain = new VBox(audRb1, audRb2);
         	
@@ -72,7 +79,9 @@ public class AudioSettingsView
         resBox.setMinWidth(350);
         resBox.setAlignment(Pos.CENTER);
         resBox.setSpacing(40);
-        Slider volumeSlider = new Slider(0,1,.5);
+        Slider volumeSlider = new Slider(0,100,1);
+        
+        volumeSlider.setValue(currentSettings.getEffectsVol());
 
         Label volumeLabel = new Label("Volume:");
         resBox.getChildren().addAll(volumeLabel, volumeSlider);
@@ -97,7 +106,15 @@ public class AudioSettingsView
         saveButton1.setPadding(new Insets(5, 10, 5, 10));
         saveButton1.setOnAction(e -> 
         {
-        Main.window.setScene(Main.settings);
+          if (audGroup.getSelectedToggle().equals(audRb1)) {
+            currentSettings.setAudioEnabled(1);
+          }
+          else {
+            currentSettings.setAudioEnabled(0);
+          }
+          currentSettings.setEffectsVol((int)volumeSlider.getValue());
+          Main.db.saveSettings(Main.getUser(), currentSettings);
+          Main.window.setScene(Main.settings);
           saveButton1.increaseScore();
         }
         );
