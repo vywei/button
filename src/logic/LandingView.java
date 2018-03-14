@@ -25,6 +25,7 @@ public class LandingView
     private final BorderPane view;
     private Image unpressedImage;
     private Image pressedImage;
+    ImageView iv1 = new ImageView();
     private static final Logger LOGGER = Logger.getLogger(Database.class.getName());
     
     public LandingView()
@@ -56,7 +57,6 @@ public class LandingView
         
         unpressedImage = new Image(Main.class.getResourceAsStream(button.getCurrentSkin().getImage()));
         pressedImage = new Image(Main.class.getResourceAsStream(button.getCurrentSkin().getImagePressed()));
-        ImageView iv1 = new ImageView();
         iv1.setImage(unpressedImage);
         iv1.setFitWidth(450);
         iv1.setPreserveRatio(true);
@@ -97,6 +97,7 @@ public class LandingView
     	unpressedImage = new Image(Main.class.getResourceAsStream(unpressedPath));
     	String pressedPath = Main.getUser().getCurrentSkin().getImagePressed();
     	pressedImage = new Image(Main.class.getResourceAsStream(pressedPath));
+    	iv1.setImage(unpressedImage);
     }
     
    public void prepareView() {
@@ -109,5 +110,6 @@ public class LandingView
        view.getStyleClass().add("root");
        return view;
    }
+   
 
 }

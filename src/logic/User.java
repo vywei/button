@@ -84,9 +84,7 @@ public class User implements Subject, Observer {
 	Skin tempSkin = validateSkin(newSkin);
 		if (tempSkin != null) {
 		    currentSkin = tempSkin;
-		    LandingView landingView = new LandingView();
-	        GridPane landingGrid = Main.gridSetup(landingView.getView());     
-	        Main.landing = new Scene(landingGrid, Main.SCREEN_WIDTH, Main.SCREEN_HEIGHT);
+		    Main.landingView.updateImages();
 		    Main.db.updateUserSkin(this);
 		    notifyObservers();
 		}
