@@ -1,5 +1,6 @@
 package logic;
 
+import java.util.List;
 import java.util.ArrayList;
 
 //Leaderboard observes: Database
@@ -22,6 +23,10 @@ public class Leaderboard implements Subject, Observer {
 	    leaderboard = new Leaderboard();
 	}
 	return leaderboard;
+    }
+
+    public List<User> getUsers() {
+	return users;
     }
   
   @Override
