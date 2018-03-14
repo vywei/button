@@ -17,15 +17,18 @@ public class TestLeaderboardUserIntegration {
 	db = db.getDatabase();
 	User result = db.loginUser("testUser", "password");
 
-	ArrayList<User> user = new ArrayList<>();
+	ArrayList<User> users = new ArrayList<>();
 	leader = leader.getLeaderboard();
 	leader.update();
 	boolean res;
-	if (leader.getUsers().size() > 0) {
+	users = (ArrayList<User>) leader.getUsers();
+	if (users.size() > 0) {
 	    res = true;
 	} else {
 	    res = false;
 	}
-	assertEquals(true, res);    
+    
+	assertEquals(true, res);
+    
     }
 }
