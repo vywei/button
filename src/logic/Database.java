@@ -77,6 +77,7 @@ public class Database {
     }
     catch (FileNotFoundException fnfe) {
       LOGGER.log( Level.SEVERE, fnfe.toString(), fnfe );
+      return null;
     }
     catch (IOException ioe) {
       LOGGER.log( Level.SEVERE, ioe.toString(), ioe );
