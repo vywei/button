@@ -13,6 +13,10 @@ public class Skin extends Item{
 	    this.imagePressed = imagePressed;
 	    this.sound = sound;
     }
+        
+    public int getPrice() {
+      return price;
+    }
     
     public String getSound() {
       return sound;
