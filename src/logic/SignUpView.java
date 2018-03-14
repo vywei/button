@@ -16,11 +16,10 @@ public class SignUpView {
 
   public SignUpView()
   {
-      // create new user instance and set up AM 
       VBox signUpBox = new VBox();
       double boxWidth = 200;
-      double height = Main.screenSize.getHeight();
-      double width = Main.screenSize.getWidth();
+      double height = Main.SCREEN_HEIGHT;
+      double width = Main.SCREEN_WIDTH;
       
       Image image = new Image(Main.class.getResourceAsStream("images/signup.png"));
       ImageView iv = new ImageView();
@@ -31,7 +30,7 @@ public class SignUpView {
       iv.setCache(true);
 
       HBox imageBox = new HBox();
-      imageBox.setPadding(new Insets(-300,0,0,-130));
+      imageBox.setPadding(new Insets(-225,0,0,-130));
       imageBox.getChildren().add(iv);
       
       GridPane newUse = new GridPane();
@@ -72,7 +71,7 @@ public class SignUpView {
 
       signUpBox.setSpacing(10);
       
-      // Sets the width of the login box.
+      // Sets the width of the signup box.
       signUpBox.setMaxWidth(boxWidth);
       
       // Adds text fields and buttons to the vbox
@@ -80,8 +79,8 @@ public class SignUpView {
       signUpBox.getChildren().addAll(confirmPassInput, createSignUpButton, cancelButton);
       newUse.getChildren().addAll(imageBox, signUpBox);
       
-      // Puts the login box in the middle-ish part of the screen
-      newUse.setPadding(new Insets(height/2-100, width/2-100, height/2, width/2-75));
+      // Puts the box in the middle-ish part of the screen
+      newUse.setPadding(new Insets(height/2-100, width/2, height/2, width/2-90));
       
       /*final BooleanProperty firstTime = new SimpleBooleanProperty(true); 
       fNameInput.focusedProperty().addListener((observable,  oldValue,  newValue) -> {
@@ -93,6 +92,7 @@ public class SignUpView {
       
       view = new BorderPane();
       view.setCenter(newUse);
+      
   }
   public Node getView()
   {
