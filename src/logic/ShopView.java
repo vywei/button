@@ -22,7 +22,7 @@ import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import javafx.scene.text.Text;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -257,12 +257,17 @@ public class ShopView
          }
          else
          {
-             final Stage dialog = new Stage();
+        	 final Stage dialog = new Stage();
              dialog.initModality(Modality.APPLICATION_MODAL);
              dialog.initOwner(Main.window);
              VBox dialogVbox = new VBox(20);
-             dialogVbox.getChildren().add(new Text("Not enough points to purchase this item!"));
-             Scene dialogScene = new Scene(dialogVbox, 300, 200);
+             dialogVbox.setAlignment(Pos.CENTER);
+             Label msgLabel = new Label("Not enough points to purchase this item!");
+             msgLabel.setFont(Font.font(Font.getDefault().getFamily(), FontWeight.BOLD,14));
+             Scene dialogScene = new Scene(dialogVbox, 250, 100);
+             dialogVbox.getChildren().add(msgLabel);
+             String sheet = Main.getSheet();
+       	     dialogScene.getStylesheets().add(sheet);
              dialog.setScene(dialogScene);
              dialog.show();
          }

@@ -18,6 +18,15 @@ import armdb.SQLQueryException;
 import armdb.SQLUpdateException;
 
 public class Database {
+	private static final String SETTINGS_COL = "settings";
+	private static final String MUSIC_COL = "music";
+	private static final String EFFECTS_VOL_COL = "effects_vol";
+	private static final String MUSIC_VOL_VOL = "music_vol";
+	private static final String AUDIO_COL = "audio";
+	private static final String VID_EFFECTS_COL = "vid_effects";
+	private static final String VID_TEXTURES_COL = "vid_textures";
+	private static final String VID_RES_HEIGHT_COL = "vid_res_height";
+	private static final String VID_RES_WIDTH_COL = "vid_res_width";
 	public static final String PLAYER_TABLE = "player";
 	public static final String SCORE_COLUMN = "score";
 	public static final String USERNAME_COLUMN = "username";
@@ -136,6 +145,84 @@ public class Database {
     }
   }
   
+  public User createAccount(String username, String password) {
+	    User resultUser = null;
+	    
+	    String passHash = encryptPassword(password);
+	    
+	    // Create query and result
+	    SQLInsert query = new SQLInsert(ch);
+
+	    // Execute the query
+	    try {
+	    	ArrayList<String> cols = new ArrayList<>();
+	    	cols.add(USERNAME_COLUMN);
+	    	cols.add(SCORE_COLUMN);
+	    	cols.add(CUR_SKIN_COLUMN );
+	    	cols.add("password");
+	    	
+	    	ArrayList<String> vals = new ArrayList<>();
+	    	vals.add(username);
+	    	vals.add("0");
+	    	vals.add("2");
+	    	vals.add(passHash.toLowerCase());
+	    	
+	        int res = query.result(PLAYER_TABLE, cols, vals);
+	        
+	        if (res == 0) {
+	        	return null;
+	        }
+	        
+	        resultUser = loginUser(username, password);
+	        
+	        SQLInsert query2 = new SQLInsert(ch);
+	        
+	        ArrayList<String> cols2 = new ArrayList<>();
+	        cols2.add("user_id");
+	        cols2.add(VID_RES_WIDTH_COL);
+	        cols2.add(VID_RES_HEIGHT_COL);
+	        cols2.add(VID_TEXTURES_COL);
+	        cols2.add(VID_EFFECTS_COL);
+	        cols2.add(AUDIO_COL);
+	        cols2.add(MUSIC_VOL_VOL);
+	        cols2.add(EFFECTS_VOL_COL);
+	        cols2.add(MUSIC_COL);
+	    	
+	    	ArrayList<String> vals2 = new ArrayList<>();
+	    	vals2.add(Integer.toString(resultUser.getID()));
+	    	vals2.add("1920");
+	    	vals2.add("1080");
+	    	vals2.add("3");
+	    	vals2.add("3");
+	    	vals2.add("1");
+	    	vals2.add("100");
+	    	vals2.add("100");
+	    	vals2.add("");
+	    	
+	    	query2.result(SETTINGS_COL, cols2, vals2);
+	    	
+	        SQLInsert query3 = new SQLInsert(ch);
+	        
+	        ArrayList<String> cols3 = new ArrayList<>();
+	        cols3.add("player_id");
+	        cols3.add("item_id");
+	    	
+	    	ArrayList<String> vals3 = new ArrayList<>();
+	    	vals3.add(Integer.toString(resultUser.getID()));
+	    	vals3.add("2");
+
+	    	query3.result("items_owned", cols3, vals3);
+
+	    }
+	    catch(SQLUpdateException e){
+	    	if (!e.toString().contains("for key 'username'")) {
+	    		LOGGER.log( Level.SEVERE, e.toString(), e );
+	    	}
+	    }
+	    
+	    return resultUser;
+	  }
+  
   public void updateUserScore(User u) {
     // Create query and result
     SQLUpdateExt query = new SQLUpdateExt(ch);
@@ -246,24 +333,26 @@ public class Database {
 	QueryResult qr;
 	
 	try {
-	    qr = query.result("settings", new ArrayList<String>(), "WHERE user_id = " + u.getID());
+	    qr = query.result(SETTINGS_COL, new ArrayList<String>(), "WHERE user_id = " + u.getID());
 	
 	    while (qr.nextFlag()) {
-	    	int temp = Integer.parseInt(qr.getValue("vid_res_width"));
+	    	int temp = Integer.parseInt(qr.getValue(VID_RES_WIDTH_COL));
 	    	userSettings.setVideoResWidth(temp);
-	        temp = Integer.parseInt(qr.getValue("vid_res_height"));
+	        temp = Integer.parseInt(qr.getValue(VID_RES_HEIGHT_COL));
 	        userSettings.setVideoResHeight(temp);
-	        temp = Integer.parseInt(qr.getValue("vid_textures"));
+	        temp = Integer.parseInt(qr.getValue(VID_TEXTURES_COL));
 	        userSettings.setTextureQual(temp);
-	        temp = Integer.parseInt(qr.getValue("vid_effects"));
+	        temp = Integer.parseInt(qr.getValue(VID_EFFECTS_COL));
 	        userSettings.setEffectsQual(temp);
-	        temp = Integer.parseInt(qr.getValue("audio"));
+	        temp = Integer.parseInt(qr.getValue(AUDIO_COL));
 	        userSettings.setAudioEnabled(temp);
-	        temp = Integer.parseInt(qr.getValue("music_vol"));
+	        temp = Integer.parseInt(qr.getValue(MUSIC_VOL_VOL));
 	        userSettings.setMusicVol(temp);
-	        temp = Integer.parseInt(qr.getValue("effects_vol"));
+	        String tempFxVol = qr.getValue(EFFECTS_VOL_COL);
+	        tempFxVol = tempFxVol.replace("/", "");
+	        temp = Integer.parseInt(tempFxVol);
 	        userSettings.setEffectsVol(temp);
-	        String stemp = qr.getValue("music");
+	        String stemp = qr.getValue(MUSIC_COL);
 	        userSettings.setMusicPath(stemp);
 	    }
 	}
@@ -278,14 +367,14 @@ public class Database {
     
     try {
       ArrayList<String> cols = new ArrayList<>();
-      cols.add("vid_res_width");
-      cols.add("vid_res_height");
-      cols.add("vid_textures");
-      cols.add("vid_effects");
-      cols.add("audio");
-      cols.add("music_vol");
-      cols.add("effects_vol");
-      cols.add("music");
+      cols.add(VID_RES_WIDTH_COL);
+      cols.add(VID_RES_HEIGHT_COL);
+      cols.add(VID_TEXTURES_COL);
+      cols.add(VID_EFFECTS_COL);
+      cols.add(AUDIO_COL);
+      cols.add(MUSIC_VOL_VOL);
+      cols.add(EFFECTS_VOL_COL);
+      cols.add(MUSIC_COL);
       
       ArrayList<String> vals = new ArrayList<>();
       vals.add(Integer.toString(s.getVideoResWidth()));
@@ -299,7 +388,7 @@ public class Database {
       
       String constraint = "WHERE user_id = " + Integer.toString(u.getID());
       
-      query.result("settings", cols, vals, constraint); 
+      query.result(SETTINGS_COL, cols, vals, constraint); 
     }
     catch(SQLUpdateException e){                   
         LOGGER.log( Level.SEVERE, e.toString(), e );          

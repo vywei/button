@@ -5,9 +5,12 @@ import java.util.logging.Logger;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -16,7 +19,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -50,7 +54,7 @@ public class LoginView
         userInput.setMaxWidth(Double.MAX_VALUE);
 
         // Password Input
-        TextField passInput = new TextField("");
+        PasswordField passInput = new PasswordField();
         passInput.setPromptText("Password");
         passInput.setMaxWidth(Double.MAX_VALUE);
             
@@ -100,14 +104,19 @@ public class LoginView
             	}
             	else  
             	{
-            		LOGGER.info("Invalid login.");
             		final Stage dialog = new Stage();
                     dialog.initModality(Modality.APPLICATION_MODAL);
                     dialog.initOwner(Main.window);
                     VBox dialogVbox = new VBox(20);
-                    dialogVbox.getChildren().add(new Text("Invalid username and/or password."));
-                    Scene dialogScene = new Scene(dialogVbox, 300, 200);
+                    dialogVbox.setAlignment(Pos.CENTER);
+                    Label msgLabel = new Label("Invalid username and/or password.");
+            		LOGGER.info("Invalid login.");
+                    msgLabel.setFont(Font.font(Font.getDefault().getFamily(), FontWeight.BOLD,14));
+                    dialogVbox.getChildren().add(msgLabel);
+                    Scene dialogScene = new Scene(dialogVbox, 250, 100);
                     dialog.setScene(dialogScene);
+                    String sheet = Main.getSheet();
+              	    dialogScene.getStylesheets().add(sheet);
                     dialog.show();
             	}
             } 
