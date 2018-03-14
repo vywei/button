@@ -10,6 +10,7 @@ import javafx.scene.text.Text;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 
 public class LeaderboardView {
 
@@ -50,7 +51,7 @@ public class LeaderboardView {
 
     private HBox getHeader()
     {
-        Label title = new Label("Credits");
+        Label title = new Label("Leaderboard");
         title.getStylesheets().add(getClass().getResource(cssTheme).toExternalForm());
         title.getStyleClass().add("a-header");
 
@@ -61,23 +62,40 @@ public class LeaderboardView {
         return header;
     }
 
-    private HBox getBody()
+    private BorderPane getBody()
     {
-    Text textBoard;
+    Text textLeft;
+    Text textCenter;
+    Text textRight;
 	leader.update();  
-	String entirety = leader.listLeaderboard();
+	String left = leader.getLeftList();
+	String center = leader.getCenterList();
+	String right = leader.getRightList();
 
-	textBoard = new Text();
-	textBoard.setText(entirety);
-	textBoard.setCache(true);
+	textLeft = new Text();
+	textCenter = new Text();
+	textRight = new Text();
+	
+	textLeft.setText(left);
+	textLeft.setCache(true);
+	
+	textCenter.setText(center);
+    textCenter.setCache(true);
+    
+    textRight.setText(right);
+    textRight.setCache(true);
+    
+    textLeft.setFill(Color.WHITE);
+    textRight.setFill(Color.WHITE);
+    textCenter.setFill(Color.WHITE);
 
-	HBox textBox = new HBox();
-	textBox.getChildren().addAll(textBoard);
-	textBox.setPadding(new Insets(130,0,0,0));
+	BorderPane textBox = new BorderPane();
+	textBox.setRight(textRight);
+	textBox.setCenter(textCenter);
+	textBox.setLeft(textLeft);
+	textBox.setPadding(new Insets(130,20,0,20));
 	textBox.setMinWidth(450);
 	textBox.setMaxWidth(Double.MAX_VALUE);
-	textBox.setAlignment(Pos.CENTER);
-	textBox.setSpacing(30);
 
 	return textBox;
     }

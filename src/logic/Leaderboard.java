@@ -74,10 +74,51 @@ public class Leaderboard implements Subject, Observer {
       for (int i = 0; i < users.size(); i++) {
          sb.append(i + 1);
          sb.append(BRK);
-         sb.append(users.get(i).toString());
+         sb.append(users.get(i).getUsername());
+         int toPad = users.get(i).getUsername().length();
+         for (int j = 0; j < 24 - toPad; j++) {
+           sb.append(" ");
+         }
+         sb.append(users.get(i).getScore());
          sb.append("\n");
       }
       return sb.toString();
+  }
+  
+  public String getLeftList()
+  {
+    StringBuilder sb = new StringBuilder();
+    sb.append("RANK");
+    sb.append("\n");
+    for (int i = 0; i < users.size(); i++) {
+      sb.append(i + 1);
+      sb.append("\n");
+    }
+    return sb.toString();
+  }
+  
+  public String getCenterList()
+  {
+    StringBuilder sb = new StringBuilder();
+    sb.append("USERNAME");
+    sb.append("\n");
+    for (int i = 0; i < users.size(); i++) {
+      sb.append(users.get(i).getUsername());
+      sb.append("\n");
+    }
+    return sb.toString();
+  }
+  
+  public String getRightList()
+  {
+    StringBuilder sb = new StringBuilder();
+    sb.append("SCORE");
+    sb.append("\n");
+    for (int i = 0; i < users.size(); i++) {
+      sb.append(users.get(i).getScore());
+      sb.append("\n");
+    }
+    return sb.toString();
   }
 
 }
