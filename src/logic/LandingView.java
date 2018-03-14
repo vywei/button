@@ -70,7 +70,7 @@ public class LandingView
               iv1.setImage(pressedImage);
               button.increaseScore();
               if (Main.getUser().getSettings().getAudioEnabled() == 1) {
-                String soundFx = button.getCurrentSkin().getSound();
+                String soundFx = Main.getUser().getCurrentSkin().getSound();
                 Main.class.getResource(soundFx);
                 Media hit = new Media(Main.class.getResource(soundFx).toString());
                 MediaPlayer mediaPlayer = new MediaPlayer(hit);
