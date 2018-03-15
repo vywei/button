@@ -31,6 +31,7 @@ public class Main extends Application{
   protected static Scene linkAccounts;
   protected static Scene bugReport;
   protected static Scene credits;
+  protected static Scene easter;
   protected static LandingView landingView;
 
   protected static String pString = "Password";
@@ -112,6 +113,15 @@ public class Main extends Application{
       GridPane signUpGrid = gridSetup(signUpView.getView());
       
       signUp = new Scene(signUpGrid, SCREEN_WIDTH, SCREEN_HEIGHT);
+  }
+  
+  public static void easterEggScreen()
+  {
+      EasterEgg easterView = new EasterEgg();
+
+      GridPane easterGrid = gridSetup(easterView.getView());
+      
+      easter = new Scene(easterGrid, SCREEN_WIDTH, SCREEN_HEIGHT);
   }
       
   public static void landingScreen()

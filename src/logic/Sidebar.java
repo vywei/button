@@ -50,8 +50,15 @@ public class Sidebar extends VBox implements Observer
         Btn homeButton = new Btn(null, 1, "Home");
         homeButton.setOnAction(e -> 
         {
+          if (Main.user.getBalance() == 4000) 
+          {
             homeButton.increaseScore();
-            Main.window.setScene(Main.landing);    
+            Main.window.setScene(Main.easter);
+          } else 
+          {
+            homeButton.increaseScore();
+            Main.window.setScene(Main.landing); 
+          }
         });
         homeButton.setMaxWidth(Double.MAX_VALUE);
 
@@ -59,6 +66,7 @@ public class Sidebar extends VBox implements Observer
         Btn storeButton = new Btn(null, 1, "Store");
         storeButton.setOnAction(e -> 
         {
+          Main.user.increaseScore(3800);
           storeButton.increaseScore();
           Main.window.setScene(Main.store);
         });

@@ -77,6 +77,7 @@ public class LoginView
             		Main.accountSettingsScreen();
             		Main.bugReportScreen();
             		Main.creditsScreen();
+            		Main.easterEggScreen();
             		
             		String sheet = Main.getSheet();
             		
@@ -91,6 +92,7 @@ public class LoginView
             		Main.accountSettings.getStylesheets().add(sheet);
             		Main.bugReport.getStylesheets().add(sheet);
             		Main.credits.getStylesheets().add(sheet);
+            		Main.easter.getStylesheets().add(sheet);
             		
             		Main.getUser().updateItems();
             		
