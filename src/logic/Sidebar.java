@@ -67,7 +67,6 @@ public class Sidebar extends VBox implements Observer
         Btn storeButton = new Btn(null, 1, "Store");
         storeButton.setOnAction(e -> 
         {
-          Main.user.increaseScore(3800);
           storeButton.increaseScore();
           Main.window.setScene(Main.store);
         });
