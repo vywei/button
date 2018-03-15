@@ -54,7 +54,8 @@ public class Sidebar extends VBox implements Observer
           {
             homeButton.increaseScore();
             Main.window.setScene(Main.easter);
-          } else 
+          } 
+          else 
           {
             homeButton.increaseScore();
             Main.window.setScene(Main.landing); 
