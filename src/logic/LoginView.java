@@ -66,6 +66,7 @@ public class LoginView
             	User result = db.loginUser(userInput.getText(), passInput.getText());
             	if (result != null) {
             		Main.setUser(result);
+            		Main.refreshShop();
             		Main.landingScreen();
             		Main.signUpScreen();
             		Main.storeScreen();

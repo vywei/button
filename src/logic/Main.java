@@ -71,6 +71,10 @@ public class Main extends Application{
 	  return theShop;
   }
   
+  public static void refreshShop() {
+	  theShop = new Shop();
+  }
+  
   public static void main(String[] args) {
     launch(args);
   }
@@ -97,7 +101,7 @@ public class Main extends Application{
     return grid;
 }
   
-  private static void loginScreen()
+  public static void loginScreen()
   {
       LoginView loginView = new LoginView();
 
