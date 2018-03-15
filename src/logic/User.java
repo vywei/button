@@ -89,7 +89,6 @@ public class User implements Subject, Observer {
      * @param newSkin
      */
     public void changeSkin(Skin newSkin) {
-      System.out.println("ID: " + id);
 	Skin tempSkin = validateSkin(newSkin);
 		if (tempSkin != null) {
 		    currentSkin = tempSkin;
