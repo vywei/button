@@ -92,8 +92,28 @@ public class Sidebar extends VBox implements Observer
         leaderboardButton.setMaxWidth(Double.MAX_VALUE);
         
         Button logoutButton = new Button("Logout");
-        logoutButton.setOnAction(e ->       
-          Main.window.setScene(Main.login)
+        logoutButton.setOnAction(e ->  
+        {
+          Main.login = null;
+          Main.loginScreen();
+          Main.landing = null;
+  	      Main.store = null;
+  		  Main.settings = null;
+  	      Main.leaderboard = null;
+  	      Main.share = null;
+  		  Main.videoSettings = null;
+  		  Main.audioSettings = null;
+  		  Main.accountSettings = null;
+  		  Main.bugReport = null;
+  		  Main.credits = null;
+  		  Main.setUser(null);
+  		  
+  		  String sheet = Main.getSheet();
+		
+		  Main.login.getStylesheets().add(sheet);
+		  
+          Main.window.setScene(Main.login);
+        }
         );
         logoutButton.setMaxWidth(Double.MAX_VALUE);
         

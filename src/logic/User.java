@@ -50,12 +50,12 @@ public class User implements Subject, Observer {
       }
 
     public User(String newUsername, int newId, String newPassword, int newScore) {
-	username = validateUsername(newUsername);
-	setId(newId);
-	password = validatePassword(newPassword);
-	setScore(newScore);
-	observers = new ArrayList<>();
-	items = new ArrayList<>();
+		username = validateUsername(newUsername);
+		setId(newId);
+		password = validatePassword(newPassword);
+		setScore(newScore);
+		observers = new ArrayList<>();
+		items = new ArrayList<>();
     }
     
     public Settings getSettings() {
@@ -89,7 +89,6 @@ public class User implements Subject, Observer {
      * @param newSkin
      */
     public void changeSkin(Skin newSkin) {
-      System.out.println("ID: " + id);
 	Skin tempSkin = validateSkin(newSkin);
 		if (tempSkin != null) {
 		    currentSkin = tempSkin;
@@ -245,14 +244,7 @@ public class User implements Subject, Observer {
      * @param newSkins
      */
     public void setItems(List<Item> newItems) {
-	Item tempItem;
-	for (int i = 0; i < newItems.size(); i++) {
-	    tempItem = newItems.get(i);
-	    if (tempItem.getType() == Item.SKIN && validateSkin((Skin)tempItem) == null) {
-		    return;
-	    }
-	}
-	items = newItems;
+    	items = newItems;
     }
 
     /**

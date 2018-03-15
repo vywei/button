@@ -100,7 +100,7 @@ public class LeaderboardView {
 	textBox.setCenter(textCenter);
 	textBox.setLeft(textLeft);
 	textBox.setPadding(new Insets(50,40,0,40));
-	textBox.setMinWidth(400);
+	textBox.setMinWidth(450);
 	textBox.setMaxWidth(Double.MAX_VALUE);
 
 	return textBox;

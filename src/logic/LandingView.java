@@ -69,6 +69,7 @@ public class LandingView
         iv1.setOnMousePressed((MouseEvent event)-> {
               iv1.setImage(pressedImage);
               button.increaseScore();
+              System.out.println(Main.getUser().getID());
               if (Main.getUser().getSettings().getAudioEnabled() == 1) {
                 String soundFx = Main.getUser().getCurrentSkin().getSound();
                 Main.class.getResource(soundFx);
