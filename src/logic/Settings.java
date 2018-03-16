@@ -18,6 +18,8 @@ public class Settings {
 	private int effectsVol;
 	private String musicPath;
 	
+	private int smellVariable;
+	
 	private Database db;
 	
 	public Settings() {
