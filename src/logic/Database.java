@@ -63,7 +63,8 @@ public class Database {
   return db;
   }
   
-  private ConnectHost loadDatabaseCredentials() {
+  private ConnectHost loadDatabaseCredentials() 
+  {
     String fileURL = "";
     String host = "";
     String user = "";
