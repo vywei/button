@@ -24,7 +24,6 @@ public class EasterEgg
     private final BorderPane view;
     protected static Scene store;
     boolean purchaseView = true;
-    private VBox body;
      
     public EasterEgg()
     {    
@@ -34,13 +33,13 @@ public class EasterEgg
         temp.register((Observer) sidebar);
         
         VBox root = new VBox();
-        root.setMaxWidth(Double.MAX_VALUE);
         root.setMinWidth(450);
+        root.setMaxWidth(Double.MAX_VALUE);
         root.getChildren().addAll(getHeader(), getBody());
         
         BorderPane pane = new BorderPane();
-        pane.setRight(sidebar);
         pane.setLeft(root);
+        pane.setRight(sidebar);
         pane.getStylesheets().add(getClass().getResource(t).toExternalForm());
         pane.getStyleClass().add("root");
         
@@ -49,28 +48,28 @@ public class EasterEgg
     
    public Node getView()
    {
-       view.getStylesheets().add(getClass().getResource(t).toExternalForm());
        view.getStyleClass().add("root");
+       view.getStylesheets().add(getClass().getResource(t).toExternalForm());
        return view;
    }
    
    private HBox getHeader() 
    {
      Label title = new Label("CONGRATS");
-     title.setFont(Font.font(Font.getDefault().getFamily(), FontWeight.BOLD,14));
      title.getStylesheets().add(getClass().getResource(t).toExternalForm());
+     title.setFont(Font.font(Font.getDefault().getFamily(), FontWeight.BOLD,14));
      title.getStyleClass().add("a-header"); 
      
      HBox header = new HBox();
-     header.getChildren().add(title);
      header.setAlignment(Pos.CENTER);
+     header.getChildren().add(title);
      return header;
      
    }
    
    private VBox getBody() 
    {
-     body = new VBox();
+     VBox body = new VBox();
      
      body.setAlignment(Pos.CENTER);
      body.setPrefHeight(Main.SCREEN_HEIGHT);
@@ -78,9 +77,10 @@ public class EasterEgg
      body.setPadding(new Insets(10,0,0,0));
      
      VBox core = new VBox();
+     core.setPadding(new Insets(10,0,0,0));
      
      Label des = new Label("YOU REACHED THE REQUIRED LINES OF CODE");
-     Label des2 = new Label("PLEASE ENJOY THIS BONUS BUTTON FOR A 5 TIME SCORE MULTIPLYER");
+     Label des2 = new Label("PLEASE ENJOY THIS BONUS BUTTON FOR A 5X SCORE MULTIPLYER");
      Label des3 = new Label("DONT LEAVE THIS PAGE OR YOU CAN'T GET BACK >:D");
      
      des.setFont(Font.font(12));
@@ -105,9 +105,7 @@ public class EasterEgg
      Btn bonus = new Btn(null, 5, "CLICK ME");
      
      bonus.setOnAction((ActionEvent event) ->
-     {
-         bonus.increaseScore();
-     }
+         bonus.increaseScore()
      );
      
      body.getChildren().add(core);

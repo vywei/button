@@ -1,11 +1,13 @@
 package logic;
 
-public class Skin extends Item{
+public class Skin extends Item {
 	
+	private static final int HASH_CONSTANT = 31;
 	private String imagePressed;
 	private String sound;
 	
-    public Skin(int id, String name, int price, String image, String imagePressed, String sound) {
+    public Skin(int id, String name, int price, String image, String imagePressed, String sound) 
+    {
 	    this.id = id;
 	    this.name = name;
 	    this.price = price;
@@ -15,30 +17,37 @@ public class Skin extends Item{
     }
         
     @Override
-    public int getPrice() {
+    public int getPrice() 
+    {
       return price;
     }
     
-    public String getSound() {
+    public String getSound() 
+    {
       return sound;
     }
     
-    public String getImagePressed() {
+    public String getImagePressed() 
+    {
     	return imagePressed;
     }
     
     @Override
-    public int getType() {
+    public int getType() 
+    {
   	  return SKIN;
     }
     
     @Override
-    public boolean equals(Object o) {
-        if (o == this) {
+    public boolean equals(Object o) 
+    {
+        if (o == this) 
+        {
             return true;
         }
 
-        if (!(o instanceof Skin)) {
+        if (!(o instanceof Skin)) 
+        {
             return false;
         }
          
@@ -50,11 +59,16 @@ public class Skin extends Item{
     @Override
     public int hashCode() {
         int result = 17;
-        result = 31 * result + name.hashCode();
-        result = 31 * result + id;
-        result = 31 * result + price;
-        result = 31 * result + image.hashCode();
-        result = 31 * result + imagePressed.hashCode();
+        result *= HASH_CONSTANT;
+        result += name.hashCode();
+        result *= HASH_CONSTANT; 
+        result += id;
+        result *= HASH_CONSTANT; 
+        result += price;
+        result *= HASH_CONSTANT; 
+        result += image.hashCode();
+        result *= HASH_CONSTANT; 
+        result += imagePressed.hashCode();
         return result;
     }
 }
