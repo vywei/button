@@ -57,7 +57,8 @@ public class Skin extends Item {
     }
     
     @Override
-    public int hashCode() {
+    public int hashCode() 
+    {
         int result = 17;
         result *= HASH_CONSTANT;
         result += name.hashCode();

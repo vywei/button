@@ -89,11 +89,13 @@ public class Database {
     return new ConnectHost(fileURL, host, user, pass, dbName);
   }
   
-  public ConnectHost getCH() {
+  public ConnectHost getCH() 
+  {
     return ch;
   }
   
-  public String encryptPassword(String password) {
+  public String encryptPassword(String password) 
+  {
     String passHash = "";
     MessageDigest md = null;
     try {
@@ -108,7 +110,8 @@ public class Database {
     return passHash;
   }
   
-  public User loginUser(String username, String password) {
+  public User loginUser(String username, String password) 
+  {
     User resultUser = null;
     
     String passHash = encryptPassword(password);
@@ -118,7 +121,8 @@ public class Database {
     QueryResult qr;
 
     // Execute the query
-    try {
+    try 
+    {
     	ArrayList<String> cols = new ArrayList<>();
     	cols.add("player.id AS pid");
     	cols.add(USERNAME_COLUMN);
@@ -137,14 +141,17 @@ public class Database {
         // Convert each row into an item
         resultUser = parseUser(qr);
     }
-    catch(SQLQueryException e){
+    catch(SQLQueryException e)
+    {
     	LOGGER.log( Level.SEVERE, e.toString(), e );
     }
     
-    if (resultUser != null) {
+    if (resultUser != null) 
+    {
       return resultUser;
     }
-    else {
+    else 
+    {
       return null;
     }
   }
@@ -375,10 +382,12 @@ public class Database {
 	SQLSelect query = new SQLSelect(ch);
 	QueryResult qr;
 	
-	try {
+	try 
+	{
 	    qr = query.result(SETTINGS_COL, new ArrayList<String>(), "WHERE user_id = " + u.getID());
 	
-	    while (qr.nextFlag()) {
+	    while (qr.nextFlag()) 
+	    {
 	    	int temp = Integer.parseInt(qr.getValue(VID_RES_WIDTH_COL));
 	    	userSettings.setVideoResWidth(temp);
 	        temp = Integer.parseInt(qr.getValue(VID_RES_HEIGHT_COL));
@@ -399,16 +408,19 @@ public class Database {
 	        userSettings.setMusicPath(stemp);
 	    }
 	}
-	catch(SQLQueryException e){
+	catch(SQLQueryException e)
+	{
 		LOGGER.log( Level.SEVERE, e.toString(), e );
 	}
 	
   }
   
-  public void saveSettings(User u, Settings s) {
+  public void saveSettings(User u, Settings s) 
+  {
     SQLUpdateExt query = new SQLUpdateExt(ch);
     
-    try {
+    try 
+    {
       ArrayList<String> cols = new ArrayList<>();
       cols.add(VID_RES_WIDTH_COL);
       cols.add(VID_RES_HEIGHT_COL);
@@ -433,7 +445,8 @@ public class Database {
       
       query.result(SETTINGS_COL, cols, vals, constraint); 
     }
-    catch(SQLUpdateException e){                   
+    catch(SQLUpdateException e)
+    {                   
         LOGGER.log( Level.SEVERE, e.toString(), e );          
     }
   }

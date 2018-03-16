@@ -12,17 +12,21 @@ public class SQLSelect extends SQLQuery {
     super(con);
   }
   
-  public QueryResult result(String table, List<String> columns, String constraint) throws SQLQueryException {
+  public QueryResult result(String table, List<String> columns, String constraint) throws SQLQueryException 
+  {
     
     // Initiate selection query
     StringBuilder tempQuery = new StringBuilder("SELECT ");
     
     // Add all or specific columns to query
-    if (columns.isEmpty()) {
+    if (columns.isEmpty()) 
+    {
       tempQuery.append("*");
     }
-    else {
-      for (String col : columns) {
+    else 
+    {
+      for (String col : columns)
+      {
         tempQuery.append(col + ",");
       }
       tempQuery.deleteCharAt(tempQuery.length() - 1);

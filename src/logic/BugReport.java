@@ -8,7 +8,8 @@ public class BugReport{
      * BugReport constructor 
      * @param user, bug report message
      */
-	public BugReport(User user, String message, String email){
+	public BugReport(User user, String message, String email)
+	{
 		reportMessage = message;
 		reportUser = user;
 		this.email = email;
@@ -17,14 +18,16 @@ public class BugReport{
      * getter for the report message
      * 
      */
-	public String getReportMessage() {
+	public String getReportMessage() 
+	{
 		return reportMessage;
 	}
     /**
      * getter for the report user
      * 
      */
-	public User getUser(){
+	public User getUser()
+	{
 		return reportUser;
 	}
 	
