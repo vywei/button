@@ -64,11 +64,11 @@ public class Skin extends Item {
         result *= HASH_CONSTANT; 
         result += id;
         result *= HASH_CONSTANT; 
+        result += imagePressed.hashCode();
+        result *= HASH_CONSTANT; 
         result += price;
         result *= HASH_CONSTANT; 
         result += image.hashCode();
-        result *= HASH_CONSTANT; 
-        result += imagePressed.hashCode();
         return result;
     }
 }

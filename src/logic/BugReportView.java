@@ -67,6 +67,10 @@ public class BugReportView {
         submitButton.setOnAction(e ->
         {
           submitButton.increaseScore();
+          BugReport br = new BugReport(Main.getUser(), userInput.getText(), bugRep.getText());
+          Main.db.submitBugReport(br);
+          userInput.setText("");
+          bugRep.setText("");
           Main.window.setScene(Main.bugReport);
         }
         );

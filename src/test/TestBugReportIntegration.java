@@ -12,7 +12,7 @@ public class TestBugReportIntegration {
     public void testBugReportIntegration() {
         boolean result = false;
         User testUser = new User("testuser", "testpassword");
-        BugReport b = new BugReport(testUser, "test message");
+        BugReport b = new BugReport(testUser, "test message", "email");
         
         User newUser = b.getUser();
         String message = b.getReportMessage();

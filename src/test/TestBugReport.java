@@ -11,7 +11,7 @@ public class TestBugReport {
 	public void testBugReport() {
 		String reportText = "Points did not increment after pressing button.";
 		User testUser = new User("testuser", "testpassword");
-		BugReport br = new BugReport(testUser, reportText);
+		BugReport br = new BugReport(testUser, reportText, "blank_email");
 		assertEquals(br.getReportMessage(), reportText);
 	}
 

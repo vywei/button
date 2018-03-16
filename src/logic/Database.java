@@ -18,6 +18,9 @@ import armdb.SQLQueryException;
 import armdb.SQLUpdateException;
 
 public class Database {
+	private static final String BUG_REPORT_TABLE = "bug_report";
+	private static final String EMAIL_COL = "email";
+	private static final String USER_ID_COL = "user_id";
 	private static final String SETTINGS_COL = "settings";
 	private static final String MUSIC_COL = "music";
 	private static final String EFFECTS_VOL_COL = "effects_vol";
@@ -145,7 +148,35 @@ public class Database {
     }
   }
   
-  public User createAccount(String username, String password) {
+  public void submitBugReport (BugReport br) 
+  {   
+	    SQLInsert query = new SQLInsert(ch);
+
+	    // Execute the query
+	    try 
+	    {
+	    	ArrayList<String> cols = new ArrayList<>();
+	    	cols.add(USER_ID_COL);
+	    	cols.add(EMAIL_COL);
+	    	cols.add("text");
+	    	
+	    	ArrayList<String> vals = new ArrayList<>();
+	    	vals.add(Integer.toString(br.getUser().getID()));
+	    	vals.add(br.getEmail());
+	    	vals.add(br.getReportMessage());
+	    	
+	        query.result(BUG_REPORT_TABLE, cols, vals);
+
+	    }
+	    catch(SQLUpdateException e)
+	    {
+	    		LOGGER.log( Level.SEVERE, e.toString(), e );
+	    }
+	    
+	  }
+  
+  public User createAccount(String username, String password) 
+  {
 	    User resultUser = null;
 	    
 	    String passHash = encryptPassword(password);
@@ -178,7 +209,7 @@ public class Database {
 	        SQLInsert query2 = new SQLInsert(ch);
 	        
 	        ArrayList<String> cols2 = new ArrayList<>();
-	        cols2.add("user_id");
+	        cols2.add(USER_ID_COL);
 	        cols2.add(VID_RES_WIDTH_COL);
 	        cols2.add(VID_RES_HEIGHT_COL);
 	        cols2.add(VID_TEXTURES_COL);
@@ -214,7 +245,8 @@ public class Database {
 	    	query3.result("items_owned", cols3, vals3);
 
 	    }
-	    catch(SQLUpdateException e){
+	    catch(SQLUpdateException e)
+	    {
 	    	if (!e.toString().contains("for key 'username'")) {
 	    		LOGGER.log( Level.SEVERE, e.toString(), e );
 	    	}
@@ -223,7 +255,8 @@ public class Database {
 	    return resultUser;
 	  }
   
-  public void updateUserScore(User u) {
+  public void updateUserScore(User u) 
+  {
     // Create query and result
     SQLUpdateExt query = new SQLUpdateExt(ch);
     
@@ -242,7 +275,8 @@ public class Database {
     }
   }
   
-  public void updateUserSkin(User u) {
+  public void updateUserSkin(User u) 
+  {
 	    // Create query and result
 	    SQLUpdateExt query = new SQLUpdateExt(ch);
 	    
@@ -261,7 +295,8 @@ public class Database {
 	    }
 	  }
   
-  private void parsePlayers(QueryResult qr, List<User> list) {
+  private void parsePlayers(QueryResult qr, List<User> list) 
+  {
     // Loop through all rows in the result
     while(qr.nextFlag()) {
       
@@ -276,7 +311,8 @@ public class Database {
     }
   }
   
-  private User parseUser(QueryResult qr) {
+  private User parseUser(QueryResult qr) 
+  {
     // Loop through all rows in the result
     User newUser = null;
     
@@ -296,16 +332,19 @@ public class Database {
       //Instantiate new item and insert into result list
       newUser = new User(username, id, score, new Skin(sid, name, price, image, imagePressed, sound));
     }
-    if (newUser != null) {
+    if (newUser != null) 
+    {
       return newUser;
     }
-    else {
+    else 
+    {
       return null;
     }
   }
     
     
-  public List<User> getLeaderboard() {
+  public List<User> getLeaderboard() 
+  {
 	// Create result list
 	List<User> players = new ArrayList<>();
 
@@ -314,20 +353,23 @@ public class Database {
 	QueryResult qr;
 
 	// Execute the query
-	try {
+	try 
+	{
 	    qr = query.result(PLAYER_TABLE, new ArrayList<String>(), "ORDER BY score DESC LIMIT 10");
 
 	    // Convert each row into an item
 	    parsePlayers(qr, players);
 	}
-	catch(SQLQueryException e){
+	catch(SQLQueryException e)
+	{
 		LOGGER.log( Level.SEVERE, e.toString(), e );
 	}
 
 	return players;
     }
   
-  public void getSettings(User u, Settings userSettings) {
+  public void getSettings(User u, Settings userSettings) 
+  {
 	
 	SQLSelect query = new SQLSelect(ch);
 	QueryResult qr;
